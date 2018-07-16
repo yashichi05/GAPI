@@ -19,7 +19,8 @@ var webform = new Vue({
         orderID_display: false,
         orderAccount_display: true,
         orderDiscount_display: true,
-        orderFee_display: false
+        orderFee_display: false,
+        allnon: true //手續費和折扣都沒有不要換行
     },
     methods: {
         formchange: function () {
@@ -37,12 +38,51 @@ var webform = new Vue({
                 this.songuo();
             }
         },
-        ruten: function () {},
-        yahoo: function () {this.orderID_display=false;this.orderFee_display=false;this.orderAccount_display=true;this.orderDiscount_display=true},
-        pchomet: function () {this.orderID_display=true;this.orderFee_display=false;this.orderAccount_display=false;this.orderDiscount_display=false},
-        pchomed: function () {this.orderID_display=true;this.orderFee_display=false;this.orderAccount_display=false;this.orderDiscount_display=false},
-        shopee: function () {this.orderID_display=true;this.orderFee_display=false;this.orderAccount_display=true;this.orderDiscount_display=false},
-        songuo: function () {this.orderID_display=true;this.orderFee_display=true;this.orderAccount_display=false;this.orderDiscount_display=true}
+        ruten: function () {
+            this.orderID_display = false;
+            this.orderFee_display = false;
+            this.orderAccount_display = true;
+            this.orderDiscount_display = false;
+            this.ifallnon()
+        },
+        yahoo: function () {
+            this.orderID_display = false;
+            this.orderFee_display = false;
+            this.orderAccount_display = true;
+            this.orderDiscount_display = true, this.ifallnon()
+        },
+        pchomet: function () {
+            this.orderID_display = true;
+            this.orderFee_display = false;
+            this.orderAccount_display = false;
+            this.orderDiscount_display = false, this.ifallnon()
+        },
+        pchomed: function () {
+            this.orderID_display = true;
+            this.orderFee_display = false;
+            this.orderAccount_display = false;
+            this.orderDiscount_display = false, this.ifallnon()
+        },
+        shopee: function () {
+            this.orderID_display = true;
+            this.orderFee_display = false;
+            this.orderAccount_display = true;
+            this.orderDiscount_display = false, this.ifallnon()
+        },
+        songuo: function () {
+            this.orderID_display = true;
+            this.orderFee_display = true;
+            this.orderAccount_display = false;
+            this.orderDiscount_display = true, this.ifallnon()
+        },
+        ifallnon: function () { //如果手續費及折扣都沒有則不換行
+            if (this.orderFee_display == false && this.orderDiscount_display == false) {
+                this.allnon = false
+            }
+            else {
+                this.allnon = true
+            }
+        }
 
     }
 })

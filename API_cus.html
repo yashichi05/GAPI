@@ -22,14 +22,14 @@
 　<option value="songuo">松果</option></select>
     <!--    選擇後自動隱藏不要的input-->
     <br>
-    <input v-if="orderID_display" type="search" name="orderID" placeholder="訂單編號"><br>
+    <input v-if="orderID_display" type="search" name="orderID" placeholder="訂單編號">
     <input v-if="orderAccount_display" type="search" name="orderAccount" placeholder="帳號"><br>
-    <input type="search" name="orderCustomer" placeholder="姓名"><br>
+    <input type="search" name="orderCustomer" placeholder="姓名">
     <input type="search" name="orderTel" placeholder="電話"><br>
-    <input type="search" name="orderShip" placeholder="貨運"><br>
+    <input v-if="orderDiscount_display" type="search" name="orderDiscount" placeholder="折扣">
+    <input v-if="orderFee_display" type="search" name="orderFee" placeholder="手續費"><br v-if="allnon">
+    <input type="search" name="orderShip" placeholder="貨運">
     <input type="search" name="orderShipPrice" placeholder="運費"><br>
-    <input v-if="orderDiscount_display" type="search" name="orderDiscount" placeholder="折扣"><br>
-    <input v-if="orderFee_display" type="search" name="orderFee" placeholder="手續費"><br>
     <div id="product1">
         <div>
             <input class="pdtinput" type="search" name="productCategory1" placeholder="品項">
