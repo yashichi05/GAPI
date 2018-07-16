@@ -42,33 +42,7 @@ function appendPre(message) {
     pre.appendChild(textContent);
 }
 
-function getsheetrange(setrange) {
 
-    document.getElementById('content').innerHTML = "";
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
-        range: 't!' + setrange,
-    }).then(function (response) {
-        //console.log(response.body);
-        var range = response.result; //response.body 也有結果，不過他是純文字
-        if (range.values.length > 0) { //如果response.result.values 有值(得到的表格內容)
-            for (i = 0; i < range.values.length; i++) {
-                var row = range.values[i]; //指派每一列
-                // Print columns A and E, which correspond to indices 0 and 4.
-                rowstr = ""
-                for (ii = 0; ii < row.length; ii++) {
-                    rowstr = rowstr + row[ii]
-                }
-                appendPre(rowstr);
-                //顯示每列
-            }
-        } else {
-            appendPre('No data found.');
-        }
-    }, function (response) {
-        appendPre('Error: ' + response.result.error.message);
-    });
-}
 
 
 var CLIENT_ID = '1010956056834-4thptaslrefke4ji4ctr3i6kipvpiuaq.apps.googleusercontent.com';
@@ -88,10 +62,9 @@ function initClient() {
         scope: SCOPES
     }).then(function () {
         if (gapi.auth2.getAuthInstance().isSignedIn.get() == false) {
-            gapi.auth2.getAuthInstance().signIn();;
-            setTimeout("getsheetrange()", 5000);
+            gapi.auth2.getAuthInstance().signIn();
         } else {
-            getsheetrange("A:B");
+            
         }
     });
 }
