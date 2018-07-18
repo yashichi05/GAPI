@@ -1,18 +1,15 @@
-//jquery
-$('.pdtinput').bind('paste', null, function (e) {
-    $this = $(this);
-    setTimeout(function () {
-        var columns = $this.val().split("	");
-        var input = $this
-        for (var i = 0; i < columns.length; i++) {
-            input.val(columns[i]);
-            input = input.next()
-        }
-    }, 0);
-});
-
 //vue
-Vue.component('product-input', {
+var buttoncevent = new Vue({
+    el:'#buttonEvent',
+    methods:{
+        test:function(){
+            alert('成功')
+        }
+        
+    }
+    
+})
+Vue.component('product-input', { //商品列表input
     props: ['comp_id'],
     template: '<div :id="\'product-\'+comp_id.toString()">\
 <div>\
@@ -23,7 +20,7 @@ Vue.component('product-input', {
 </div>\
 \
 <div>\
-<input :id="\'count\'+comp_id.toString()" type="search" v-on:focus.once="addinput" @change="putToproductlist(\'productCount\',comp_id)"  placeholder="數量">\
+<input :id="\'count\'+comp_id.toString()" type="search" v-on:focus.once="addinput" @change="putToproductlist(\'productCount\',comp_id)" placeholder="數量">\
 <input :id="\'price\'+comp_id.toString()" type="search" @change="putToproductlist(\'productPrice\',comp_id)"  placeholder="價格">\
 <input :id="\'allprice\'+comp_id.toString()" type="search" @change="putToproductlist(\'productAllpirce\',comp_id)"  placeholder="總價">\
 </div>\
@@ -31,39 +28,35 @@ Vue.component('product-input', {
     methods: {
         addinput: function () {
             productlist.products.push({
-                id: Number(this.comp_id)+1,
+                id: Number(this.comp_id) + 1,
                 productIso: "",
                 productName: "",
                 productType: "",
                 productCount: "",
                 productPrice: "",
                 productAllpirce: ""
-            })
+            });
         },
-            putToproductlist:function(a,b){
-                if(a == 'productIso'){
-                    productlist.products[b].productIso = $("#iso"+b.toString()).val()
-                }
-                else if(a == 'productName'){
-                    productlist.products[b].productName = $("#name"+b.toString()).val()
-                }
-                else if(a == 'productType'){
-                    productlist.products[b].productType = $("#type"+b.toString()).val()
-                }
-                else if(a == 'productCount'){
-                    productlist.products[b].productCount = $("#count"+b.toString()).val()
-                }
-                else if(a == 'productPrice'){
-                    productlist.products[b].productPrice = $("#price"+b.toString()).val()
-                }
-                else if(a == 'productAllpirce'){
-                    productlist.products[b].productAllpirce = $("#allprice"+b.toString()).val()
-                }
-                
+        putToproductlist: function (a, b) {
+            if (a == 'productIso') {
+                productlist.products[b].productIso = $("#iso" + b.toString()).val()
+            } else if (a == 'productName') {
+                productlist.products[b].productName = $("#name" + b.toString()).val()
+            } else if (a == 'productType') {
+                productlist.products[b].productType = $("#type" + b.toString()).val()
+            } else if (a == 'productCount') {
+                productlist.products[b].productCount = $("#count" + b.toString()).val()
+            } else if (a == 'productPrice') {
+                productlist.products[b].productPrice = $("#price" + b.toString()).val()
+            } else if (a == 'productAllpirce') {
+                productlist.products[b].productAllpirce = $("#allprice" + b.toString()).val()
             }
+
+        }
     }
 })
-var productlist = new Vue({
+
+var productlist = new Vue({ //商品列表資料
     el: '#productlist',
     data: {
         products: [
@@ -79,12 +72,26 @@ var productlist = new Vue({
           ]
     },
     methods: {
+        splitpaste: function () { //貼上自動分攔
+            $('.pdtinput').bind('paste', null, function (e) {
+                $this = $(this);
+                setTimeout(function () {
+                    var columns = $this.val().split("	");
+                    var input = $this
+                    for (var i = 0; i < columns.length; i++) {
+                        input.val(columns[i]);
+                        input = input.next();
+                        input.focus()
+                    }
+                }, 0);
+            });
+        }
 
     }
 
 })
 
-var webform = new Vue({
+var webform = new Vue({//訂單客人資料
     el: '#orderform',
     data: {
         web: 'yahoo',
@@ -155,5 +162,8 @@ var webform = new Vue({
             }
         }
 
+
     }
 })
+
+//jquery

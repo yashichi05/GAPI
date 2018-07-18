@@ -11,42 +11,42 @@
 </head>
 
 
-<form>
-    <div id="orderform">
-        <select id="webselect" v-model="web" v-on:change="formchange()" name="Gsheet"> 
+
+<div id="orderform">
+    <select id="webselect" v-model="web" v-on:change="formchange()" name="Gsheet"> 
 　<option value="yahoo">雅虎</option>
 　<option value="pchomet">PC梓</option>
 　<option value="pchomed">PC大</option>
 　<option value="shopee">蝦皮</option>
 　<option value="ruten">露天</option>
 　<option value="songuo">松果</option></select>
-        <!--    選擇後自動隱藏不要的input-->
-        <br>
-        <input v-if="orderID_display" type="search" name="orderID" placeholder="訂單編號">
-        <input v-if="orderAccount_display" type="search" name="orderAccount" placeholder="帳號"><br>
-        <input type="search" name="orderCustomer" placeholder="姓名">
-        <input type="search" name="orderTel" placeholder="電話"><br>
-        <input v-if="orderDiscount_display" type="search" name="orderDiscount" placeholder="折扣">
-        <input v-if="orderFee_display" type="search" name="orderFee" placeholder="手續費"><br v-if="allnon">
-        <input type="search" name="orderShip" placeholder="貨運">
-        <input type="search" name="orderShipPrice" placeholder="運費"><br>
+    <!--    選擇後自動隱藏不要的input-->
+    <br>
+    <input v-if="orderID_display" type="search" name="orderID" placeholder="訂單編號">
+    <input v-if="orderAccount_display" type="search" name="orderAccount" placeholder="帳號"><br>
+    <input type="search" name="orderCustomer" placeholder="姓名">
+    <input type="search" name="orderTel" placeholder="電話"><br>
+    <input v-if="orderDiscount_display" type="search" name="orderDiscount" placeholder="折扣">
+    <input v-if="orderFee_display" type="search" name="orderFee" placeholder="手續費"><br v-if="allnon">
+    <input type="search" name="orderShip" placeholder="貨運">
+    <input type="search" name="orderShipPrice" placeholder="運費"><br>
 
-    </div>
-    <div id="productlist">
-        <div style="padding-top:10px;" is="product-input" :comp_id="pdt.id" v-for="pdt in products"></div>
+</div>
+<div id="productlist" @click="splitpaste">
+    <section style="padding-top:10px;" is="product-input" :comp_id="pdt.id" v-for="pdt in products"></section>
 
-        <!--            自動新增新的商品蘭-->
-        <!--            可互算-->
-        <!--            處理google write →新增出貨紀錄→扣數量-->
-        <!--            回傳商品剩餘數量-->
-        <!--            出現刪除訂單紐及下一筆案紐 可以刪除剛剛新增的訂單，下一筆按鈕可以清除輸入框及隱藏刪除訂單按鈕、下一筆按鈕-->
+    <!--            自動新增新的商品蘭-->
+    <!--            可互算-->
+    <!--            處理google write →新增出貨紀錄→扣數量-->
+    <!--            回傳商品剩餘數量-->
+    <!--            出現刪除訂單紐及下一筆案紐 可以刪除剛剛新增的訂單，下一筆按鈕可以清除輸入框及隱藏刪除訂單按鈕、下一筆按鈕-->
 
-    </div>
-    <input type="submit" value="送出">
-    <button>刪除</button>
+</div>
+<div id="buttonEvent">
+    <button @click="test">送出</button>
+    <button @click="test">刪除</button>
     <button>下一筆</button>
-
-</form>
+</div>
 
 
 
