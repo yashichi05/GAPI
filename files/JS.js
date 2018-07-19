@@ -33,14 +33,14 @@ var buttoncevent = new Vue({
 
 })
 Vue.component('product-input', { //商品列表input,
-    data: function () {//每個產生的元件皆有counter 變數，不共用
+    data: function () { //每個產生的元件皆有counter 變數，不共用
         return {
             countC: this.count1,
             countP: this.count2,
             countAP: this.count3
         }
     },
-    props: ['comp_id','count1','count2','count3'],
+    props: ['comp_id', 'count1', 'count2', 'count3'],
     template: '<div :id="\'product-\'+comp_id.toString()">\
 <div>\
 <input class="pdtinput" type="search" placeholder="品項">\
@@ -50,12 +50,15 @@ Vue.component('product-input', { //商品列表input,
 </div>\
 \
 <div>\
-<input :id="\'count\'+comp_id.toString()" type="search" v-on:focus.once="addinput" @change="putToproductlist(\'productCount\',comp_id)" placeholder="數量" v-model="countC">\
-<input :id="\'price\'+comp_id.toString()" type="search" @change="putToproductlist(\'productPrice\',comp_id)"  placeholder="價格" v-model="countP">\
+<input :id="\'count\'+comp_id.toString()" type="search" v-on:focus.once="addinput" @keyup.enter="nextInput(\'count\'+comp_id.toString()) "@change="putToproductlist(\'productCount\',comp_id)" placeholder="數量" v-model="countC">\
+<input :id="\'price\'+comp_id.toString()" type="search" @keyup.enter="nextInput(\'price\'+comp_id.toString())" @change="putToproductlist(\'productPrice\',comp_id)"  placeholder="價格" v-model="countP">\
 <input :id="\'allprice\'+comp_id.toString()" type="search" @change="putToproductlist(\'productAllpirce\',comp_id)"  placeholder="總價" v-model="countAP">\
 </div>\
 </div>',
     methods: {
+        nextInput: function (target) {
+            $('#' + target).next().focus();
+        },
         addinput: function () {
             productlist.products.push({
                 id: Number(this.comp_id) + 1,
@@ -75,15 +78,15 @@ Vue.component('product-input', { //商品列表input,
             } else if (a == 'productType') {
                 productlist.products[b].productType = $("#type" + b.toString()).val()
             } else if (a == 'productCount') {
-                this.countAP = this.countC*this.countP //計算總價
+                this.countAP = this.countC * this.countP //計算總價
                 productlist.products[b].productCount = $("#count" + b.toString()).val()
                 productlist.products[b].productAllpirce = this.countAP //傳送總價
             } else if (a == 'productPrice') {
-                this.countAP = this.countC*this.countP //計算總價
+                this.countAP = this.countC * this.countP //計算總價
                 productlist.products[b].productPrice = $("#price" + b.toString()).val()
                 productlist.products[b].productAllpirce = this.countAP //傳送總價 
             } else if (a == 'productAllpirce') {
-                this.countP = this.countAP/this.countC //計算單價
+                this.countP = this.countAP / this.countC //計算單價
                 productlist.products[b].productAllpirce = $("#allprice" + b.toString()).val()
                 productlist.products[b].productPrice = this.countP //傳送總價 
             }
