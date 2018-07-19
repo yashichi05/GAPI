@@ -1,4 +1,73 @@
-function btnclick() {
+var sheetrange = { //寫入的範圍
+    findLastRow: function (sheetId, sheetName) { //隨找最後一列新增(未完成)
+        sheetName = sheetName + 'A:A';
+        return sheetName
+    },
+    yahooID: {
+        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
+        gname: 'Y!'
+    },
+    shopeeID: {
+        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
+        gname: 'S!'
+    },
+    pchomedID: {
+        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
+        gname: 'PD!'
+    },
+    pchometID: {
+        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
+        gname: 'PT!'
+    },
+    RutenID: {
+        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
+        gname: 'R!'
+    },
+    songuoID: {
+        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
+        gname: 'SG!'
+    }
+}
+//測試VALUES
+var arte = [];
+
+function testar() {
+    for (var i = 0; i < productlist.products.length-1; i++) {//-1是因為永遠會多一攔
+        arte.push(['日期', webform.orderAccount, webform.orderCustomer, webform.orderTel,productlist.products[i].productIso,productlist.products[i].productName,productlist.products[i].productType,productlist.products[i].productCount,productlist.products[i].productPrice,productlist.products[i].productAllpirce])
+
+    }
+
+}
+
+
+//案送出後執行的城市
+var clickEvent = {
+    submitOrder: function () {
+        if (webform.web == 'yahoo') { //yahoo訂單記錄寫入
+            var orderValues = [['日期', webform.orderAccount, webform.orderCustomer, webform.orderTel,
+webform.orderDiscount,
+webform.orderShip,
+webform.orderShipPrice,
+productlist.products]] //yahoo訂單記錄寫入需要的值(未完成) 需要處理products 的城市 先偵測有效商品數量 → 開同數量的陣列長度→填入資料→再將商品依序 填入陣列的陣列內資料
+            writesheetrange(sheetrange.yahooID.gid, findLastRow(sheetrange.yahooID.gid, sheetrange.yahooID.gname, orderValues))
+        } else if (webform.web == 'pchomet') {
+
+        } else if (webform.web == 'pchomed') {
+
+        } else if (webform.web == 'shopee') {
+
+        } else if (webform.web == 'ruten') {
+
+        } else if (webform.web == 'songuo') {
+
+        }
+
+    },
+    delOreder: function () {},
+    nextOrder: function () {}
+}
+
+function getrange() { //test
 
     console.log("value");
     id1 = document.getElementById('1').value;
@@ -12,13 +81,13 @@ function btnclick() {
 
 }
 
-function writesheetrange(setrange, setvalues) {
+function writesheetrange(setid, setrange, setvalues) { //寫入資料
     var body = {
         values: setvalues
     };
     gapi.client.sheets.spreadsheets.values.update({
-        spreadsheetId: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
-        range: 't!' + setrange,
+        spreadsheetId: setid,
+        range: setrange,
         valueInputOption: 'RAW',
         resource: body
     }).then(function (response) {
@@ -29,19 +98,23 @@ function writesheetrange(setrange, setvalues) {
 }
 
 
+function getsheetrange(getid, getrange, ) { //讀取資料
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: getid,
+        range: getrange,
+    }).then(function (response) {
+        console.log(response.result.values);
 
+    }, function (response) {
+        console.log('Error: ' + response.result.error.message);
+    });
+}
 
 
 /**顯示結果範例
  * Print the names and majors of students in a sample spreadsheet:
  * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
  */
-function appendPre(message) {
-    var pre = document.getElementById('content');
-    var textContent = document.createTextNode(message + '\n');
-    pre.appendChild(textContent);
-}
-
 
 
 
@@ -64,7 +137,7 @@ function initClient() {
         if (gapi.auth2.getAuthInstance().isSignedIn.get() == false) {
             gapi.auth2.getAuthInstance().signIn();
         } else {
-            
+
         }
     });
 }

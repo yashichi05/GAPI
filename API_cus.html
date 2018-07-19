@@ -20,22 +20,27 @@
 　<option value="shopee">蝦皮</option>
 　<option value="ruten">露天</option>
 　<option value="songuo">松果</option></select>
+    <select id="GsheetCol" v-model="gsheetcol"> 
+　<option value="K">K</option>
+　<option value="L">L</option>
+　<option value="M">M</option>
+　<option value="N">N</option></select>
     <!--    選擇後自動隱藏不要的input-->
     <br>
-    <input v-if="orderID_display" type="search" name="orderID" placeholder="訂單編號">
-    <input v-if="orderAccount_display" type="search" name="orderAccount" placeholder="帳號"><br>
-    <input type="search" name="orderCustomer" placeholder="姓名">
-    <input type="search" name="orderTel" placeholder="電話"><br>
-    <input v-if="orderDiscount_display" type="search" name="orderDiscount" placeholder="折扣">
-    <input v-if="orderFee_display" type="search" name="orderFee" placeholder="手續費"><br v-if="allnon">
-    <input type="search" name="orderShip" placeholder="貨運">
-    <input type="search" name="orderShipPrice" placeholder="運費"><br>
+    <input v-if="orderID_display" type="search" v-model="orderID" placeholder="訂單編號">
+    <input v-if="orderAccount_display" type="search" v-model="orderAccount" placeholder="帳號"><br>
+    <input type="search" v-model="orderCustomer" placeholder="姓名">
+    <input type="search" v-model="orderTel" placeholder="電話"><br>
+    <input v-if="orderDiscount_display" type="search" v-model="orderDiscount" placeholder="折扣">
+    <input v-if="orderFee_display" type="search" v-model="orderFee" placeholder="手續費"><br v-if="allnon">
+    <input type="search" v-model="orderShip" placeholder="貨運">
+    <input type="search" v-model="orderShipPrice" placeholder="運費"><br>
 
 </div>
 <div id="productlist" @click="splitpaste">
     <section style="padding-top:10px;" is="product-input" :comp_id="pdt.id" v-for="pdt in products"></section>
 
-    <!--            自動新增新的商品蘭-->
+    <!--            自動新增新的商品蘭 發票欄位???-->
     <!--            可互算-->
     <!--            處理google write →新增出貨紀錄→扣數量-->
     <!--            回傳商品剩餘數量-->
