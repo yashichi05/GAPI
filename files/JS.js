@@ -26,8 +26,7 @@ var test = new Vue({
 ///////////////////////////////////////
 var buttonevent = new Vue({ //按鈕事件
     el: '#buttonEvent',
-    data:{
-    },
+    data: {},
     methods: {
         test: function () {
             alert('成功')
@@ -39,66 +38,69 @@ var buttonevent = new Vue({ //按鈕事件
 
 ////////////////////////////////////////
 Vue.component('product-input', { //商品列表input,
-data: function () { //每個產生的元件皆有counter 變數，不共用
-    return {
-        countC: this.count1,
-        countP: this.count2,
-        countAP: this.count3
-    }
-},
-props: ['comp_id', 'count1', 'count2', 'count3'],
-template: '<div :id="\'product-\'+comp_id.toString()">\
+    data: function () { //每個產生的元件皆有counter 變數，不共用
+        return {
+            countC: this.count1,
+            countP: this.count2,
+            countAP: this.count3
+        }
+    },
+    props: ['comp_id', 'count1', 'count2', 'count3'],
+    template: '<div :id="\'product-\'+comp_id.toString()">\
 <div>\
-<input class="pdtinput" type="search" placeholder="品項">\
-<input :id="\'iso\'+comp_id.toString()" class="pdtinput" type="search" @change="putToproductlist(\'productIso\',comp_id )"  placeholder="國際條碼">\
-<input :id="\'name\'+comp_id.toString()" class="pdtinput" type="search" @change="putToproductlist(\'productName\',comp_id)"  placeholder="商品名稱">\
-<input :id="\'type\'+comp_id.toString()" class="pdtinput" type="search" @change="putToproductlist(\'productType\',comp_id)"  placeholder="款式">\
+<input :id="\'ph-\'+comp_id.toString()" class="pdtinput" type="search" placeholder="品項">\
+<input :id="\'Iso-\'+comp_id.toString()" class="pdtinput" type="search" @change="putToproductlist(\'productIso\',comp_id )"  placeholder="國際條碼">\
+<input :id="\'Name-\'+comp_id.toString()" class="pdtinput" type="search" @change="putToproductlist(\'productName\',comp_id)"  placeholder="商品名稱">\
+<input :id="\'Type-\'+comp_id.toString()" class="pdtinput" type="search" @change="putToproductlist(\'productType\',comp_id)"  placeholder="款式">\
 </div>\
 \
 <div>\
-<input :id="\'count\'+comp_id.toString()" type="search" v-on:focus.once="addinput" @keyup.enter="nextInput(\'count\'+comp_id.toString()) "@change="putToproductlist(\'productCount\',comp_id)" placeholder="數量" v-model="countC">\
-<input :id="\'price\'+comp_id.toString()" type="search" @keyup.enter="nextInput(\'price\'+comp_id.toString())" @change="putToproductlist(\'productPrice\',comp_id)"  placeholder="價格" v-model="countP">\
-<input :id="\'allprice\'+comp_id.toString()" type="search" @change="putToproductlist(\'productAllpirce\',comp_id)"  placeholder="總價" v-model="countAP">\
+<input :id="\'count-\'+comp_id.toString()" type="search" v-on:focus.once="addinput" @keyup.enter="nextInput(\'count-\'+comp_id.toString()) "@change="putToproductlist(\'productCount\',comp_id)" placeholder="數量" v-model="countC">\
+<input :id="\'price-\'+comp_id.toString()" type="search" @keyup.enter="nextInput(\'price-\'+comp_id.toString())" @change="putToproductlist(\'productPrice\',comp_id)"  placeholder="價格" v-model="countP">\
+<input :id="\'allprice-\'+comp_id.toString()" type="search" @change="putToproductlist(\'productAllpirce\',comp_id)"  placeholder="總價" v-model="countAP">\
 </div>\
 </div>',
-methods: {
-    nextInput: function (target) {
-        $('#' + target).next().focus();
-    },
-    addinput: function () {
-        productlist.products.push({
-            id: Number(this.comp_id) + 1,
-            productIso: "",
-            productName: "",
-            productType: "",
-            productCount: "",
-            productPrice: "",
-            productAllpirce: ""
-        });
-    },
-    putToproductlist: function (a, b) {
-        if (a == 'productIso') {
-            productlist.products[b].productIso = $("#iso" + b.toString()).val()
-        } else if (a == 'productName') {
-            productlist.products[b].productName = $("#name" + b.toString()).val()
-        } else if (a == 'productType') {
-            productlist.products[b].productType = $("#type" + b.toString()).val()
-        } else if (a == 'productCount') {
-            this.countAP = this.countC * this.countP //計算總價
-            productlist.products[b].productCount = $("#count" + b.toString()).val()
-            productlist.products[b].productAllpirce = this.countAP //傳送總價
-        } else if (a == 'productPrice') {
-            this.countAP = this.countC * this.countP //計算總價
-            productlist.products[b].productPrice = $("#price" + b.toString()).val()
-            productlist.products[b].productAllpirce = this.countAP //傳送總價 
-        } else if (a == 'productAllpirce') {
-            this.countP = this.countAP / this.countC //計算單價
-            productlist.products[b].productAllpirce = $("#allprice" + b.toString()).val()
-            productlist.products[b].productPrice = this.countP //傳送總價 
-        }
+    computed: {},
 
+    methods: {
+        nextInput: function (target) {
+            $('#' + target).next().focus();
+        },
+        addinput: function () {
+            productlist.products.push({
+                id: Number(this.comp_id) + 1,
+                productIso: "",
+                productName: "",
+                productType: "",
+                productCount: "",
+                productPrice: "",
+                productAllpirce: ""
+            });
+        },
+        putToproductlist: function (a, b) {
+            if (a == 'productIso') {
+                productlist.products[b].productIso = $("#Iso-" + b.toString()).val()
+            } else if (a == 'productName') {
+                console.log('run')
+                productlist.products[b].productName = $("#Name-" + b.toString()).val()
+            } else if (a == 'productType') {
+                productlist.products[b].productType = $("#Type-" + b.toString()).val()
+            } else if (a == 'productCount') {
+                this.countAP = this.countC * this.countP //計算總價
+                productlist.products[b].productCount = $("#count-" + b.toString()).val()
+                productlist.products[b].productAllpirce = this.countAP //傳送總價
+            } else if (a == 'productPrice') {
+                this.countAP = this.countC * this.countP //計算總價
+                productlist.products[b].productPrice = $("#price-" + b.toString()).val()
+                productlist.products[b].productAllpirce = this.countAP //傳送總價 
+            } else if (a == 'productAllpirce') {
+                this.countP = this.countAP / this.countC //計算單價
+                productlist.products[b].productAllpirce = $("#allprice-" + b.toString()).val()
+                productlist.products[b].productPrice = this.countP //傳送總價 
+            }
+
+        }
     }
-}
 })
 
 
@@ -119,7 +121,7 @@ var productlist = new Vue({ //商品列表資料
           ]
     },
     methods: {
-        splitpaste: function () { //貼上自動分攔 貼上後不能執行@change?????
+        splitpaste: function () {
             $('.pdtinput').bind('paste', null, function (e) {
                 $this = $(this);
                 setTimeout(function () {
@@ -127,9 +129,16 @@ var productlist = new Vue({ //商品列表資料
                     var input = $this
                     for (var i = 0; i < columns.length; i++) {
                         input.val(columns[i]);
+
+                        var t = input.attr('id').split('-');
+                        if (t[0] != 'ph') { //貼上自動分攔 貼上後不能執行@change 所以自己附值
+                            t = 'productlist.products[' + t[1] + '].product' + t[0] + '= columns[i]'
+                            eval(t);
+                        }
                         input = input.next();
-                        input.focus()
                     }
+                var t = '$("#count-' + $this.attr('id').split('-')[1] + '").focus()';//貼完 focus數量input
+                eval(t);
                 }, 0);
             });
         }
@@ -141,7 +150,7 @@ var productlist = new Vue({ //商品列表資料
 var webform = new Vue({ //訂單客人資料
     el: '#orderform',
     data: {
-        gsheetcol:'L', //庫存表存取欄位
+        gsheetcol: 'L', //庫存表存取欄位
         web: 'yahoo',
         orderID_display: false,
         orderAccount_display: true,
@@ -158,7 +167,7 @@ var webform = new Vue({ //訂單客人資料
         orderShipPrice: ""
     },
     methods: {
-        formchange: function () {//判斷平台
+        formchange: function () { //判斷平台
             if (this.web == 'ruten') {
                 this.ruten();
             } else if (this.web == 'yahoo') {
@@ -221,4 +230,3 @@ var webform = new Vue({ //訂單客人資料
 
     }
 })
-
