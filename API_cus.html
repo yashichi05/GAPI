@@ -35,6 +35,7 @@
     <input v-if="orderFee_display" type="search" v-model="orderFee" placeholder="手續費"><br v-if="allnon">
     <input type="search" v-model="orderShip" placeholder="貨運">
     <input type="search" v-model="orderShipPrice" placeholder="運費"><br>
+    <span>{{orderPrice}}</span>
 
 </div>
 <div id="productlist" @click="splitpaste">

@@ -163,8 +163,15 @@ var webform = new Vue({ //訂單客人資料
         orderTel: "",
         orderDiscount: "",
         orderFee: "",
-        orderShip: "",
+        orderShip: "0",
         orderShipPrice: ""
+    },
+    computed:{//訂單總金額
+        orderPrice: function(){
+            var OP = 0
+                for(var i = 0;i<productlist.products.length;i++){OP = OP+Number(productlist.products[i].productAllpirce)}
+            return Number(this.orderShip)+OP;
+        }
     },
     methods: {
         formchange: function () { //判斷平台

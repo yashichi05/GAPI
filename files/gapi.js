@@ -33,7 +33,7 @@ var arte = [];
 
 function testar() {
     for (var i = 0; i < productlist.products.length-1; i++) {//-1是因為永遠會多一攔
-        arte.push(['日期', webform.orderAccount, webform.orderCustomer, webform.orderTel,productlist.products[i].productIso,productlist.products[i].productName,productlist.products[i].productType,productlist.products[i].productCount,productlist.products[i].productPrice,productlist.products[i].productAllpirce])
+        arte.push(['日期', webform.orderAccount, webform.orderCustomer, webform.orderTel,productlist.products[i].productIso,productlist.products[i].productName,productlist.products[i].productType,productlist.products[i].productCount,productlist.products[i].productPrice,productlist.products[i].productAllpirce,webform.orderShip,webform.orderShipPrice,"","","","","",webform.orderPrice])
 
     }
 
