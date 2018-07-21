@@ -1,8 +1,4 @@
 var sheetrange = { //寫入的範圍
-    findLastRow: function (sheetId, sheetName) { //隨找最後一列新增(未完成)
-        sheetName = sheetName + 'A:A';
-        return sheetName
-    },
     yahooID: {
         gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
         gname: 'Y!'
@@ -28,28 +24,37 @@ var sheetrange = { //寫入的範圍
         gname: 'SG!'
     }
 }
-//測試VALUES
-var arte = [];
 
-function testar() {
-    for (var i = 0; i < productlist.products.length-1; i++) {//-1是因為永遠會多一攔
-        arte.push(['日期', webform.orderAccount, webform.orderCustomer, webform.orderTel,productlist.products[i].productIso,productlist.products[i].productName,productlist.products[i].productType,productlist.products[i].productCount,productlist.products[i].productPrice,productlist.products[i].productAllpirce,webform.orderShip,webform.orderShipPrice,"","","","","",webform.orderPrice])
 
-    }
 
-}
 
 
 //案送出後執行的城市
-var clickEvent = {
+var btnclickEvent = {
+    todayDate: function () { //當日日期
+        var todayDate = new Date();
+        return todayDate.toLocaleDateString()
+    },
     submitOrder: function () {
         if (webform.web == 'yahoo') { //yahoo訂單記錄寫入
-            var orderValues = [['日期', webform.orderAccount, webform.orderCustomer, webform.orderTel,
-webform.orderDiscount,
-webform.orderShip,
-webform.orderShipPrice,
-productlist.products]] //yahoo訂單記錄寫入需要的值(未完成) 需要處理products 的城市 先偵測有效商品數量 → 開同數量的陣列長度→填入資料→再將商品依序 填入陣列的陣列內資料
-            writesheetrange(sheetrange.yahooID.gid, findLastRow(sheetrange.yahooID.gid, sheetrange.yahooID.gname, orderValues))
+            var yahookey = webform.orderAccount //設定KEY值 若KEY無值則不會新增任何東西
+            if (yahookey.length == 0) {
+                webform.orderAccount = '未輸入代號'
+                return
+            }
+
+
+
+            var aryV = []; //設定陣列
+            aryV.push([this.todayDate(), webform.orderAccount, webform.orderCustomer, webform.orderTel, productlist.products[0].productIso, productlist.products[0].productName, productlist.products[0].productType, productlist.products[0].productCount, productlist.products[0].productPrice, productlist.products[0].productAllpirce, "'" + webform.orderShip, webform.orderShipPrice, webform.orderDiscount, "", "", "", "", webform.orderPrice]); //產生第一列
+            for (var i = 1; i < productlist.products.length - 1; i++) { //-1是因為永遠會多一攔 從第二列開始新增
+                aryV.push([this.todayDate(), webform.orderAccount, webform.orderCustomer, webform.orderTel, productlist.products[i].productIso, productlist.products[i].productName, productlist.products[i].productType, productlist.products[i].productCount, productlist.products[i].productPrice, productlist.products[i].productAllpirce])
+            };
+
+
+
+            submitData(sheetrange.yahooID.gid, sheetrange.yahooID.gname, aryV); //資料送出
+
         } else if (webform.web == 'pchomet') {
 
         } else if (webform.web == 'pchomed') {
@@ -67,19 +72,23 @@ productlist.products]] //yahoo訂單記錄寫入需要的值(未完成) 需要�
     nextOrder: function () {}
 }
 
-function getrange() { //test
 
-    console.log("value");
-    id1 = document.getElementById('1').value;
-    id2 = document.getElementById('2').value;
-    id3 = document.getElementById('3').value;
-    id4 = document.getElementById('4').value;
-    id5 = document.getElementById('5').value;
-    var setv = [[id1, id2, id3, id4, id5]];
-    console.log(setv);
-    writesheetrange("A1", setv)
+function submitData(getid, getname, aryV) { //取得最後一列，並寫入資料
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: getid,
+        range: getname + "B:B"
+    }).then(function (response) {
+
+        //console.log(response.result.values)
+        var dataLen = response.result.values.length + 1;
+        writesheetrange(getid, getname + "A" + dataLen.toString(), aryV)
+
+    }, function (response) {
+        console.log('Error: ' + response.result.error.message);
+    });
 
 }
+
 
 function writesheetrange(setid, setrange, setvalues) { //寫入資料
     var body = {
@@ -88,7 +97,7 @@ function writesheetrange(setid, setrange, setvalues) { //寫入資料
     gapi.client.sheets.spreadsheets.values.update({
         spreadsheetId: setid,
         range: setrange,
-        valueInputOption: 'RAW',
+        valueInputOption: 'USER_ENTERED', //自動挑整格式
         resource: body
     }).then(function (response) {
         var result = response.result;
@@ -98,17 +107,7 @@ function writesheetrange(setid, setrange, setvalues) { //寫入資料
 }
 
 
-function getsheetrange(getid, getrange, ) { //讀取資料
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: getid,
-        range: getrange,
-    }).then(function (response) {
-        console.log(response.result.values);
 
-    }, function (response) {
-        console.log('Error: ' + response.result.error.message);
-    });
-}
 
 
 /**顯示結果範例

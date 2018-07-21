@@ -24,7 +24,7 @@ var test = new Vue({
 })
 
 ///////////////////////////////////////
-var buttonevent = new Vue({ //按鈕事件
+var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否為數字，若否則跳出alert
     el: '#buttonEvent',
     data: {},
     methods: {
@@ -163,14 +163,14 @@ var webform = new Vue({ //訂單客人資料
         orderTel: "",
         orderDiscount: "",
         orderFee: "",
-        orderShip: "0",
-        orderShipPrice: ""
+        orderShip: "",
+        orderShipPrice: "0"
     },
     computed:{//訂單總金額
         orderPrice: function(){
             var OP = 0
                 for(var i = 0;i<productlist.products.length;i++){OP = OP+Number(productlist.products[i].productAllpirce)}
-            return Number(this.orderShip)+OP;
+            return Number(this.orderShipPrice)+OP-this.orderDiscount;
         }
     },
     methods: {
