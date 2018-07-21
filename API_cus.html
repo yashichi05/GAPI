@@ -33,7 +33,13 @@
     <input type="search" v-model="orderTel" placeholder="電話"><br>
     <input v-if="orderDiscount_display" type="search" v-model="orderDiscount" placeholder="折扣">
     <input v-if="orderFee_display" type="search" v-model="orderFee" placeholder="手續費"><br v-if="allnon">
-    <input type="search" v-model="orderShip" placeholder="貨運">
+        <select v-model="orderShip" > 
+　<option value="7-11">7-11</option>
+　<option value="全家">全家</option>
+　<option value="新竹">新竹</option>
+　<option value="神行">神行</option>
+　<option value="大榮">大榮</option>
+　<option value="萊爾富">萊爾富</option></select>
     <input type="search" v-model="orderShipPrice" placeholder="運費"><br>
     <span>{{orderPrice}}</span>
 

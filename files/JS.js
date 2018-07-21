@@ -163,7 +163,7 @@ var webform = new Vue({ //訂單客人資料
         orderTel: "",
         orderDiscount: "",
         orderFee: "",
-        orderShip: "",
+        orderShip: "7-11",
         orderShipPrice: "0"
     },
     computed:{//訂單總金額
