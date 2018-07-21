@@ -55,15 +55,10 @@
 
 </div>
 <div id="buttonEvent">
-    <button @click="test">送出</button>
-    <button @click="test">刪除</button>
+    <button @click="submitOrder">送出</button>
+    <button>刪除</button>
     <button>下一筆</button>
 </div>
-    <div id="test">
-    <input type="text" v-model="data1" @change="cal1">
-    <input type="text" v-model="data2" @change="cal2">
-    <input type="text" v-model="data3" @change="cal3">
-    </div>
 
 
 
@@ -75,7 +70,7 @@
 
 <footer>
     <script src="gapi.js"></script>
-    <script src="JS.js"></script>
+    <script src="jsfunction.js"></script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 
 </footer>

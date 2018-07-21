@@ -1,4 +1,8 @@
 var sheetrange = { //寫入的範圍
+    resStock: {
+        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
+        gname: 't!'
+    },
     yahooID: {
         gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
         gname: 'Y!'
@@ -29,58 +33,60 @@ var sheetrange = { //寫入的範圍
 
 
 
-//案送出後執行的城市
-var btnclickEvent = {
-    todayDate: function () { //當日日期
-        var todayDate = new Date();
-        return todayDate.toLocaleDateString()
-    },
-    submitOrder: function () {
-        if (webform.web == 'yahoo') { //yahoo訂單記錄寫入
-            var yahookey = webform.orderAccount //設定KEY值 若KEY無值則不會新增任何東西
-            if (yahookey.length == 0) {
-                webform.orderAccount = '未輸入代號'
-                return
-            }
 
+function GsubmitStockData(iso, count, pindex) { //扣數量用 差回傳資料 還有相加數量
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: sheetrange.resStock.gid,
+        range: sheetrange.resStock.gname + "B:O"
+    }).then(function (response) {
+        var stockISOAry = [];
+        var setArysite
+        if (webform.gsheetcol == "K") { //判斷KLMN 陣列位置
+            setArysite = 9;
+        } else if (webform.gsheetcol == "L") {
+            setArysite = 10;
 
+        } else if (webform.gsheetcol == "M") {
+            setArysite = 11;
 
-            var aryV = []; //設定陣列
-            aryV.push([this.todayDate(), webform.orderAccount, webform.orderCustomer, webform.orderTel, productlist.products[0].productIso, productlist.products[0].productName, productlist.products[0].productType, productlist.products[0].productCount, productlist.products[0].productPrice, productlist.products[0].productAllpirce, "'" + webform.orderShip, webform.orderShipPrice, webform.orderDiscount, "", "", "", "", webform.orderPrice]); //產生第一列
-            for (var i = 1; i < productlist.products.length - 1; i++) { //-1是因為永遠會多一攔 從第二列開始新增
-                aryV.push([this.todayDate(), webform.orderAccount, webform.orderCustomer, webform.orderTel, productlist.products[i].productIso, productlist.products[i].productName, productlist.products[i].productType, productlist.products[i].productCount, productlist.products[i].productPrice, productlist.products[i].productAllpirce])
-            };
-
-
-
-            submitData(sheetrange.yahooID.gid, sheetrange.yahooID.gname, aryV); //資料送出
-
-        } else if (webform.web == 'pchomet') {
-
-        } else if (webform.web == 'pchomed') {
-
-        } else if (webform.web == 'shopee') {
-
-        } else if (webform.web == 'ruten') {
-
-        } else if (webform.web == 'songuo') {
+        } else if (webform.gsheetcol == "N") {
+            setArysite = 12;
 
         }
+        //console.log(response.result.values)
+        for (var i = 0; i < response.result.values.length; i++) {
+            stockISOAry.push(response.result.values[i][0]);
+        }
+        var findRow = stockISOAry.indexOf(iso) + 1; //找到的ISO列數
+        var calV1 = response.result.values[findRow - 1][13] - count; //計算拍賣架上取貨後剩餘數量
+        var caltext1 = "$('#getOres-" + pindex + "').text('架:" + calV1 + "');";
+        var calV2 = response.result.values[findRow - 1][7]; //顯示批發倉庫數量
+        var caltext2 = "$('#getBres-" + pindex + "').text('庫:" + calV2 + "');";
+        count = Number(response.result.values[findRow - 1][setArysite]) + Number(count); //總取貨量 原取貨+現取貨
+        //console.log(typeof(response.result.values[findRow-1][setArysite]));
+        eval(caltext1);
+        eval(caltext2); //計算剩餘庫存
+        var wcol = sheetrange.resStock.gname + webform.gsheetcol + findRow.toString() //設定寫入欄位
+        count = [[count]]
+        writesheetrange(sheetrange.resStock.gid, wcol, count) //開始寫入數量
 
-    },
-    delOreder: function () {},
-    nextOrder: function () {}
+    }, function (response) {
+        console.log('Error: ' + response.result.error.message);
+    });
+
 }
 
-
-function submitData(getid, getname, aryV) { //取得最後一列，並寫入資料
+function GsubmitOrderData(getid, getname, aryV) { //取得最後一列，並寫入資料
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: getid,
-        range: getname + "B:B"
+        range: getname + "A:B"
     }).then(function (response) {
 
         //console.log(response.result.values)
         var dataLen = response.result.values.length + 1;
+        if (response.result.values[dataLen - 2][0] != buttonevent.todayDate()) {
+            dataLen = dataLen + 1;
+        }
         writesheetrange(getid, getname + "A" + dataLen.toString(), aryV)
 
     }, function (response) {

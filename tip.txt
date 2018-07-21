@@ -1,5 +1,6 @@
 https://www.w3schools.com/jsref/dom_obj_event.asp
 dom event
-var d = new Date()
-d.toLocaleDateString()
-日期
+
+
+BUG
+打商品時，不能連續有兩個相同的商品ISO碼，第一個會少扣，因為扣數量程式跑太快，試算表的資料還沒有更新

@@ -1,36 +1,122 @@
 //vue
 
-var test = new Vue({
-    el: '#test',
-    data: {
-        data1: 1,
-        data2: 1,
-        data3: 1,
 
-    },
-    methods: {
-        cal1: function () {
-            this.data3 = this.data1 * this.data2
-        },
-        cal2: function () {
-            this.data3 = this.data1 * this.data2
-        },
-        cal3: function () {
-            this.data2 = this.data3 / this.data1
-        }
-
-    }
-
-})
 
 ///////////////////////////////////////
 var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否為數字，若否則跳出alert
     el: '#buttonEvent',
     data: {},
     methods: {
-        test: function () {
-            alert('成功')
-        }
+        stockmanage: function () {
+            for (var i = 0; i < productlist.products.length - 1; i++) {
+                var miso = productlist.products[i].productIso;
+                var mcount = productlist.products[i].productCount;
+                GsubmitStockData(miso, mcount, i);
+            }
+
+        },
+        todayDate: function () { //當日日期
+            var todayDate = new Date();
+            return todayDate.toLocaleDateString();
+        },
+        submitOrder: function () { //跨日需自動控行(未完成)
+            if (webform.web == 'yahoo') { //yahoo訂單記錄寫入
+                var yahookey = webform.orderAccount //設定KEY值 若KEY無值則不會傳送
+                if (yahookey.length == 0) {
+                    webform.orderAccount = '未輸入代號'
+                    return
+                }
+                var aryV = []; //設定陣列
+                aryV.push([this.todayDate(), webform.orderAccount, webform.orderCustomer, "'" + webform.orderTel, productlist.products[0].productIso, productlist.products[0].productName, productlist.products[0].productType, productlist.products[0].productCount, productlist.products[0].productPrice, productlist.products[0].productAllpirce, "'" + webform.orderShip, webform.orderShipPrice, webform.orderDiscount, "", "", "", "", webform.orderPrice]); //產生第一列
+
+                for (var i = 1; i < productlist.products.length - 1; i++) { //-1是因為永遠會多一攔 從第二列開始新增
+                    aryV.push([this.todayDate(), webform.orderAccount, webform.orderCustomer, "'" + webform.orderTel, productlist.products[i].productIso, productlist.products[i].productName, productlist.products[i].productType, productlist.products[i].productCount, productlist.products[i].productPrice, productlist.products[i].productAllpirce])
+                };
+                /////
+                GsubmitOrderData(sheetrange.yahooID.gid, sheetrange.yahooID.gname, aryV); //資料送出
+                this.stockmanage(); //扣數量
+
+            } else if (webform.web == 'pchomet') {
+                ///////KEY值
+                var ptkey = 'non'; //設定KEY值 若KEY無值則不會傳送
+                if (ptkey.length == 0) {
+                    webform.orderAccount = '未輸入代號'
+                    return
+                }
+                ///////資料陣列
+                var aryV = [];
+                aryV.push();
+                
+                //////執行送出
+                GsubmitOrderData(sheetrange.yahooID.gid, sheetrange.yahooID.gname, aryV); //資料送出
+                this.stockmanage(); //扣數量
+
+            } else if (webform.web == 'pchomed') {
+                ///////KEY值
+                var ptkey = 'non'; //設定KEY值 若KEY無值則不會傳送
+                if (ptkey.length == 0) {
+                    webform.orderAccount = '未輸入代號'
+                    return
+                }
+                ///////資料陣列
+                var aryV = [];
+                aryV.push();
+                
+                //////執行送出
+                GsubmitOrderData(sheetrange.yahooID.gid, sheetrange.yahooID.gname, aryV); //資料送出
+                this.stockmanage(); //扣數量
+
+            } else if (webform.web == 'shopee') {
+                ///////KEY值
+                var ptkey = 'non'; //設定KEY值 若KEY無值則不會傳送
+                if (ptkey.length == 0) {
+                    webform.orderAccount = '未輸入代號'
+                    return
+                }
+                ///////資料陣列
+                var aryV = [];
+                aryV.push();
+                
+                //////執行送出
+                GsubmitOrderData(sheetrange.yahooID.gid, sheetrange.yahooID.gname, aryV); //資料送出
+                this.stockmanage(); //扣數量
+
+            } else if (webform.web == 'ruten') {
+                ///////KEY值
+                var ptkey = 'non'; //設定KEY值 若KEY無值則不會傳送
+                if (ptkey.length == 0) {
+                    webform.orderAccount = '未輸入代號'
+                    return
+                }
+                ///////資料陣列
+                var aryV = [];
+                aryV.push();
+                
+                //////執行送出
+                GsubmitOrderData(sheetrange.yahooID.gid, sheetrange.yahooID.gname, aryV); //資料送出
+                this.stockmanage(); //扣數量
+
+            } else if (webform.web == 'songuo') {////這個比較特殊
+                ///////KEY值
+                var ptkey = 'non'; //設定KEY值 若KEY無值則不會傳送
+                if (ptkey.length == 0) {
+                    webform.orderAccount = '未輸入代號'
+                    return
+                }
+                ///////資料陣列
+                var aryV = [];
+                aryV.push();
+                
+                //////執行送出
+                GsubmitOrderData(sheetrange.yahooID.gid, sheetrange.yahooID.gname, aryV); //資料送出
+                this.stockmanage(); //扣數量
+                
+
+            }
+
+        },
+        delOreder: function () {},
+        nextOrder: function () {}
 
     }
 
@@ -58,6 +144,7 @@ Vue.component('product-input', { //商品列表input,
 <input :id="\'count-\'+comp_id.toString()" type="search" v-on:focus.once="addinput" @keyup.enter="nextInput(\'count-\'+comp_id.toString()) "@change="putToproductlist(\'productCount\',comp_id)" placeholder="數量" v-model="countC">\
 <input :id="\'price-\'+comp_id.toString()" type="search" @keyup.enter="nextInput(\'price-\'+comp_id.toString())" @change="putToproductlist(\'productPrice\',comp_id)"  placeholder="價格" v-model="countP">\
 <input :id="\'allprice-\'+comp_id.toString()" type="search" @change="putToproductlist(\'productAllpirce\',comp_id)"  placeholder="總價" v-model="countAP">\
+<span :id="\'getOres-\'+comp_id.toString()"></span><span style="padding-left:10px;" :id="\'getBres-\'+comp_id.toString()"></span>\
 </div>\
 </div>',
     computed: {},
@@ -77,7 +164,7 @@ Vue.component('product-input', { //商品列表input,
                 productAllpirce: ""
             });
         },
-        putToproductlist: function (a, b) {
+        putToproductlist: function (a, b) { //用手動輸入 值變化後 會觸發
             if (a == 'productIso') {
                 productlist.products[b].productIso = $("#Iso-" + b.toString()).val()
             } else if (a == 'productName') {
@@ -129,16 +216,18 @@ var productlist = new Vue({ //商品列表資料
                     var input = $this
                     for (var i = 0; i < columns.length; i++) {
                         input.val(columns[i]);
-
-                        var t = input.attr('id').split('-');
-                        if (t[0] != 'ph') { //貼上自動分攔 貼上後不能執行@change 所以自己附值
-                            t = 'productlist.products[' + t[1] + '].product' + t[0] + '= columns[i]'
-                            eval(t);
+                        var vAry = input.attr('id')
+                        if (vAry) {
+                            vAry = vAry.split('-') //貼上多出一欄，會有錯訊息 所以上面要判斷vAry是否有值
+                            if (vAry[0] != 'ph') { //貼上自動分攔 貼上後不能執行@change 所以自己附值
+                                vAry = 'productlist.products[' + vAry[1] + '].product' + vAry[0] + '= columns[i]'
+                                eval(vAry);
+                            }
                         }
                         input = input.next();
                     }
-                var t = '$("#count-' + $this.attr('id').split('-')[1] + '").focus()';//貼完 focus數量input
-                eval(t);
+                    var t = '$("#count-' + $this.attr('id').split('-')[1] + '").focus()'; //貼完 focus數量input
+                    eval(t);
                 }, 0);
             });
         }
@@ -166,11 +255,13 @@ var webform = new Vue({ //訂單客人資料
         orderShip: "7-11",
         orderShipPrice: "0"
     },
-    computed:{//訂單總金額
-        orderPrice: function(){
+    computed: { //訂單總金額
+        orderPrice: function () {
             var OP = 0
-                for(var i = 0;i<productlist.products.length;i++){OP = OP+Number(productlist.products[i].productAllpirce)}
-            return Number(this.orderShipPrice)+OP-this.orderDiscount;
+            for (var i = 0; i < productlist.products.length; i++) {
+                OP = OP + Number(productlist.products[i].productAllpirce)
+            }
+            return Number(this.orderShipPrice) + OP - this.orderDiscount;
         }
     },
     methods: {
