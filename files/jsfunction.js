@@ -142,7 +142,33 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
 
         },
         delOreder: function () {},
-        nextOrder: function () {}
+        nextOrder: function () {
+            //清空訂單資料
+            webform.orderID = ""
+            webform.orderAccount = ""
+            webform.orderCustomer = ""
+            webform.orderTel = ""
+            webform.orderDiscount = ""
+            webform.orderFee = ""
+            webform.orderFeeCredit = ""
+            webform.SGcount = ""
+            webform.SGcountC = "1"
+            webform.SGPrice = ""
+            //初始化商品資料
+            productlist.products = []
+            setTimeout(function () { //沒有設settimeout 不會重製第一欄
+                productlist.products = [{
+                        id: "0",
+                        productIso: "",
+                        productName: "",
+                        productType: "",
+                        productCount: "",
+                        productPrice: "",
+                        productAllpirce: ""
+              }
+          ]}, 1)
+
+        }
 
     }
 
@@ -191,11 +217,10 @@ Vue.component('product-input', { //商品列表input,
             });
             productlist.SGdetect(); //松果偵測
         },
-        putToproductlist: function (a, b) { //用手動輸入 值變化後 會觸發
+        putToproductlist: function (a, b) { //用手動輸入 值變化後 會觸發附值
             if (a == 'productIso') {
                 productlist.products[b].productIso = $("#Iso-" + b.toString()).val()
             } else if (a == 'productName') {
-                console.log('run')
                 productlist.products[b].productName = $("#Name-" + b.toString()).val()
             } else if (a == 'productType') {
                 productlist.products[b].productType = $("#Type-" + b.toString()).val()
