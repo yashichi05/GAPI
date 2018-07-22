@@ -206,16 +206,16 @@ Vue.component('product-input', { //商品列表input,
     props: ['comp_id', 'count1', 'count2', 'count3'],
     template: '<div :id="\'product-\'+comp_id.toString()">\
 <div>\
-<input :id="\'ph-\'+comp_id.toString()" class="pdtinput" type="search" placeholder="品項">\
-<input :id="\'Iso-\'+comp_id.toString()" class="pdtinput" type="search" @change="putToproductlist(\'productIso\',comp_id )"  placeholder="國際條碼">\
-<input :id="\'Name-\'+comp_id.toString()" class="pdtinput" type="search" @change="putToproductlist(\'productName\',comp_id)"  placeholder="商品名稱">\
-<input :id="\'Type-\'+comp_id.toString()" class="pdtinput" type="search" @change="putToproductlist(\'productType\',comp_id)"  placeholder="款式">\
+<input :id="\'ph-\'+comp_id.toString()" class="pdtinput" type="search" style=" width: 34px;" placeholder="項">\
+<input :id="\'Iso-\'+comp_id.toString()" class="pdtinput" type="search" style=" width: 145px;" @change="putToproductlist(\'productIso\',comp_id )"  placeholder="國際條碼">\
+<input :id="\'Name-\'+comp_id.toString()" class="pdtinput" type="search" style=" width: 200px;" @change="putToproductlist(\'productName\',comp_id)"  placeholder="商品名稱">\
+<input :id="\'Type-\'+comp_id.toString()" class="pdtinput" type="search" style=" width: 100px;" @change="putToproductlist(\'productType\',comp_id)"  placeholder="款式">\
 </div>\
 \
 <div>\
-<input :id="\'count-\'+comp_id.toString()" type="search" v-on:focus.once="addinput" @keyup.enter="nextInput(\'count-\'+comp_id.toString()) "@change="putToproductlist(\'productCount\',comp_id)" placeholder="數量" v-model="countC">\
-<input :id="\'price-\'+comp_id.toString()" class="SGdisplay" type="search" @keyup.enter="nextInput(\'price-\'+comp_id.toString())" @change="putToproductlist(\'productPrice\',comp_id)"  placeholder="價格" v-model="countP">\
-<input :id="\'allprice-\'+comp_id.toString()" class="SGdisplay" type="search" @change="putToproductlist(\'productAllpirce\',comp_id)"  placeholder="總價" v-model="countAP">\
+<input :id="\'count-\'+comp_id.toString()" type="number" style=" width: 30px;" v-on:focus.once="addinput" @keyup.enter="nextInput(\'count-\'+comp_id.toString()) "@change="putToproductlist(\'productCount\',comp_id)" placeholder="數" v-model="countC">\
+<input :id="\'price-\'+comp_id.toString()" class="SGdisplay" type="number" style=" width: 45px;" @keyup.enter="nextInput(\'price-\'+comp_id.toString())" @change="putToproductlist(\'productPrice\',comp_id)"  placeholder="價格" v-model="countP">\
+<input :id="\'allprice-\'+comp_id.toString()" class="SGdisplay" type="number" style=" width: 45px;" @change="putToproductlist(\'productAllpirce\',comp_id)"  placeholder="總價" v-model="countAP">\
 <span :id="\'getOres-\'+comp_id.toString()"></span><span style="padding-left:10px;" :id="\'getBres-\'+comp_id.toString()"></span>\
 </div>\
 </div>',
