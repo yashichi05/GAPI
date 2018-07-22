@@ -41,7 +41,7 @@ function GsubmitStockData(iso, count, pindex) { //扣數量用 差回傳資料 �
     }).then(function (response) {
         var stockISOAry = [];
         var setArysite
-        if (webform.gsheetcol == "K") { //判斷KLMN 陣列位置
+        if (webform.gsheetcol == "K") { //判斷KLMN 陣列位置 用來計算剩餘數量，不影響寫入
             setArysite = 9;
         } else if (webform.gsheetcol == "L") {
             setArysite = 10;

@@ -32,16 +32,18 @@
     <input type="search" v-model="orderCustomer" placeholder="姓名">
     <input type="search" v-model="orderTel" placeholder="電話"><br>
     <input v-if="orderDiscount_display" type="search" v-model="orderDiscount" placeholder="折扣">
-    <input v-if="orderFee_display" type="search" v-model="orderFee" placeholder="手續費"><br v-if="allnon">
-        <select v-model="orderShip" > 
+    <input v-if="SGCdisplay" type="search" v-model="orderFee" placeholder="手續費">
+    <br v-if="ifallnon">
+    <select v-model="orderShip" v-if="!SGCdisplay"> 
 　<option value="7-11">7-11</option>
 　<option value="全家">全家</option>
 　<option value="新竹">新竹</option>
 　<option value="神行">神行</option>
 　<option value="大榮">大榮</option>
 　<option value="萊爾富">萊爾富</option></select>
-    <input type="search" v-model="orderShipPrice" placeholder="運費"><br>
-    <span>{{orderPrice}}</span>
+    <input type="search" v-if="!SGCdisplay" v-model="orderShipPrice" placeholder="運費"><br v-if="!SGCdisplay">
+    <span>訂單金額:{{orderPrice}}</span><span style="padding-left:10px;" v-if="orderFeeCredit_display"><input type="checkbox" value="Y" v-model="orderFeeCredit">信用卡付款</span>
+    <span v-if="SGCdisplay"><br><input type="search" v-model="SGPrice" placeholder="價格">元<input type="search" v-model="SGcount" placeholder="幾">入×<input type="search" v-model="SGcountC"></span>
 
 </div>
 <div id="productlist" @click="splitpaste">
