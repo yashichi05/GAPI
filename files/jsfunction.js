@@ -7,8 +7,21 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
     el: '#buttonEvent',
     data: {},
     methods: {
+        disableButton: function () { //按鈕鎖定事件
+            $("#ordersubmit").attr('disabled', 'disabled')
+            $("#orderdel").attr('disabled', 'disabled')
+            $("#orderclear").attr('disabled', 'disabled')
+        },
+        activButton: function(){
+            $("#ordersubmit").removeAttr('disabled')
+            //$("#orderdel").removeAttr('disabled')
+            $("#orderclear").removeAttr('disabled')
+        },
         stockmanage: function () {
-            for (var i = 0; i < productlist.products.length - 1; i++) {
+            if(productlist.products.length - 1 ==0){//商品欄指有一欄時 直接解放 避免卡住
+                this.activButton()
+            }
+            for (var i = 0; i < productlist.products.length - 1; i++) { //會多一個所以-1
                 var miso = productlist.products[i].productIso;
                 var mcount = productlist.products[i].productCount;
                 GsubmitStockData(miso, mcount, i);
@@ -19,13 +32,14 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
             var todayDate = new Date();
             return todayDate.toLocaleDateString();
         },
-        submitOrder: function () { //跨日需自動控行(未完成)
+        submitOrder: function () { //跨日需自動控行
             if (webform.web == 'yahoo') { //yahoo訂單記錄寫入
                 var orderkey = webform.orderAccount //設定KEY值 若KEY無值則不會傳送
                 if (orderkey.length == 0) {
                     webform.orderAccount = '未輸入代號'
                     return
                 }
+                this.disableButton() //鎖定按鈕
                 var aryV = []; //設定陣列
                 aryV.push([this.todayDate(), webform.orderAccount, webform.orderCustomer, "'" + webform.orderTel, productlist.products[0].productIso, productlist.products[0].productName, productlist.products[0].productType, productlist.products[0].productCount, productlist.products[0].productPrice, productlist.products[0].productAllpirce, "'" + webform.orderShip, webform.orderShipPrice, webform.orderDiscount, "", "", "", "", webform.orderPrice]); //產生第一列
 
@@ -43,6 +57,7 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
                     webform.orderID = '未輸入訂單編號'
                     return
                 }
+                this.disableButton() //鎖定按鈕
                 ///////資料陣列
                 var aryV = [];
                 aryV.push([this.todayDate(), webform.orderID, webform.orderCustomer, "'" + webform.orderTel, "'" + productlist.products[0].productIso, productlist.products[0].productName, productlist.products[0].productType, productlist.products[0].productCount, productlist.products[0].productPrice, productlist.products[0].productAllpirce, "'" + webform.orderShip, webform.orderShipPrice, "", webform.orderPrice]); //產生第一列
@@ -61,6 +76,7 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
                     webform.orderID = '未輸入訂單編號'
                     return
                 }
+                this.disableButton() //鎖定按鈕
                 ///////資料陣列
                 var aryV = [];
                 aryV.push([this.todayDate(), webform.orderID, webform.orderCustomer, "'" + webform.orderTel, "'" + productlist.products[0].productIso, productlist.products[0].productName, productlist.products[0].productType, productlist.products[0].productCount, productlist.products[0].productPrice, productlist.products[0].productAllpirce, "'" + webform.orderShip, webform.orderShipPrice, "", webform.orderPrice]); //產生第一列
@@ -79,6 +95,7 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
                     webform.orderID = '未輸入訂單編號'
                     return
                 }
+                this.disableButton() //鎖定按鈕
                 ///////資料陣列
                 var aryV = [];
                 aryV.push([this.todayDate(), webform.orderID, webform.orderCustomer, "'" + webform.orderTel, webform.orderAccount, "'" + productlist.products[0].productIso, productlist.products[0].productName, productlist.products[0].productType, productlist.products[0].productCount, productlist.products[0].productPrice, productlist.products[0].productAllpirce, "'" + webform.orderShip, webform.orderShipPrice, webform.orderPrice, "", webform.orderFeeCreditCal]); //產生第一列
@@ -97,6 +114,7 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
                     webform.orderID = '未輸入訂單編號'
                     return
                 }
+                this.disableButton() //鎖定按鈕
                 ///////資料陣列
                 var aryV = [];
                 aryV.push([this.todayDate(), webform.orderID, webform.orderID, webform.orderCustomer, "'" + webform.orderTel, "'" + productlist.products[0].productIso, productlist.products[0].productName, productlist.products[0].productType, productlist.products[0].productCount, productlist.products[0].productPrice, productlist.products[0].productAllpirce, "'" + webform.orderShip, webform.orderShipPrice, "", webform.orderPrice]); //產生第一列
@@ -115,6 +133,7 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
                     webform.orderID = '未輸入訂單編號'
                     return
                 }
+                this.disableButton() //鎖定按鈕
                 ///////資料陣列
                 ///先產生商品列
                 var SGproductsISO = productlist.products[0].productIso + "*" + productlist.products[0].productCount;
@@ -166,7 +185,8 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
                         productPrice: "",
                         productAllpirce: ""
               }
-          ]}, 1)
+          ]
+            }, 1)
 
         }
 

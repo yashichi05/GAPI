@@ -35,9 +35,11 @@ var sheetrange = { //寫入的範圍
 
 
 function GsubmitStockData(iso, count, pindex) { //扣數量用 差回傳資料 還有相加數量
+
+
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: sheetrange.resStock.gid,
-        range: sheetrange.resStock.gname + "B:O"
+        range: sheetrange.resStock.gname + "B:R" //原本只有取道O蘭，但因為鎖定的取貨蘭 包括本身即之後的欄位為空，會導致陣列較短，無法取值計算 而沒法附值
     }).then(function (response) {
         var stockISOAry = [];
         var setArysite
@@ -54,10 +56,18 @@ function GsubmitStockData(iso, count, pindex) { //扣數量用 差回傳資料 �
 
         }
         //console.log(response.result.values)
-        for (var i = 0; i < response.result.values.length; i++) {
+        for (var i = 0; i < response.result.values.length; i++) { //提取ISO
             stockISOAry.push(response.result.values[i][0]);
         }
         var findRow = stockISOAry.indexOf(iso) + 1; //找到的ISO列數
+        if (pindex == productlist.products.length - 2) { //最後一個商品時//解放按鈕 -2是因為index從0開始 商品列又固定多1 
+            buttonevent.activButton()
+        }
+        if (findRow - 1 == -1 || iso == "") { //如果找不到ISO 會返回-1 iso為空白字元 會自動找到80列 所以強制RETURN
+            var errortext = "$('#getOres-" + pindex + "').text('找不到');";
+            eval(errortext)
+            return
+        }
         var calV1 = response.result.values[findRow - 1][13] - count; //計算拍賣架上取貨後剩餘數量
         var caltext1 = "$('#getOres-" + pindex + "').text('架:" + calV1 + "');";
         var calV2 = response.result.values[findRow - 1][7]; //顯示批發倉庫數量
@@ -68,6 +78,7 @@ function GsubmitStockData(iso, count, pindex) { //扣數量用 差回傳資料 �
         eval(caltext2); //計算剩餘庫存
         var wcol = sheetrange.resStock.gname + webform.gsheetcol + findRow.toString() //設定寫入欄位
         count = [[count]]
+
         writesheetrange(sheetrange.resStock.gid, wcol, count) //開始寫入數量
 
     }, function (response) {
