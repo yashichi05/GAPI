@@ -1,31 +1,31 @@
 var sheetrange = { //寫入的範圍
     resStock: {
-        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
-        gname: 't!'
+        gid: '19ZXwhENPrLmLURoKO4xXoCDahpyMG5wuU_8xsU74kyI',
+        gname: '工作表1!'
     },
     yahooID: {
-        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
-        gname: 'Y!'
+        gid: '1ve2C2zi_W8ctD4ObBdkEkheStQGgopHpGHXd_ygdNiI',
+        gname: 'YAHOO拍賣!'
     },
     shopeeID: {
-        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
-        gname: 'S!'
+        gid: '1-m4Y_02IF82_o7dI3N8z9mA4GcuqspyaaPtHxmze1Uk',
+        gname: '工作表1!'
     },
     pchomedID: {
-        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
-        gname: 'PD!'
+        gid: '1Vm0WQTShQSCRswroN2N4MNq-ofJPAOvv_yPMqVTNqnc',
+        gname: '大一!'
     },
     pchometID: {
-        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
-        gname: 'PT!'
+        gid: '1Vm0WQTShQSCRswroN2N4MNq-ofJPAOvv_yPMqVTNqnc',
+        gname: '梓原!'
     },
     RutenID: {
-        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
-        gname: 'R!'
+        gid: '1nimYD9iPgdHE7RXWqflBocOkj29mRVkCaatcWbq4Rvw',
+        gname: '露天拍賣!'
     },
     songuoID: {
-        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
-        gname: 'SG!'
+        gid: '1MRTaGo2H0xyhhyeA-Y0EDlVUzJ8J_djI6qCawZRt1Qw',
+        gname: '工作表1!'
     }
 }
 

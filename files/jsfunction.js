@@ -423,6 +423,7 @@ var webform = new Vue({ //訂單客人資料
             this.orderFeeCredit_display = false;
             this.orderAccount_display = false;
             this.orderDiscount_display = true;
+            this.orderShipPrice = "0"  //松果無運費
         }
 
 
