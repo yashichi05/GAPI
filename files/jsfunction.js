@@ -338,7 +338,8 @@ var webform = new Vue({ //訂單客人資料
         orderFeeCredit: "",
         SGcount: "",
         SGcountC: "1",
-        SGPrice: ""
+        SGPrice: "",
+        orderSheetRow:0 //訂單所在的G表列數
     },
     computed: { //訂單總金額
         orderFeeCreditCal: function () {

@@ -4,8 +4,8 @@ var sheetrange = { //寫入的範圍
         gname: '工作表1!'
     },
     yahooID: {
-        gid: '1ve2C2zi_W8ctD4ObBdkEkheStQGgopHpGHXd_ygdNiI',
-        gname: 'YAHOO拍賣!'
+        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
+        gname: 'Y!'
     },
     shopeeID: {
         gid: '1-m4Y_02IF82_o7dI3N8z9mA4GcuqspyaaPtHxmze1Uk',
@@ -29,14 +29,13 @@ var sheetrange = { //寫入的範圍
     }
 }
 
-
-
-
+var CLIENT_ID = '1010956056834-4thptaslrefke4ji4ctr3i6kipvpiuaq.apps.googleusercontent.com';
+var API_KEY = 'AIzaSyAHl2xxKPSYdNRsAN8B-WAlYWUMuHa1LB8';
+var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
 
 function GsubmitStockData(iso, count, pindex) { //扣數量用 差回傳資料 還有相加數量
-
-
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: sheetrange.resStock.gid,
         range: sheetrange.resStock.gname + "B:R" //原本只有取道O蘭，但因為鎖定的取貨蘭 包括本身即之後的欄位為空，會導致陣列較短，無法取值計算 而沒法附值
@@ -94,10 +93,11 @@ function GsubmitOrderData(getid, getname, aryV) { //取得最後一列，並寫�
     }).then(function (response) {
 
         //console.log(response.result.values)
-        var dataLen = response.result.values.length + 1;
-        if (response.result.values[dataLen - 2][0] != buttonevent.todayDate()) {
+        var dataLen = response.result.values.length + 1; //寫入的列數
+        if (response.result.values[dataLen - 2][0] != buttonevent.todayDate()) { //比對最後一筆資料是否為今天日期 不是的話自動空一列
             dataLen = dataLen + 1;
         }
+        webform.orderSheetRow = [dataLen,dataLen+productlist.products.length-2] //輸出所在列數
         writesheetrange(getid, getname + "A" + dataLen.toString(), aryV)
 
     }, function (response) {
@@ -105,7 +105,6 @@ function GsubmitOrderData(getid, getname, aryV) { //取得最後一列，並寫�
     });
 
 }
-
 
 function writesheetrange(setid, setrange, setvalues) { //寫入資料
     var body = {
@@ -123,27 +122,11 @@ function writesheetrange(setid, setrange, setvalues) { //寫入資料
 
 }
 
-
-
-
-
-/**顯示結果範例
- * Print the names and majors of students in a sample spreadsheet:
- * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
- */
-
-
-
-var CLIENT_ID = '1010956056834-4thptaslrefke4ji4ctr3i6kipvpiuaq.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyAHl2xxKPSYdNRsAN8B-WAlYWUMuHa1LB8';
-var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
-var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
-
-function handleClientLoad() {
+function handleClientLoad() { //啟動
     gapi.load('client:auth2', initClient);
 }
 
-function initClient() {
+function initClient() { //初始化
     gapi.client.init({
         apiKey: API_KEY,
         clientId: CLIENT_ID,
