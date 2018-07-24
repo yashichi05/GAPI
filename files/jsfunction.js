@@ -5,20 +5,22 @@
 ///////////////////////////////////////
 var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否為數字，若否則跳出alert
     el: '#buttonEvent',
-    data: {},
+    data: {
+        btnevent:'' //按鈕現在執行的事件 1是送出 2是刪除 //先給刪除用
+    },
     methods: {
         disableButton: function () { //按鈕鎖定事件
             $("#ordersubmit").attr('disabled', 'disabled')
             $("#orderdel").attr('disabled', 'disabled')
             $("#orderclear").attr('disabled', 'disabled')
         },
-        activButton: function(){
-            $("#ordersubmit").removeAttr('disabled')
-            //$("#orderdel").removeAttr('disabled')
+        activButton: function () {
+            //$("#ordersubmit").removeAttr('disabled')
+            $("#orderdel").removeAttr('disabled')
             $("#orderclear").removeAttr('disabled')
         },
         stockmanage: function () {
-            if(productlist.products.length - 1 ==0){//商品欄指有一欄時 直接解放 避免卡住
+            if (productlist.products.length - 1 == 0) { //商品欄指有一欄時 直接解放 避免卡住
                 this.activButton()
             }
             for (var i = 0; i < productlist.products.length - 1; i++) { //會多一個所以-1
@@ -160,8 +162,19 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
             }
 
         },
-        delOreder: function () {},
+        delOreder: function () {
+            this.disableButton() //鎖定刪除按鈕
+            this.btnevent = 2;
+            for (var i = 0; i < productlist.products.length - 1; i++) { //補回數量；會多一個所以-1
+                var miso = productlist.products[i].productIso;
+                var mcount = productlist.products[i].productCount*-1; //補回數量 X-1
+                GsubmitStockData(miso, mcount, i);
+            }
+            clearOrderSheet(this.selectValueToSheetID.gid, this.selectValueToSheetID.gname, webform.orderSheetRow)
+
+        },
         nextOrder: function () {
+            $("#ordersubmit").attr('disabled', 'disabled') //鎖定送出紐
             //清空訂單資料
             webform.orderID = ""
             webform.orderAccount = ""
@@ -188,8 +201,28 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
           ]
             }, 1)
 
+            $("#orderdel").attr('disabled', 'disabled') //鎖定刪除紐
+
         }
 
+    },
+    computed: {
+        selectValueToSheetID: function () { //選擇的平台自動轉向他的id delOreder用
+            if (webform.web == 'yahoo') {
+                return sheetrange.yahooID
+            } else if (webform.web == 'pchomet') {
+                return sheetrange.pchometID
+            } else if (webform.web == 'pchomed') {
+                return sheetrange.pchomedID
+            } else if (webform.web == 'shopee') {
+                return sheetrange.shopeeID
+            } else if (webform.web == 'ruten') {
+                return sheetrange.RutenID
+            } else if (webform.web == 'songuo') {
+                return sheetrange.songuoID
+            }
+
+        }
     }
 
 })
@@ -216,7 +249,7 @@ Vue.component('product-input', { //商品列表input,
 <input :id="\'count-\'+comp_id.toString()" type="number" style=" width: 30px;" v-on:focus.once="addinput" @keyup.enter="nextInput(\'count-\'+comp_id.toString()) "@change="putToproductlist(\'productCount\',comp_id)" placeholder="數" v-model="countC">\
 <input :id="\'price-\'+comp_id.toString()" class="SGdisplay" type="number" style=" width: 45px;" @keyup.enter="nextInput(\'price-\'+comp_id.toString())" @change="putToproductlist(\'productPrice\',comp_id)"  placeholder="價格" v-model="countP">\
 <input :id="\'allprice-\'+comp_id.toString()" class="SGdisplay" type="number" style=" width: 45px;" @change="putToproductlist(\'productAllpirce\',comp_id)"  placeholder="總價" v-model="countAP">\
-<span :id="\'getOres-\'+comp_id.toString()"></span><span style="padding-left:10px;" :id="\'getBres-\'+comp_id.toString()"></span>\
+<span class="pdgc" :id="\'getOres-\'+comp_id.toString()"></span><span class="pdgc" style="padding-left:10px;" :id="\'getBres-\'+comp_id.toString()"></span>\
 </div>\
 </div>',
     computed: {},
@@ -226,6 +259,7 @@ Vue.component('product-input', { //商品列表input,
             $('#' + target).next().focus();
         },
         addinput: function () {
+            $("#ordersubmit").removeAttr('disabled') //當新增第一個商品時"送出"將可以點選
             productlist.products.push({
                 id: Number(this.comp_id) + 1,
                 productIso: "",
@@ -339,7 +373,7 @@ var webform = new Vue({ //訂單客人資料
         SGcount: "",
         SGcountC: "1",
         SGPrice: "",
-        orderSheetRow:0 //訂單所在的G表列數
+        orderSheetRow: 0 //訂單所在的G表列數
     },
     computed: { //訂單總金額
         orderFeeCreditCal: function () {
@@ -424,7 +458,7 @@ var webform = new Vue({ //訂單客人資料
             this.orderFeeCredit_display = false;
             this.orderAccount_display = false;
             this.orderDiscount_display = true;
-            this.orderShipPrice = "0"  //松果無運費
+            this.orderShipPrice = "0" //松果無運費
         }
 
 

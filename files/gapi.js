@@ -59,8 +59,13 @@ function GsubmitStockData(iso, count, pindex) { //扣數量用 差回傳資料 �
             stockISOAry.push(response.result.values[i][0]);
         }
         var findRow = stockISOAry.indexOf(iso) + 1; //找到的ISO列數
-        if (pindex == productlist.products.length - 2) { //最後一個商品時//解放按鈕 -2是因為index從0開始 商品列又固定多1 
+        if (pindex == productlist.products.length - 2) { //最後一個商品時//解放按鈕 -2是因為index從0開始 商品列又固定多1  因為後面找不到值會return 所以在這
             buttonevent.activButton()
+            if (buttonevent.btnevent == 2) { //如果是刪除事件
+                $("#orderdel").attr('disabled', 'disabled') //鎖定刪除按鈕
+                $("#ordersubmit").removeAttr('disabled') //激活送出紐
+                buttonevent.btnevent = '' //還原初始值
+            }
         }
         if (findRow - 1 == -1 || iso == "") { //如果找不到ISO 會返回-1 iso為空白字元 會自動找到80列 所以強制RETURN
             var errortext = "$('#getOres-" + pindex + "').text('找不到');";
@@ -97,7 +102,7 @@ function GsubmitOrderData(getid, getname, aryV) { //取得最後一列，並寫�
         if (response.result.values[dataLen - 2][0] != buttonevent.todayDate()) { //比對最後一筆資料是否為今天日期 不是的話自動空一列
             dataLen = dataLen + 1;
         }
-        webform.orderSheetRow = [dataLen,dataLen+productlist.products.length-2] //輸出所在列數
+        webform.orderSheetRow = [dataLen, dataLen + productlist.products.length - 2] //輸出所在列數
         writesheetrange(getid, getname + "A" + dataLen.toString(), aryV)
 
     }, function (response) {
@@ -139,4 +144,20 @@ function initClient() { //初始化
 
         }
     });
+}
+
+
+
+
+function clearOrderSheet(gid, gname, row) {
+
+
+    gapi.client.sheets.spreadsheets.values.batchClear({
+            spreadsheetId: gid,
+            ranges: [gname + row[0] + ':' + row[1]]
+        })
+        .then(function (response) {
+        }, function (reason) {
+            console.error('error: ' + reason.result.error.message);
+        });
 }
