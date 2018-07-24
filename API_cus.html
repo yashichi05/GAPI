@@ -8,8 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>Google Sheets API Quickstart</title>
     <meta charset="utf-8" />
-</head>
+<!--    去除input 的箭頭-->
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
 
+    </style>
+</head>
 
 
 <div id="orderform">
@@ -29,8 +36,8 @@
     <br>
     <input v-if="orderID_display" type="search" style="width:135px;" v-model="orderID" placeholder="訂單編號">
     <input v-if="orderAccount_display" type="search" style="width:105px;" v-model="orderAccount" placeholder="帳號"><br>
-    <input type="search" v-model="orderCustomer" style="width:75px;"  placeholder="姓名">
-    <input type="search" v-model="orderTel" style="width:115px;"  placeholder="電話"><br>
+    <input type="search" v-model="orderCustomer" style="width:75px;" placeholder="姓名">
+    <input type="search" v-model="orderTel" style="width:115px;" placeholder="電話"><br>
     <input v-if="orderDiscount_display" type="number" style="width:40px;" v-model="orderDiscount" placeholder="折扣">
     <input v-if="SGCdisplay" type="number" style="width:40px;" v-model="orderFee" placeholder="手續費">
     <br v-if="ifallnon">
@@ -41,7 +48,7 @@
 　<option value="神行">神行</option>
 　<option value="大榮">大榮</option>
 　<option value="萊爾富">萊爾富</option></select>
-    <input type="number" v-if="!SGCdisplay"  style="width:30px;" v-model="orderShipPrice" placeholder="運費"><br v-if="!SGCdisplay">
+    <input type="number" v-if="!SGCdisplay" style="width:30px;" v-model="orderShipPrice" placeholder="運費"><br v-if="!SGCdisplay">
     <span>訂單金額:{{orderPrice}}</span><span style="padding-left:10px;" v-if="orderFeeCredit_display"><input type="checkbox" value="Y" v-model="orderFeeCredit">信用卡付款</span>
     <span v-if="SGCdisplay"><br><input type="number" style="width:45px;" v-model="SGPrice" placeholder="價格">元<input type="number" style="margin-left:10px;width:30px;" v-model="SGcount" placeholder="幾">入×<input type="number" style="width:23px;" v-model="SGcountC"></span>
 
@@ -57,9 +64,9 @@
 
 </div>
 <div id="buttonEvent">
-    <button id = "ordersubmit" @click="submitOrder">送出</button>
-    <button id = "orderdel" disabled="disabled">刪除</button>
-    <button id = "orderclear" @click="nextOrder">下一筆</button>
+    <button id="ordersubmit" @click="submitOrder">送出</button>
+    <button id="orderdel" disabled="disabled">刪除</button>
+    <button id="orderclear" @click="nextOrder">下一筆</button>
 </div>
 
 
