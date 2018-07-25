@@ -103,7 +103,7 @@ function GsubmitOrderData(getid, getname, aryV) { //取得最後一列，並寫�
             dataLen = dataLen + 1;
         }
         webform.orderSheetRow = [dataLen, dataLen + productlist.products.length - 2] //輸出所在列數
-        writesheetrange(getid, getname + "A" + dataLen.toString(), aryV)
+        writesheetrangeAppend(getid, getname + "A" + dataLen.toString(), aryV)
 
     }, function (response) {
         console.log('Error: ' + response.result.error.message);
@@ -111,7 +111,7 @@ function GsubmitOrderData(getid, getname, aryV) { //取得最後一列，並寫�
 
 }
 
-function writesheetrange(setid, setrange, setvalues) { //寫入資料
+function writesheetrange(setid, setrange, setvalues) { //寫入資料 update方法
     var body = {
         values: setvalues
     };
@@ -149,15 +149,27 @@ function initClient() { //初始化
 
 
 
-function clearOrderSheet(gid, gname, row) {
-
-
+function clearOrderSheet(gid, gname, row) { //刪除訂單
     gapi.client.sheets.spreadsheets.values.batchClear({
             spreadsheetId: gid,
             ranges: [gname + row[0] + ':' + row[1]]
         })
-        .then(function (response) {
-        }, function (reason) {
+        .then(function (response) {}, function (reason) {
             console.error('error: ' + reason.result.error.message);
         });
+}
+
+function writesheetrangeAppend(setid, setrange,setvalues) { //append的方法
+    gapi.client.sheets.spreadsheets.values.append({
+        spreadsheetId: setid,
+        range: setrange,
+        valueInputOption: 'USER_ENTERED', //自動挑整格式
+        majorDimension: "ROWS",
+        values: setvalues
+
+    }).then(function (response) {
+        var result = response.result;
+        console.log(`${result.updatedCells} cells updated.`);
+    });
+
 }
