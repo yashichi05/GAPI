@@ -1,7 +1,7 @@
 https://www.w3schools.com/jsref/dom_obj_event.asp
 dom event
 
-
+api key 要記得變成 高妮妮的
 BUG
 打商品時，不能連續有兩個相同的商品ISO碼，第一個會少扣，因為扣數量程式跑太快，試算表的資料還沒有更新
 
@@ -10,5 +10,10 @@ https://www.qa-knowhow.com/?p=2559
 
 打發票自動順號 (依訂單金額定位)
 統整7-11 全家個數
-googleapi function　物件化X (gapi沒辦法塞物件)
-研究then promise 
+
+研究then promise
+
+取貨數量 能自動標記宅配的商品
+
+
+googleapi function　物件化X (gapi塞在物件內會錯誤) 

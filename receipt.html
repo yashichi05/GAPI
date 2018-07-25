@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script src="jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Title </title>
+</head>
+
+<body>
+    
+    <div id="receiptdiv">
+        <h1>Yahoo</h1>
+        <div is= "receipt-input" :oreder="v.id" :name="v.name" :orderindex="i"  v-for="(v,i) in orders"></div>
+    </div>
+    
+    
+    
+    
+    
+    
+
+    <footer>
+        <script src="gapi.js"></script>
+        <script src="receiptJS.js"></script>
+        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+
+    </footer>
+</body>
+
+</html>

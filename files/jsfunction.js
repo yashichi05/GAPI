@@ -1,7 +1,6 @@
 //vue
 
 
-
 ///////////////////////////////////////
 var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否為數字，若否則跳出alert
     el: '#buttonEvent',

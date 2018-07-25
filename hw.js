@@ -6,7 +6,9 @@ app.use(express.static('public'));
 app.get('/', function (req, res) {
    res.sendFile( __dirname + "/" + "API_cus.html" );
 })
- 
+app.get('/receipt', function (req, res) {
+   res.sendFile( __dirname + "/" + "receipt.html" );
+})
 
 
 
