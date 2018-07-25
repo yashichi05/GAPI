@@ -14,10 +14,11 @@
 <body>
     
     <div id="receiptdiv">
-        <h1>Yahoo</h1>
+        <button @click="whichbutton('yahoo','2','3','K','O')">yahoo</button>
+        <button @click="whichbutton('shopee','1','2','L','S')">shopee</button>
+        <button @click="outputNumber">送出</button>
         <div is= "receipt-input" :oreder="v.id" :name="v.name" :orderindex="i"  v-for="(v,i) in orders"></div>
     </div>
-    
     
     
     

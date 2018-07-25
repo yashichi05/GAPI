@@ -159,7 +159,7 @@ function clearOrderSheet(gid, gname, row) { //刪除訂單
         });
 }
 
-function writesheetrangeAppend(setid, setrange,setvalues) { //append的方法
+function writesheetrangeAppend(setid, setrange, setvalues) { //append的方法
     gapi.client.sheets.spreadsheets.values.append({
         spreadsheetId: setid,
         range: setrange,
@@ -170,6 +170,43 @@ function writesheetrangeAppend(setid, setrange,setvalues) { //append的方法
     }).then(function (response) {
         var result = response.result;
         console.log(`${result.updatedCells} cells updated.`);
+    });
+
+}
+
+
+//receipt 專用
+function getTodayOrder(getid, getname, oi, on, ship) { //取得今日訂單的第一列
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: getid,
+        range: getname + "A:" + ship
+    }).then(function (response) {
+
+        var todayDate = new Date();
+        var aryA = []
+        var aryK = []
+        var aryKindex = []
+        for (var i = 0; i < response.result.values.length; i++) { //提取日期
+            aryA.push(response.result.values[i][0]);
+        }
+        var getV = aryA.indexOf(todayDate.toLocaleDateString()) //尋找當天日期
+        var shipCal = response.result.values[getV].length - 1 //貨運所在欄數
+        for (var i = getV; i < response.result.values.length; i++) {
+            if (response.result.values[i][shipCal]) { //有值則執行 新增物件
+
+                aryK.push(response.result.values[i][shipCal]); //貨運方式提取
+                aryKindex.push(i)
+                receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on])
+            }
+        }
+
+
+        receiptdiv.RowIndex = aryKindex
+
+
+
+    }, function (response) {
+        console.log('Error: ' + response.result.error.message);
     });
 
 }
