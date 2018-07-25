@@ -4,8 +4,8 @@ var sheetrange = { //寫入的範圍
         gname: '工作表1!'
     },
     yahooID: {
-        gid: '1o14isxIEJIzNOraSgDbR0eGZqzRFSKpncFZM1C7cTCA',
-        gname: 'Y!'
+        gid: '1ve2C2zi_W8ctD4ObBdkEkheStQGgopHpGHXd_ygdNiI',
+        gname: 'YAHOO拍賣!'
     },
     shopeeID: {
         gid: '1-m4Y_02IF82_o7dI3N8z9mA4GcuqspyaaPtHxmze1Uk',
