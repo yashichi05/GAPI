@@ -176,16 +176,15 @@ function writesheetrangeAppend(setid, setrange, setvalues) { //append的方法
 
 
 //receipt 專用
-function getTodayOrder(getid, getname, oi, on, ship) { //取得今日訂單的第一列
+function getTodayOrder(getid, getname, oi, on, op,ship) { //取得今日訂單的第一列
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: getid,
-        range: getname + "A:" + ship
+        range: getname + "A:" + op
     }).then(function (response) {
 
         var todayDate = new Date();
         var aryA = []
-        var aryK = []
-        var aryKindex = []
+        var aryPindex = []
         for (var i = 0; i < response.result.values.length; i++) { //提取日期
             aryA.push(response.result.values[i][0]);
         }
@@ -195,18 +194,15 @@ function getTodayOrder(getid, getname, oi, on, ship) { //取得今日訂單的�
             return
         };
         $('#cantFindp').remove() //如果有找到則刪除P資料
-        var shipCal = response.result.values[getV].length - 1 //貨運所在欄數
+        var priceCol = response.result.values[getV].length-1
         for (var i = getV; i < response.result.values.length; i++) {
-            if (response.result.values[i][shipCal]) { //有值則執行 新增物件
-
-                aryK.push(response.result.values[i][shipCal]); //貨運方式提取
-                aryKindex.push(i)
-                receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on])
+            if (response.result.values[i][priceCol]) { //有值則執行 新增物件
+                aryPindex.push(i)
+                receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on],response.result.values[i][priceCol])
             }
         }
 
-
-        receiptdiv.RowIndex = aryKindex
+        receiptdiv.RowIndex = aryPindex
 
 
 

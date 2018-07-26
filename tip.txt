@@ -16,4 +16,7 @@ https://www.qa-knowhow.com/?p=2559
 取貨數量 能自動標記宅配的商品
 
 
+松果要多貨運條碼 INPUT
+發票若原本有值希望自動輸入到INPUT
+送出時要鎖定送出紐
 googleapi function　物件化X (gapi塞在物件內會錯誤) 
