@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Title </title>
+    <title> 發票 </title>
     <style>
         td{
             padding:3px;
@@ -22,13 +22,14 @@
     <div id="receiptdiv">
         <div style="padding-bottom: 25px;">
 <!--            按鈕執行 v為平台名稱  OI為訂單編號所在欄位 ON訂單客人欄數 rn發票欄位 op訂單金額欄數 rnc 發票欄位(打字母)-->
-            <button @click="whichbutton('yahoo','3','4','15','18','O')">Yahoo!</button>
+            <button @click="whichbutton('yahoo','2','3','15','18','O')">雅虎</button>
             <button @click="whichbutton('shopee','2','3','19','14','S')">蝦皮</button>
-            <button @click="whichbutton('pchomed','2','3','18','14','R')">Pchome大一</button>
-            <button @click="whichbutton('pchomet','2','3','18','14','R')">pchomet梓原</button>
+            <button @click="whichbutton('pchomed','2','3','18','14','R')">PC大一</button>
+            <button @click="whichbutton('pchomet','2','3','18','14','R')">PC梓原</button>
             <button @click="whichbutton('Ruten','2','4','21','15','U')">露天</button>
-            <button @click="whichbutton('songuo','2','3','15','13','O')">松果</button>
-            <button @click="outputNumber">送出</button>
+            <button @click="whichbutton('songuo','2','3','15','13','O')">松果</button><br><br>
+            <button @click="outputNumber">送出發票</button>
+            <button v-if="sgbtn" @click="outputNumber(1)">送出貨運(松果)</button>
         </div>
         <div is="receipt-input" :oreder="v.id" :name="v.name" :rn="v.receiptNumber" :price="v.price" :orderindex="i" v-for="(v,i) in orders"></div>
     </div>
