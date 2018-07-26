@@ -189,7 +189,12 @@ function getTodayOrder(getid, getname, oi, on, ship) { //取得今日訂單的�
         for (var i = 0; i < response.result.values.length; i++) { //提取日期
             aryA.push(response.result.values[i][0]);
         }
-        var getV = aryA.indexOf(todayDate.toLocaleDateString()) //尋找當天日期
+        var getV = aryA.indexOf(todayDate.toLocaleDateString()); //尋找當天日期
+        if (getV == -1){ //如果找不到返回
+            $('#receiptdiv').append('<p id=\"cantFindp\">找不到資料</p>')
+            return
+        };
+        $('#cantFindp').remove() //如果有找到則刪除P資料
         var shipCal = response.result.values[getV].length - 1 //貨運所在欄數
         for (var i = getV; i < response.result.values.length; i++) {
             if (response.result.values[i][shipCal]) { //有值則執行 新增物件

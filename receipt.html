@@ -12,18 +12,25 @@
 </head>
 
 <body>
-    
+
     <div id="receiptdiv">
-        <button @click="whichbutton('yahoo','2','3','K','O')">yahoo</button>
-        <button @click="whichbutton('shopee','1','2','L','S')">shopee</button>
-        <button @click="outputNumber">送出</button>
-        <div is= "receipt-input" :oreder="v.id" :name="v.name" :orderindex="i"  v-for="(v,i) in orders"></div>
+        <div style="padding-bottom: 25px;">
+<!--            按鈕執行 v為平台名稱  OI為訂單編號所在欄數-1 ON訂單客人欄數 ship為貨運所在欄數 rn 發票欄位-->
+            <button @click="whichbutton('yahoo','2','3','K','O')">Yahoo!</button>
+            <button @click="whichbutton('shopee','1','2','L','S')">蝦皮</button>
+            <button @click="whichbutton('pchomed','1','2','K','R')">Pchome大一</button>
+            <button @click="whichbutton('pchomet','1','2','K','R')">pchomet梓原</button>
+            <button @click="whichbutton('Ruten','1','3','L','U')">露天</button>
+            <button @click="whichbutton('songuo','1','2','N','O')">松果</button>
+            <button @click="outputNumber">送出</button>
+        </div>
+        <div is="receipt-input" :oreder="v.id" :name="v.name" :orderindex="i" v-for="(v,i) in orders"></div>
     </div>
-    
-    
-    
-    
-    
+
+
+
+
+
 
     <footer>
         <script src="gapi.js"></script>

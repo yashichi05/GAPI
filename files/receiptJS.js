@@ -5,7 +5,7 @@ Vue.component('receipt-input', {
             num: ""
         }
     },
-    template: '<div><span>{{oreder}}</span><span style=\"padding: 20px;\">{{name}}</span><input :id=\"\'receiptInput-\'+orderindex\" @change="putvalue" v-model=\"num\" type=\"search\"><button @click=\"autoFill\">下拉</button></div>',
+    template: '<div><span>{{oreder}}</span><span>{{name}}</span><input :id=\"\'receiptInput-\'+orderindex\" @change="putvalue" v-model=\"num\" type=\"search\"><button @click=\"autoFill\">下拉</button></div>',
     methods: {
         autoFill: function () { //自動向下填滿
             var cal = this.num.slice(-8) //取最後8碼
@@ -33,7 +33,8 @@ var receiptdiv = new Vue({
         orders: []
     },
     methods: {
-        whichbutton:function(v,oi,on,ship,rn){ //按鈕執行 v為平台名稱 ship為貨運所在欄數 OI為訂單編號所在欄數 ON訂單客人欄數
+        whichbutton:function(v,oi,on,ship,rn){ //按鈕執行 v為平台名稱 ship為貨運所在欄數 OI為訂單編號所在欄數 ON訂單客人欄數 rn 發票欄位
+            receiptdiv.orders = [];//淨空試算表
             var gid = eval('sheetrange.'+v+'ID.gid')
             var gname = eval('sheetrange.'+v+'ID.gname')
             this.receiptCal = rn
