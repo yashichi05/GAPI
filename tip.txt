@@ -8,7 +8,6 @@ BUG
 POS 自動化
 https://www.qa-knowhow.com/?p=2559
 
-打發票自動順號 (依訂單金額定位)
 統整7-11 全家個數
 
 研究then promise
@@ -17,6 +16,5 @@ https://www.qa-knowhow.com/?p=2559
 
 
 松果要多貨運條碼 INPUT
-發票若原本有值希望自動輸入到INPUT
 送出時要鎖定送出紐
 googleapi function　物件化X (gapi塞在物件內會錯誤) 

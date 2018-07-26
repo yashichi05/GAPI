@@ -176,10 +176,10 @@ function writesheetrangeAppend(setid, setrange, setvalues) { //append的方法
 
 
 //receipt 專用
-function getTodayOrder(getid, getname, oi, on, op,ship) { //取得今日訂單的第一列
+function getTodayOrder(getid, getname, oi, on, op,rn) { //取得今日訂單的第一列
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: getid,
-        range: getname + "A:" + op
+        range: getname + "A:U"  //讀取整個試算表，A:Z 必須包含發票 金額 資料
     }).then(function (response) {
 
         var todayDate = new Date();
@@ -188,21 +188,20 @@ function getTodayOrder(getid, getname, oi, on, op,ship) { //取得今日訂單�
         for (var i = 0; i < response.result.values.length; i++) { //提取日期
             aryA.push(response.result.values[i][0]);
         }
-        var getV = aryA.indexOf(todayDate.toLocaleDateString()); //尋找當天日期
+        var getV = aryA.indexOf(todayDate.toLocaleDateString()); //尋找當天日期列數
         if (getV == -1){ //如果找不到返回
             $('#receiptdiv').append('<p id=\"cantFindp\">找不到資料</p>')
             return
         };
-        $('#cantFindp').remove() //如果有找到則刪除P資料
-        var priceCol = response.result.values[getV].length-1
+        $('#cantFindp').remove() //如果有找到則刪除html"找不到"訊息
         for (var i = getV; i < response.result.values.length; i++) {
-            if (response.result.values[i][priceCol]) { //有值則執行 新增物件
+            if (response.result.values[i][op]) { //有值則執行 新增物件
                 aryPindex.push(i)
-                receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on],response.result.values[i][priceCol])
+                receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on],response.result.values[i][op],response.result.values[i][rn]) //增加V-FOR物件
             }
         }
 
-        receiptdiv.RowIndex = aryPindex
+        receiptdiv.RowIndex = aryPindex //回傳各訂單開頭列數陣列，寫入用
 
 
 
