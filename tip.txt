@@ -16,5 +16,6 @@ https://www.qa-knowhow.com/?p=2559
 
 
 
+
 送出時要鎖定送出紐 (沒有必要)
 googleapi function　物件化X (gapi塞在物件內會錯誤) 
