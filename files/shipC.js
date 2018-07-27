@@ -3,32 +3,32 @@ var shipMenu = new Vue({
     data: {
 
         shopee: {
-            seven: 5,
-            family: 7,
-            life: 1
+            seven: 0,
+            family: 0,
+            life: 0
         },
         yahoo: {
-            seven: 5,
-            family: 7
+            seven: 0,
+            family: 0
         },
         pchomed: {
-            seven: 7,
-            family: 7
+            seven: 0,
+            family: 0
         },
         pchomet: {
-            seven: 5,
-            family: 7
+            seven: 0,
+            family: 0
         },
         Ruten: {
-            seven: 5,
-            family: 7
+            seven: 0,
+            family: 0
         },
         songuo: {
-            family: 7
+            family: 0
         },
         buy123: {
-            seven: 5,
-            family: 7
+            seven: 0,
+            family: 0
         }
     },
     computed: {
@@ -49,16 +49,23 @@ var shipMenu = new Vue({
         }
     },
     methods: {
+        getallweb: function () {
+            shipget('yahoo', 'K')
+            shipget('shopee', 'L')
+            shipget('Ruten', 'L')
+            shipget('pchomed', 'K')
+            shipget('pchomet', 'K')
+            shipget('buy123', 'K')
+        },
+
         shipName: function (sv) {
             if (sv == 'seven') {
                 return '7-11'
+            } else if (sv == 'family') {
+                return '全家'
+            } else if (sv == 'life') {
+                return '萊爾富'
             }
-        }
-        else if (sv == 'family') {
-            return '全家'
-        }
-        else if (sv == 'life') {
-            return '萊爾富'
         }
     }
 
