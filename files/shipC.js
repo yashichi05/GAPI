@@ -49,13 +49,14 @@ var shipMenu = new Vue({
         }
     },
     methods: {
-        getallweb: function () {
+        getallweb: function () { //執行查找
             shipget('yahoo', 'K')
             shipget('shopee', 'L')
             shipget('Ruten', 'L')
             shipget('pchomed', 'K')
             shipget('pchomet', 'K')
             shipget('buy123', 'K')
+            shipget('songuo', 'N')
         },
 
         shipName: function (sv) {

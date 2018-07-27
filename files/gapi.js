@@ -229,7 +229,7 @@ function shipget(web, col) { //取得貨運那蘭 web 哪個平台 ship 哪個�
         var aryA = [] //存放日期
         var aryS = [] //存放貨運資料
         for (var i = 0; i < response.result.values.length; i++) { //提取日期
-            aryA.push(new Date(response.result.values[i][0]).toLocaleDateString());//new date()將文字轉為日期物件 toLocaleDateString再把他轉為文字 這樣日期格式會跟下面比對的統一
+            aryA.push(new Date(response.result.values[i][0]).toLocaleDateString()); //new date()將文字轉為日期物件 toLocaleDateString再把他轉為文字 這樣日期格式會跟下面比對的統一
         }
         var getV = aryA.indexOf(todayDate.toLocaleDateString()); //尋找當天日期列數
         if (getV == -1) { //如果找不到返回
@@ -243,7 +243,18 @@ function shipget(web, col) { //取得貨運那蘭 web 哪個平台 ship 哪個�
                 aryS.push(response.result.values[i][shipcolindex])
             }
         }
-        var sc = [] //存放宅配方式
+        var sc = [] //計算宅配數量
+        
+        if (web == 'songuo') { //如果是松果
+            for (var i = 0; i < aryS.length; i++) {
+                if (aryS[i].substr(0,2) == "08" || aryS[i].substr(0,2) == "18") { //開頭是08 或18就算是全家一件
+                    sc.push(i)
+                    
+                }
+            }
+            shipMenu.songuo.family = sc.length
+            return
+        }
         var ship = ['seven', 'family', 'life']
         for (var oi = 0; oi < ship.length; oi++) {
             for (var i = 0; i < aryS.length; i++) {
@@ -252,7 +263,7 @@ function shipget(web, col) { //取得貨運那蘭 web 哪個平台 ship 哪個�
                 }
             }
             eval("shipMenu." + web + "." + ship[oi] + " = sc.length")
-            sc = []//陣列清空
+            sc = [] //陣列清空
         }
 
 
