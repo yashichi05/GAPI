@@ -29,8 +29,8 @@ var sheetrange = { //寫入的範圍
     }
 }
 
-var CLIENT_ID = '1010956056834-4thptaslrefke4ji4ctr3i6kipvpiuaq.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyAHl2xxKPSYdNRsAN8B-WAlYWUMuHa1LB8';
+var CLIENT_ID = '830462167717-2hh5u6k5fo2iuscsfohas2fide5n9g24.apps.googleusercontent.com';
+var API_KEY = 'AIzaSyBj8xjZ75lF9oEirYXbEQA-pyJcZKgkHgE';
 var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
@@ -176,10 +176,10 @@ function writesheetrangeAppend(setid, setrange, setvalues) { //append的方法
 
 
 //receipt 專用
-function getTodayOrder(getid, getname, oi, on, op,rn) { //取得今日訂單的第一列
+function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的第一列
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: getid,
-        range: getname + "A:U"  //讀取整個試算表，A:Z 必須包含發票 金額 資料
+        range: getname + "A:U" //讀取整個試算表，A:Z 必須包含發票 金額 資料
     }).then(function (response) {
 
         var todayDate = new Date();
@@ -189,7 +189,8 @@ function getTodayOrder(getid, getname, oi, on, op,rn) { //取得今日訂單的�
             aryA.push(response.result.values[i][0]);
         }
         var getV = aryA.indexOf(todayDate.toLocaleDateString()); //尋找當天日期列數
-        if (getV == -1){ //如果找不到返回
+        if (getV == -1) { //如果找不到返回
+            $('#cantFindp').remove()
             $('#receiptdiv').append('<p id=\"cantFindp\">找不到資料</p>')
             return
         };
@@ -197,7 +198,7 @@ function getTodayOrder(getid, getname, oi, on, op,rn) { //取得今日訂單的�
         for (var i = getV; i < response.result.values.length; i++) {
             if (response.result.values[i][op]) { //有值則執行 新增物件
                 aryPindex.push(i)
-                receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on],response.result.values[i][op],response.result.values[i][rn]) //增加V-FOR物件
+                receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on], response.result.values[i][op], response.result.values[i][rn]) //增加V-FOR物件
             }
         }
 
