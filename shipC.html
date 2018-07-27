@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <script src="jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Title </title>
+</head>
+
+<body>
+    <div id="shipmenu" class="container">
+        <div class="row">
+            <div class="col text-center p-5">
+                <h1>7-11</h1>
+                <h1>{{sevencount}}</h1>
+                <div class="d-flex justify-content-between">
+
+                    <div class="text-center">
+                        <h5>Yahoo</h5>
+                        <h5>{{yahoo.seven}}</h5>
+                    </div>
+                    <div class="text-center">
+                        <h5>露天</h5>
+                        <h5>{{Ruten.seven}}</h5>
+                    </div>
+                    <div class="text-center">
+                        <h5>蝦皮</h5>
+                        <h5>{{shopee.seven}}</h5>
+                    </div>
+                    <div class="text-center">
+                        <h5>PC</h5>
+                        <h5>{{pchomeAll.seven}}</h5>
+                    </div>
+                    <div class="text-center">
+                        <h5>生活</h5>
+                        <h5>{{buy123.seven}}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col text-center p-5">
+                <h1>全家</h1>
+                <h1>{{familycount}}</h1>
+                <div class="d-flex justify-content-between">
+
+                    <div class="text-center">
+                        <h5>Yahoo</h5>
+                        <h5>{{yahoo.family}}</h5>
+                    </div>
+                    <div class="text-center">
+                        <h5>露天</h5>
+                        <h5>{{Ruten.family}}</h5>
+                    </div>
+                    <div class="text-center">
+                        <h5>蝦皮</h5>
+                        <h5>{{shopee.family}}</h5>
+                    </div>
+                    <div class="text-center">
+                        <h5>PC</h5>
+                        <h5>{{pchomeAll.family}}</h5>
+                    </div>
+                    <div class="text-center">
+                        <h5>生活</h5>
+                        <h5>{{buy123.family}}</h5>
+                    </div>
+                    <div class="text-center">
+                        <h5>松果</h5>
+                        <h5>{{songuo.family}}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col text-center p-5">
+                <h1>萊爾富</h1>
+                <h1>{{lifecount}}</h1>
+                <div class="d-flex justify-content-center">
+                    <div class="text-center">
+                        <h5>蝦皮</h5>
+                        <h5>{{shopee.life}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <script src="gapi.js"></script>
+        <script src="shipC.js"></script>
+        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    </footer>
+</body>
+
+</html>

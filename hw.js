@@ -9,6 +9,9 @@ app.get('/', function (req, res) {
 app.get('/receipt', function (req, res) {
    res.sendFile( __dirname + "/" + "receipt.html" );
 })
+app.get('/ship', function (req, res) {
+   res.sendFile( __dirname + "/" + "shipC.html" );
+})
 
 
 

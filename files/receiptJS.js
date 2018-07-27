@@ -1,7 +1,9 @@
 Vue.component('receipt-input', {
     props: ['oreder', 'name', 'price', 'orderindex', 'rn'],
-    data:function(){
-        return {num:this.rn} //v-model 會附值給rn 會出現警告 ，所以新增一個NUM 初值為rn的值，當她被附值後會脫離rn
+    data: function () {
+        return {
+            num: this.rn
+        } //v-model 會附值給rn 會出現警告 ，所以新增一個NUM 初值為rn的值，當她被附值後會脫離rn
     },
     template: '<tr><td>{{oreder}}</td><td>{{name}}</td><td>{{price}}</td><td><input :id=\"\'receiptInput-\'+orderindex\" @change="putvalue" v-model=\"num\" type=\"search\"><button @click=\"autoFill\">下拉</button></td></tr>',
     methods: {
@@ -55,10 +57,10 @@ var receiptdiv = new Vue({
                 receiptNumber: receiptN
             })
         },
-        outputNumber: function (ship) { //輸出輸入的發票號碼
+        outputNumber: function (sgs) { //輸出輸入的發票號碼
             for (var i = 0; i < this.orders.length; i++) {
                 var va = [[this.orders[i].receiptNumber]];
-                if (ship) {
+                if (sgs=='Y') {
                     var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+String.fromCharCode(this.receiptCol.charCodeAt(0) - 1)+(this.RowIndex[i]+1), va)' //是松果貨運的話，寫入發票的前一欄
                 } else {
                     var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+this.receiptCol+(this.RowIndex[i]+1), va)'

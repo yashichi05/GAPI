@@ -26,6 +26,10 @@ var sheetrange = { //寫入的範圍
     songuoID: {
         gid: '1MRTaGo2H0xyhhyeA-Y0EDlVUzJ8J_djI6qCawZRt1Qw',
         gname: '工作表1!'
+    },
+    buy123: {
+        gid: '1jztvn3KG-e6ffWfEfUYF7pBS_vdYFGofM2dH8C4Krrs',
+        gname: '工作表!'
     }
 }
 
@@ -203,6 +207,49 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
         }
 
         receiptdiv.RowIndex = aryPindex //回傳各訂單開頭列數陣列，寫入用
+
+
+
+    }, function (response) {
+        console.log('Error: ' + response.result.error.message);
+    });
+
+}
+
+//貨運統計
+function shipget(web,ship,col) { //取得貨運那蘭 web 哪個平台 ship 哪個貨運 col 貨運於哪個欄位
+    var getid = eval("sheetrange."+web+"ID.gid")
+    var getname = eval("sheetrange."+web+"ID.gname")
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: getid,
+        range: getname + "A:"+col
+    }).then(function (response) {
+
+        var todayDate = new Date();
+        var aryA = [] //存放日期
+        var aryS = [] //存放貨運資料
+        for (var i = 0; i < response.result.values.length; i++) { //提取日期
+            aryA.push(response.result.values[i][0]);
+        }
+        var getV = aryA.indexOf(todayDate.toLocaleDateString()); //尋找當天日期列數
+        if (getV == -1) { //如果找不到返回
+            return
+        };
+        var shipcolindex = response.result.values.length-1 //貨運的欄位INDEX
+        for (var i = getV; i < response.result.values.length; i++) {
+            if (response.result.values[i][shipcolindex]) { //有值則執行 將貨運推至陣列
+                aryS.push(i)
+            }
+        }
+        var sc =[] //存放宅配方式
+        for (var i = 0; i < aryS.length; i++) {
+            if (aryS[i]==ship) { //符合要尋找的貨運方式 將貨運推至陣列 ship要設定成7-11 全家 萊爾富
+                sc.push(i)
+            }
+        }
+        eval("shipMenu."+web+"."+ship+" = sc.length")
+        
+
 
 
 
