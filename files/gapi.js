@@ -241,9 +241,10 @@ function shipget(web,ship,col) { //取得貨運那蘭 web 哪個平台 ship 哪�
                 aryS.push(i)
             }
         }
+
         var sc =[] //存放宅配方式
         for (var i = 0; i < aryS.length; i++) {
-            if (aryS[i]==ship) { //符合要尋找的貨運方式 將貨運推至陣列 ship要設定成7-11 全家 萊爾富
+            if (aryS[i]==shipMenu.shipName(ship)) { //符合要尋找的貨運方式 將貨運推至陣列 ship要設定成7-11 全家 萊爾富
                 sc.push(i)
             }
         }
