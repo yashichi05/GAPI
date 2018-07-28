@@ -1,7 +1,8 @@
 var sheetrange = { //寫入的範圍
     resStock: {
         gid: '19ZXwhENPrLmLURoKO4xXoCDahpyMG5wuU_8xsU74kyI',
-        gname: '工作表1!'
+        gname: '工作表1!',
+        col:{iso:'A',pname:'G'}
     },
     yahooID: {
         gid: '1ve2C2zi_W8ctD4ObBdkEkheStQGgopHpGHXd_ygdNiI',
@@ -261,7 +262,7 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
         var ship = ['seven', 'family', 'life']
         for (var oi = 0; oi < ship.length; oi++) {
             for (var i = 0; i < aryS.length; i++) {
-                if (aryS[i].substr(0,1) == shipMenu.shipName(ship[oi])) { //符合要尋找的貨運方式(只找第一個字) 將貨運推至陣列 shipMenu()轉成要尋找的文字 
+                if (aryS[i].substr(0, 1) == shipMenu.shipName(ship[oi])) { //符合要尋找的貨運方式(只找第一個字) 將貨運推至陣列 shipMenu()轉成要尋找的文字 
                     sc.push(i)
                 }
             }
@@ -272,6 +273,51 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
 
 
 
+
+    }, function (response) {
+        console.log('Error: ' + response.result.error.message);
+    });
+
+}
+//print order
+var fctnlist = {
+    findtoday: function (ary) { //找當天日期的列數
+        var todayDate = new Date();
+        return ary.indexOf('2018/7/27')
+    }
+}
+
+
+function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, shipprice, oprice) { //
+    var getid = eval("sheetrange." + web + "ID.gid")
+    var getname = eval("sheetrange." + web + "ID.gname")
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: getid,
+        range: getname + "A:Z" //讀取整個試算表，A:Z 必須包含發票 金額 資料
+    }).then(function (response) {
+
+        var aryA = [] //存放日期
+        var aryO = [] //存放今日訂單
+        for (var i = 0; i < response.result.values.length; i++) { //提取日期
+            aryA.push(new Date(response.result.values[i][0]).toLocaleDateString()); //new date()將文字轉為日期物件 toLocaleDateString再把他轉為文字 這樣日期格式會跟下面比對的統一
+        }
+        var getR = fctnlist.findtoday(aryA); //尋找當天日期列數
+        if (getR == -1) { //如果找不到返回
+            return
+        };
+        for (var i = getR; i < response.result.values.length; i++) { //從getR列開始提取今日訂單 
+            if (response.result.values[i][okey]) { //如果key欄有值PUSH
+                aryO.push(response.result.values[i]);
+            }
+        }
+        var pushpdtindex = -1 //訂單的Index
+        for (var i = 0; i < aryO.length; i++) {
+            if (aryO[i][oprice]) { //總金額有值，輸入訂單資料
+                printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], aryO[i][oprice])
+                pushpdtindex = pushpdtindex +1
+            }
+            printorderobj.pushPobj(pushpdtindex,aryO[i][iso],aryO[i][pname],aryO[i][ptype],aryO[i][pcount],aryO[i][pprice]) //推訂單商品資料
+        }
 
     }, function (response) {
         console.log('Error: ' + response.result.error.message);

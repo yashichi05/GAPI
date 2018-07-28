@@ -16,7 +16,8 @@ https://www.qa-knowhow.com/?p=2559
 研究then promise
 研究ajax 及製作統整頁面
 
-
+欄位要放在sheetrange裡面 統一調用
+還要一個function 可以把ABCD 欄位轉成01234
 
 
 

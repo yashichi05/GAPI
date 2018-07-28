@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <script src="jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        span{
+            margin-left:10px;
+            border:1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="printOrder">
+        <div v-for="(ov,oindex) in allorder" style="page-break-inside:avoid;margin-bottom:20px;"><span>{{ov.orderID}}</span><span>{{ov.cusname}}</span><span>{{ov.ship}}</span><span>{{ov.shipprice}}</span><span>{{ov.oprice}}</span>
+            
+            <div v-for="(pv,pindex) in allorder[oindex].products"><span>{{pv.iso}}</span><span>{{pv.pcount}}</span><span>{{pv.pname}}</span><span>{{pv.ptype}}</span><span>{{pv.pcount}}</span><span>{{pv.pprice}}</span></div>
+        </div>
+    </div>
+
+    <footer>
+        <script src="gapi.js"></script>
+        <script src="printOrder.js"></script>
+        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+
+    </footer>
+</body>
+
+</html>
