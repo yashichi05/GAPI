@@ -217,13 +217,16 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
 }
 
 //貨運統計 松果要另外
-function shipget(web, col) { //取得貨運那蘭 web 哪個平台 ship 哪個貨運 col 貨運於哪個欄位(字母)
+function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship 哪個貨運 col 貨運於哪個欄位(字母)
     var getid = eval("sheetrange." + web + "ID.gid")
     var getname = eval("sheetrange." + web + "ID.gname")
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: getid,
         range: getname + "A:" + col
     }).then(function (response) {
+        if (final == 'final') { //解除鎖定按鈕
+            $("#shipget").removeAttr('disabled')
+        }
 
         var todayDate = new Date();
         var aryA = [] //存放日期
@@ -244,12 +247,12 @@ function shipget(web, col) { //取得貨運那蘭 web 哪個平台 ship 哪個�
             }
         }
         var sc = [] //計算宅配數量
-        
+
         if (web == 'songuo') { //如果是松果
             for (var i = 0; i < aryS.length; i++) {
-                if (aryS[i].substr(0,2) == "08" || aryS[i].substr(0,2) == "18") { //開頭是08 或18就算是全家一件
+                if (aryS[i].substr(0, 2) == "08" || aryS[i].substr(0, 2) == "18") { //開頭是08 或18就算是全家一件
                     sc.push(i)
-                    
+
                 }
             }
             shipMenu.songuo.family = sc.length
