@@ -62,11 +62,11 @@ var shipMenu = new Vue({
 
         shipName: function (sv) {
             if (sv == 'seven') {
-                return '7-11'
+                return '7'
             } else if (sv == 'family') {
-                return '全家'
+                return '全'
             } else if (sv == 'life') {
-                return '萊爾富'
+                return '萊'
             }
         }
     }

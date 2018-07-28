@@ -261,7 +261,7 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
         var ship = ['seven', 'family', 'life']
         for (var oi = 0; oi < ship.length; oi++) {
             for (var i = 0; i < aryS.length; i++) {
-                if (aryS[i] == shipMenu.shipName(ship[oi])) { //符合要尋找的貨運方式 將貨運推至陣列 shipMenu()轉成要尋找的文字
+                if (aryS[i].substr(0,1) == shipMenu.shipName(ship[oi])) { //符合要尋找的貨運方式(只找第一個字) 將貨運推至陣列 shipMenu()轉成要尋找的文字 
                     sc.push(i)
                 }
             }
