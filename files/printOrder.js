@@ -1,12 +1,3 @@
-Vue.component('order-list', {
-    props: ['orderid', 'ship', 'shipprice', 'oprice'],
-    template: '<div class="orderdiv">{{orderid}}</div>'
-})
-Vue.component('product-list', {
-    props: ['pindex', 'iso', 'pname', 'ptype', 'pcount', 'pprice'],
-    template: '<span>{{pindex}}{{iso}}{{pname}}{{ptype}}{{pcount}}{{pprice}}</span>'
-})
-
 var printorderobj = new Vue({
     el: '#printOrder',
     data: {

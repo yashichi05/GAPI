@@ -3,8 +3,8 @@ var sheetrange = { //寫入的範圍
         gid: '19ZXwhENPrLmLURoKO4xXoCDahpyMG5wuU_8xsU74kyI',
         gname: '工作表1!',
         col: {
-            iso: 'A',
-            pname: 'G'
+            iso: '工作表1!',
+            pname: '19ZXwhENPrLmLURoKO4xXoCDahpyMG5wuU_8xsU74kyI'
         }
     },
     yahooID: {
@@ -306,6 +306,7 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
         }
         var getR = fctnlist.findtoday(aryA); //尋找當天日期列數
         if (getR == -1) { //如果找不到返回
+            $("button").removeAttr('disabled') //激活送出紐
             return
         };
         for (var i = getR; i < response.result.values.length; i++) { //從getR列開始提取今日訂單 
@@ -325,6 +326,40 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
             }
             printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice]) //推訂單商品資料
         }
+        $("button").removeAttr('disabled') //激活送出紐
+    }, function (response) {
+        console.log('Error: ' + response.result.error.message);
+    });
+
+}
+//取貨單
+function printporductslist(col) { //
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: sheetrange.resStock.gid,
+        range: sheetrange.resStock.gname + "A:Q"
+    }).then(function (response) {
+
+        var aryL = [] //存放取貨表
+        for (var i = 0; i < response.result.values.length; i++) { //提取資料
+            if (response.result.values[i][col] && response.result.values[i][col] > 0) {
+                aryL.push(response.result.values[i]);
+            }
+        }
+        for (var i = 0; i < aryL.length; i++) { //去除剩餘數量>0
+            if (isNaN(Number(aryL[i][14])) || Number(aryL[i][14]) > 0) {//大於0或是文字的
+                aryL[i][14] = ""
+            }
+        }
+        aryL = aryL.sort(function (a, b) { //依位置排列
+            if (!a[16]) {
+                a[16] = "99"
+
+            } else if(!b[16]) {
+                b[16] = "99"
+            }
+            return Number(a[16].split("-")[0])-Number(b[16].split("-")[0])
+        });
+        productL.productlist = aryL;
         $("button").removeAttr('disabled') //激活送出紐
     }, function (response) {
         console.log('Error: ' + response.result.error.message);
