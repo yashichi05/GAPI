@@ -2,7 +2,10 @@ var sheetrange = { //寫入的範圍
     resStock: {
         gid: '19ZXwhENPrLmLURoKO4xXoCDahpyMG5wuU_8xsU74kyI',
         gname: '工作表1!',
-        col:{iso:'A',pname:'G'}
+        col: {
+            iso: 'A',
+            pname: 'G'
+        }
     },
     yahooID: {
         gid: '1ve2C2zi_W8ctD4ObBdkEkheStQGgopHpGHXd_ygdNiI',
@@ -283,7 +286,7 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
 var fctnlist = {
     findtoday: function (ary) { //找當天日期的列數
         var todayDate = new Date();
-        return ary.indexOf('2018/7/27')
+        return ary.indexOf(todayDate.toLocaleDateString())
     }
 }
 
@@ -313,12 +316,16 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
         var pushpdtindex = -1 //訂單的Index
         for (var i = 0; i < aryO.length; i++) {
             if (aryO[i][oprice]) { //總金額有值，輸入訂單資料
-                printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], aryO[i][oprice])
-                pushpdtindex = pushpdtindex +1
+                if (web == 'songuo' || web == 'buy123') {
+                    printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], 0, aryO[i][oprice]) //如果是松果或生活運費為0
+                } else {
+                    printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], aryO[i][oprice])
+                }
+                pushpdtindex = pushpdtindex + 1
             }
-            printorderobj.pushPobj(pushpdtindex,aryO[i][iso],aryO[i][pname],aryO[i][ptype],aryO[i][pcount],aryO[i][pprice]) //推訂單商品資料
+            printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice]) //推訂單商品資料
         }
-
+        $("button").removeAttr('disabled') //激活送出紐
     }, function (response) {
         console.log('Error: ' + response.result.error.message);
     });

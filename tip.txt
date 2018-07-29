@@ -9,7 +9,6 @@ POS 自動化
 https://www.qa-knowhow.com/?p=2559
 
 
-列印用的訂單列表
 取貨數量 能自動標記宅配的商品(有困難)
 有讀取條更好
 
@@ -18,7 +17,7 @@ https://www.qa-knowhow.com/?p=2559
 
 欄位要放在sheetrange裡面 統一調用
 還要一個function 可以把ABCD 欄位轉成01234
-
+續退訂單?
 
 
 送出時要鎖定送出紐 (沒有必要)

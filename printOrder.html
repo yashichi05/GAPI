@@ -2,30 +2,62 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <script src="jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <meta charset="UTF-8">
     <title></title>
     <style>
-        span{
-            margin-left:10px;
-            border:1px solid #ccc;
+        @media print {
+            button {
+                display: none;
+            }
+            .oprice {
+                background-color: #eee !important;
+                -webkit-print-color-adjust: exact;
+            }
         }
+
     </style>
 </head>
 
 <body>
     <div id="printOrder">
-        <div v-for="(ov,oindex) in allorder" style="page-break-inside:avoid;margin-bottom:20px;"><span>{{ov.orderID}}</span><span>{{ov.cusname}}</span><span>{{ov.ship}}</span><span>{{ov.shipprice}}</span><span>{{ov.oprice}}</span>
-            
-            <div v-for="(pv,pindex) in allorder[oindex].products"><span>{{pv.iso}}</span><span>{{pv.pcount}}</span><span>{{pv.pname}}</span><span>{{pv.ptype}}</span><span>{{pv.pcount}}</span><span>{{pv.pprice}}</span></div>
+        <button @click="doit('yahoo')">雅虎</button><button @click="doit('shopee')">蝦皮</button><button @click="doit('pchomed')">PC大一</button><button @click="doit('pchomet')">PC梓原</button><button @click="doit('Ruten')">露天</button><button @click="doit('songuo')">松果</button><button @click="doit('buy123')">生活</button>
+        <div v-for="(ov,oindex) in allorder" class="" style="border:3px solid #000;font-size: 20px; width:1200px;page-break-inside:avoid;margin-bottom:20px;padding-bottom:10px;">
+            <div class="d-flex" style="border-bottom: 1px solid #000;padding:1px;">
+                <div class="border-right p-1" style="width:195px;">
+                    <b>{{ov.orderID}}</b>
+                </div>
+                <div class="border-right text-center p-1" style="width:115px;">
+                    <b>{{ov.cusname}}</b>
+                </div>
+                <div class="border-right" style="width:580px;"></div>
+                <div class="p-1 text-center border-right" style="width:170px;">
+                    <b>{{ov.ship}}<span style="padding-left:20px;">運費:{{ov.shipprice}}</span></b>
+                </div>
+                <div class="p-1 text-center oprice" style="width:141px;background-color: #eee">
+                    <b>發票:{{ov.oprice}}</b>
+                </div>
+            </div>
+            <div v-for="(pv,pindex) in allorder[oindex].products" class="border-bottom d-flex" style="padding:1px;">
+                <div class="border-right p-1 text-left" style="width:195px">{{pv.iso}}</div>
+                <div class="border-right p-1 text-center" style="width:35px">{{pv.pcount}}</div>
+                <div class="border-right p-1 text-left" style="width:660px">{{pv.pname}}</div>
+                <div class="border-right p-1 text-left" style="width:220px">{{pv.ptype}}</div>
+                <div class="border-right p-1 text-center" style="width:35px">{{pv.pcount}}</div>
+                <div class="text-center p-1" style="width:55px">{{pv.pprice}}</div>
+            </div>
         </div>
     </div>
+
 
     <footer>
         <script src="gapi.js"></script>
         <script src="printOrder.js"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
     </footer>
 </body>
