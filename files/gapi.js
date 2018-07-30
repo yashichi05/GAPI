@@ -3,37 +3,165 @@ var sheetrange = { //寫入的範圍
         gid: '19ZXwhENPrLmLURoKO4xXoCDahpyMG5wuU_8xsU74kyI',
         gname: '工作表1!',
         col: {
-            iso: '工作表1!',
-            pname: '19ZXwhENPrLmLURoKO4xXoCDahpyMG5wuU_8xsU74kyI'
+            piso: 'F',//ISO
+            pname: 'G',//產品名稱
+            ptype: 'H',//款式
+            pcount: 'I'//數量
         }
     },
     yahooID: {
         gid: '1ve2C2zi_W8ctD4ObBdkEkheStQGgopHpGHXd_ygdNiI',
-        gname: 'YAHOO拍賣!'
+        gname: 'YAHOO拍賣!',
+        col: {
+            oid: 'B',//訂單編號
+            oname: 'C',//姓名
+            otel: 'D',//電話
+            oaccount: 'E',//帳號
+            piso: 'F',//ISO
+            pname: 'G',//產品名稱
+            ptype: 'H',//款式
+            pcount: 'I',//數量
+            pprice: 'J',//單價
+            pallprice: 'K',//總價
+            oship: 'L',//貨運
+            oshipprice: 'M',//運費
+            oprice: 'N',//訂單金額
+            ofee: '',//手續費
+            odiscount: '',//折扣
+            oreceipt: 's'//發票
+        }
     },
     shopeeID: {
         gid: '1-m4Y_02IF82_o7dI3N8z9mA4GcuqspyaaPtHxmze1Uk',
-        gname: '工作表1!'
+        gname: '工作表1!',
+        col: {
+            oid: 'B',//訂單編號
+            oname: 'C',//姓名
+            otel: 'D',//電話
+            oaccount: 'E',//帳號
+            piso: 'F',//ISO
+            pname: 'G',//產品名稱
+            ptype: 'H',//款式
+            pcount: 'I',//數量
+            pprice: 'J',//單價
+            pallprice: 'K',//總價
+            oship: 'L',//貨運
+            oshipprice: 'M',//運費
+            oprice: 'N',//訂單金額
+            ofee: '',//手續費
+            odiscount: '',//折扣
+            oreceipt: 's'//發票
+        }
     },
     pchomedID: {
         gid: '1Vm0WQTShQSCRswroN2N4MNq-ofJPAOvv_yPMqVTNqnc',
-        gname: '大一!'
+        gname: '大一!',
+        col: {
+            oid: 'B',//訂單編號
+            oname: 'C',//姓名
+            otel: 'D',//電話
+            oaccount: 'E',//帳號
+            piso: 'F',//ISO
+            pname: 'G',//產品名稱
+            ptype: 'H',//款式
+            pcount: 'I',//數量
+            pprice: 'J',//單價
+            pallprice: 'K',//總價
+            oship: 'L',//貨運
+            oshipprice: 'M',//運費
+            oprice: 'N',//訂單金額
+            ofee: '',//手續費
+            odiscount: '',//折扣
+            oreceipt: 's'//發票
+        }
     },
     pchometID: {
         gid: '1Vm0WQTShQSCRswroN2N4MNq-ofJPAOvv_yPMqVTNqnc',
-        gname: '梓原!'
+        gname: '梓原!',
+        col: {
+            oid: 'B',//訂單編號
+            oname: 'C',//姓名
+            otel: 'D',//電話
+            oaccount: 'E',//帳號
+            piso: 'F',//ISO
+            pname: 'G',//產品名稱
+            ptype: 'H',//款式
+            pcount: 'I',//數量
+            pprice: 'J',//單價
+            pallprice: 'K',//總價
+            oship: 'L',//貨運
+            oshipprice: 'M',//運費
+            oprice: 'N',//訂單金額
+            ofee: '',//手續費
+            odiscount: '',//折扣
+            oreceipt: 's'//發票
+        }
     },
     RutenID: {
         gid: '1nimYD9iPgdHE7RXWqflBocOkj29mRVkCaatcWbq4Rvw',
-        gname: '露天拍賣!'
+        gname: '露天拍賣!',
+        col: {
+            oid: 'B',//訂單編號
+            oname: 'C',//姓名
+            otel: 'D',//電話
+            oaccount: 'E',//帳號
+            piso: 'F',//ISO
+            pname: 'G',//產品名稱
+            ptype: 'H',//款式
+            pcount: 'I',//數量
+            pprice: 'J',//單價
+            pallprice: 'K',//總價
+            oship: 'L',//貨運
+            oshipprice: 'M',//運費
+            oprice: 'N',//訂單金額
+            ofee: '',//手續費
+            odiscount: '',//折扣
+            oreceipt: 's'//發票
+        }
     },
     songuoID: {
         gid: '1MRTaGo2H0xyhhyeA-Y0EDlVUzJ8J_djI6qCawZRt1Qw',
-        gname: '工作表1!'
+        gname: '工作表1!',
+        col: {
+            oid: 'B',//訂單編號
+            oname: 'C',//姓名
+            otel: 'D',//電話
+            oaccount: 'E',//帳號
+            piso: 'F',//ISO
+            pname: 'G',//產品名稱
+            ptype: 'H',//款式
+            pcount: 'I',//數量
+            pprice: 'J',//單價
+            pallprice: 'K',//總價
+            oship: 'L',//貨運
+            oshipprice: 'M',//運費
+            oprice: 'N',//訂單金額
+            ofee: '',//手續費
+            odiscount: '',//折扣
+            oreceipt: 's'//發票
+        }
     },
     buy123ID: {
         gid: '1jztvn3KG-e6ffWfEfUYF7pBS_vdYFGofM2dH8C4Krrs',
-        gname: '工作表!'
+        gname: '工作表!',
+        col: {
+            oid: 'B',//訂單編號
+            oname: 'C',//姓名
+            otel: 'D',//電話
+            oaccount: 'E',//帳號
+            piso: 'F',//ISO
+            pname: 'G',//產品名稱
+            ptype: 'H',//款式
+            pcount: 'I',//數量
+            pprice: 'J',//單價
+            pallprice: 'K',//總價
+            oship: 'L',//貨運
+            oshipprice: 'M',//運費
+            oprice: 'N',//訂單金額
+            ofee: '',//手續費
+            odiscount: '',//折扣
+            oreceipt: 's'//發票
+        }
     }
 }
 
@@ -42,6 +170,9 @@ var API_KEY = 'AIzaSyBj8xjZ75lF9oEirYXbEQA-pyJcZKgkHgE';
 var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
+function COLindex(txt) {
+    return txt.charCodeAt(0) - 65
+}
 
 function GsubmitStockData(iso, count, pindex) { //扣數量用 差回傳資料 還有相加數量
     gapi.client.sheets.spreadsheets.values.get({
@@ -346,7 +477,7 @@ function printporductslist(col) { //
             }
         }
         for (var i = 0; i < aryL.length; i++) { //去除剩餘數量>0
-            if (isNaN(Number(aryL[i][14])) || Number(aryL[i][14]) > 0) {//大於0或是文字的
+            if (isNaN(Number(aryL[i][14])) || Number(aryL[i][14]) > 0) { //大於0或是文字的
                 aryL[i][14] = ""
             }
         }
@@ -354,10 +485,10 @@ function printporductslist(col) { //
             if (!a[16]) {
                 a[16] = "99"
 
-            } else if(!b[16]) {
+            } else if (!b[16]) {
                 b[16] = "99"
             }
-            return Number(a[16].split("-")[0])-Number(b[16].split("-")[0])
+            return Number(a[16].split("-")[0]) - Number(b[16].split("-")[0])
         });
         productL.productlist = aryL;
         $("button").removeAttr('disabled') //激活送出紐
