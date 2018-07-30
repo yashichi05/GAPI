@@ -18,19 +18,19 @@
 </head>
 
 <body>
-    <div id="productsdiv" style="width: 1200px;font-size:20px">
+    <div id="productsdiv" style="width: 1200px;font-size:24px">
         <button @click="doit(10)">T</button>
         <button @click="doit(11)">Y</button>
         <button @click="doit(12)">J</button>
         <button @click="doit(13)">婷</button>
         <div class="d-flex" v-for="(pr,pindex) in productlist">
             <div class="border border-dark" style="width:40px;"></div>
-            <div style="width:40px;">{{pr[14]}}</div>
+            <div style="width:60px;">{{pr[14]}}</div>
             <div style="width:40px;">{{pr[col]}}</div>
-            <div style="width:200px;">{{pr[1]}}</div>
-            <div style="width:600px;">{{pr[2]}}</div>
-            <div style="width:240px;">{{pr[3]}}</div>
-            <div style="width:40px;">{{(pr[16]==99)?'':pr[16]}}</div>
+            <div style="width:240px;">{{pr[1]}}</div>
+            <div style="width:560px;">{{pr[2]}}</div>
+            <div style="width:200px;">{{pr[3]}}</div>
+            <div style="width:60px;">{{(pr[16]==99)?'':pr[16]}}</div>
         </div>
 
     </div>
