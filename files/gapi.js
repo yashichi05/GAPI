@@ -373,7 +373,7 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
         if (getV == -1) { //如果找不到返回
             return
         };
-        var shipcolindex = response.result.values[getV].length - 1 //貨運的欄位INDEX
+        var shipcolindex = response.result.values[getV].length - 1 //貨運的欄位INDEX bug第一張訂單貨運空的 會導致統計失敗
         for (var i = getV; i < response.result.values.length; i++) {
 
             if (response.result.values[i][shipcolindex]) { //有值則執行 將貨運推至陣列
