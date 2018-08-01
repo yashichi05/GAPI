@@ -8,16 +8,20 @@ POS 自動化
 https://www.qa-knowhow.com/?p=2559
 
 
+露天怪怪
 取貨數量 能自動標記宅配的商品(有困難)
 有讀取條更好
-
+查超商數量須以開頭第一個字查詢"7" "全"
 研究then promise
 研究ajax 及製作統整頁面
 
 欄位要放在sheetrange裡面 統一調用
 還要一個function 可以把ABCD 欄位轉成01234
 續退訂單?
+刪除訂單
 
+sql 外連
+http://sharedderrick.blogspot.com/2009/05/sql-server-2008-express-enable-remote.html
 
 送出時要鎖定送出紐 (沒有必要)
 googleapi function　物件化X (gapi塞在物件內會錯誤) 
