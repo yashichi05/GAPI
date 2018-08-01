@@ -118,9 +118,9 @@ var buttonevent = new Vue({ //按鈕事件 //送出時檢查 訂單金額是否�
                 this.disableButton() //鎖定按鈕
                 ///////資料陣列
                 var aryV = [];
-                aryV.push([this.todayDate(), webform.orderID, webform.orderID, webform.orderCustomer, "'" + webform.orderTel, "'" + productlist.products[0].productIso, productlist.products[0].productName, productlist.products[0].productType, productlist.products[0].productCount, productlist.products[0].productPrice, productlist.products[0].productAllpirce, "'" + webform.orderShip, webform.orderShipPrice, "", webform.orderPrice]); //產生第一列
+                aryV.push([this.todayDate(), webform.orderID, webform.orderAccount, webform.orderCustomer, "'" + webform.orderTel, "'" + productlist.products[0].productIso, productlist.products[0].productName, productlist.products[0].productType, productlist.products[0].productCount, productlist.products[0].productPrice, productlist.products[0].productAllpirce, "'" + webform.orderShip, webform.orderShipPrice, "", webform.orderPrice]); //產生第一列
                 for (var i = 1; i < productlist.products.length - 1; i++) { //-1是因為永遠會多一攔 從第二列開始新增
-                    aryV.push([this.todayDate(), webform.orderID, webform.orderCustomer, "'" + webform.orderTel, "'" + productlist.products[i].productIso, productlist.products[i].productName, productlist.products[i].productType, productlist.products[i].productCount, productlist.products[i].productPrice, productlist.products[i].productAllpirce])
+                    aryV.push([this.todayDate(), webform.orderID, webform.orderAccount, webform.orderCustomer, "'" + webform.orderTel, "'" + productlist.products[i].productIso, productlist.products[i].productName, productlist.products[i].productType, productlist.products[i].productCount, productlist.products[i].productPrice, productlist.products[i].productAllpirce])
                 };
 
                 //////執行送出
