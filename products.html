@@ -23,11 +23,16 @@
         <button @click="doit(11)">Y</button>
         <button @click="doit(12)">J</button>
         <button @click="doit(13)">婷</button>
+        <button style="margin-left:20px;" @click="mark('yahoo')">雅虎</button>
+        <button @click="mark('Ruten')">露天</button>
+        <button @click="mark('shopee')">蝦皮</button>
+        <button @click="mark('pchomed')">PC大一</button>
+        <button @click="mark('pchomet')">PC梓原</button>
         <div class="d-flex" v-for="(pr,pindex) in productlist">
             <div class="border border-dark" style="width:40px;"></div>
             <div style="width:60px;">{{pr[14]}}</div>
             <div style="width:40px;">{{pr[col]}}</div>
-            <div style="width:240px;">{{pr[1]}}</div>
+            <div style="width:240px;padding-left:7px;">{{pr[1]}}</div>
             <div style="width:560px;white-space:nowrap;overflow: hidden">{{pr[2]}}</div>
             <div style="width:200px;white-space:nowrap;overflow: hidden">{{pr[3]}}</div>
             <div style="width:60px;">{{(pr[16]==99)?'':pr[16]}}</div>

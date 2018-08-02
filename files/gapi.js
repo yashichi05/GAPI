@@ -3,164 +3,164 @@ var sheetrange = { //寫入的範圍
         gid: '19ZXwhENPrLmLURoKO4xXoCDahpyMG5wuU_8xsU74kyI',
         gname: '工作表1!',
         col: {
-            piso: 'F',//ISO
-            pname: 'G',//產品名稱
-            ptype: 'H',//款式
-            pcount: 'I'//數量
+            piso: 'F', //ISO
+            pname: 'G', //產品名稱
+            ptype: 'H', //款式
+            pcount: 'I' //數量
         }
     },
     yahooID: {
         gid: '1ve2C2zi_W8ctD4ObBdkEkheStQGgopHpGHXd_ygdNiI',
         gname: 'YAHOO拍賣!',
         col: {
-            oid: 'B',//訂單編號
-            oname: 'C',//姓名
-            otel: 'D',//電話
-            oaccount: 'E',//帳號
-            piso: 'F',//ISO
-            pname: 'G',//產品名稱
-            ptype: 'H',//款式
-            pcount: 'I',//數量
-            pprice: 'J',//單價
-            pallprice: 'K',//總價
-            oship: 'L',//貨運
-            oshipprice: 'M',//運費
-            oprice: 'N',//訂單金額
-            ofee: '',//手續費
-            odiscount: '',//折扣
-            oreceipt: 's'//發票
+            oid: '', //訂單編號
+            oname: 'C', //姓名
+            otel: 'D', //電話
+            oaccount: 'B', //帳號
+            piso: 'E', //ISO
+            pname: 'F', //產品名稱
+            ptype: 'G', //款式
+            pcount: 'H', //數量
+            pprice: 'I', //單價
+            pallprice: 'J', //總價
+            oship: 'K', //貨運
+            oshipprice: 'L', //運費
+            oprice: 'R', //訂單金額
+            ofee: '', //手續費
+            odiscount: 'M', //折扣
+            oreceipt: 'O' //發票
         }
     },
     shopeeID: {
         gid: '1-m4Y_02IF82_o7dI3N8z9mA4GcuqspyaaPtHxmze1Uk',
         gname: '工作表1!',
         col: {
-            oid: 'B',//訂單編號
-            oname: 'C',//姓名
-            otel: 'D',//電話
-            oaccount: 'E',//帳號
-            piso: 'F',//ISO
-            pname: 'G',//產品名稱
-            ptype: 'H',//款式
-            pcount: 'I',//數量
-            pprice: 'J',//單價
-            pallprice: 'K',//總價
-            oship: 'L',//貨運
-            oshipprice: 'M',//運費
-            oprice: 'N',//訂單金額
-            ofee: '',//手續費
-            odiscount: '',//折扣
-            oreceipt: 's'//發票
+            oid: 'B', //訂單編號
+            oname: 'C', //姓名
+            otel: 'D', //電話
+            oaccount: 'E', //帳號
+            piso: 'F', //ISO
+            pname: 'G', //產品名稱
+            ptype: 'H', //款式
+            pcount: 'I', //數量
+            pprice: 'J', //單價
+            pallprice: 'K', //總價
+            oship: 'L', //貨運
+            oshipprice: 'M', //運費
+            oprice: 'N', //訂單金額
+            ofee: '', //手續費
+            odiscount: '', //折扣
+            oreceipt: 'S' //發票
         }
     },
     pchomedID: {
         gid: '1Vm0WQTShQSCRswroN2N4MNq-ofJPAOvv_yPMqVTNqnc',
         gname: '大一!',
         col: {
-            oid: 'B',//訂單編號
-            oname: 'C',//姓名
-            otel: 'D',//電話
-            oaccount: 'E',//帳號
-            piso: 'F',//ISO
-            pname: 'G',//產品名稱
-            ptype: 'H',//款式
-            pcount: 'I',//數量
-            pprice: 'J',//單價
-            pallprice: 'K',//總價
-            oship: 'L',//貨運
-            oshipprice: 'M',//運費
-            oprice: 'N',//訂單金額
-            ofee: '',//手續費
-            odiscount: '',//折扣
-            oreceipt: 's'//發票
+            oid: 'B', //訂單編號
+            oname: 'C', //姓名
+            otel: 'D', //電話
+            oaccount: '', //帳號
+            piso: 'E', //ISO
+            pname: 'F', //產品名稱
+            ptype: 'G', //款式
+            pcount: 'H', //數量
+            pprice: 'I', //單價
+            pallprice: 'J', //總價
+            oship: 'K', //貨運
+            oshipprice: 'L', //運費
+            oprice: 'N', //訂單金額
+            ofee: '', //手續費
+            odiscount: '', //折扣
+            oreceipt: 'R' //發票
         }
     },
     pchometID: {
         gid: '1Vm0WQTShQSCRswroN2N4MNq-ofJPAOvv_yPMqVTNqnc',
         gname: '梓原!',
         col: {
-            oid: 'B',//訂單編號
-            oname: 'C',//姓名
-            otel: 'D',//電話
-            oaccount: 'E',//帳號
-            piso: 'F',//ISO
-            pname: 'G',//產品名稱
-            ptype: 'H',//款式
-            pcount: 'I',//數量
-            pprice: 'J',//單價
-            pallprice: 'K',//總價
-            oship: 'L',//貨運
-            oshipprice: 'M',//運費
-            oprice: 'N',//訂單金額
-            ofee: '',//手續費
-            odiscount: '',//折扣
-            oreceipt: 's'//發票
+            oid: 'B', //訂單編號
+            oname: 'C', //姓名
+            otel: 'D', //電話
+            oaccount: '', //帳號
+            piso: 'E', //ISO
+            pname: 'F', //產品名稱
+            ptype: 'G', //款式
+            pcount: 'H', //數量
+            pprice: 'I', //單價
+            pallprice: 'J', //總價
+            oship: 'K', //貨運
+            oshipprice: 'L', //運費
+            oprice: 'N', //訂單金額
+            ofee: '', //手續費
+            odiscount: '', //折扣
+            oreceipt: 'R' //發票
         }
     },
     RutenID: {
         gid: '1nimYD9iPgdHE7RXWqflBocOkj29mRVkCaatcWbq4Rvw',
         gname: '露天拍賣!',
         col: {
-            oid: 'B',//訂單編號
-            oname: 'C',//姓名
-            otel: 'D',//電話
-            oaccount: 'E',//帳號
-            piso: 'F',//ISO
-            pname: 'G',//產品名稱
-            ptype: 'H',//款式
-            pcount: 'I',//數量
-            pprice: 'J',//單價
-            pallprice: 'K',//總價
-            oship: 'L',//貨運
-            oshipprice: 'M',//運費
-            oprice: 'N',//訂單金額
-            ofee: '',//手續費
-            odiscount: '',//折扣
-            oreceipt: 's'//發票
+            oid: 'B', //訂單編號
+            oname: 'D', //姓名
+            otel: 'E', //電話
+            oaccount: 'C', //帳號
+            piso: 'F', //ISO
+            pname: 'G', //產品名稱
+            ptype: 'H', //款式
+            pcount: 'I', //數量
+            pprice: 'J', //單價
+            pallprice: 'K', //總價
+            oship: 'L', //貨運
+            oshipprice: 'M', //運費
+            oprice: 'O', //訂單金額
+            ofee: '', //手續費
+            odiscount: '', //折扣
+            oreceipt: 'U' //發票
         }
     },
     songuoID: {
         gid: '1MRTaGo2H0xyhhyeA-Y0EDlVUzJ8J_djI6qCawZRt1Qw',
         gname: '工作表1!',
         col: {
-            oid: 'B',//訂單編號
-            oname: 'C',//姓名
-            otel: 'D',//電話
-            oaccount: 'E',//帳號
-            piso: 'F',//ISO
-            pname: 'G',//產品名稱
-            ptype: 'H',//款式
-            pcount: 'I',//數量
-            pprice: 'J',//單價
-            pallprice: 'K',//總價
-            oship: 'L',//貨運
-            oshipprice: 'M',//運費
-            oprice: 'N',//訂單金額
-            ofee: '',//手續費
-            odiscount: '',//折扣
-            oreceipt: 's'//發票
+            oid: 'B', //訂單編號
+            oname: 'C', //姓名
+            otel: 'D', //電話
+            oaccount: '', //帳號
+            piso: 'E', //ISO
+            pname: 'F', //產品名稱
+            ptype: 'G', //款式
+            pcount: '', //數量
+            pprice: '', //單價
+            pallprice: 'J', //總價
+            oship: 'N', //貨運
+            oshipprice: '', //運費
+            oprice: 'M', //訂單金額
+            ofee: 'K', //手續費
+            odiscount: 'L', //折扣
+            oreceipt: 'O' //發票
         }
     },
     buy123ID: {
         gid: '1jztvn3KG-e6ffWfEfUYF7pBS_vdYFGofM2dH8C4Krrs',
         gname: '工作表!',
         col: {
-            oid: 'B',//訂單編號
-            oname: 'C',//姓名
-            otel: 'D',//電話
-            oaccount: 'E',//帳號
-            piso: 'F',//ISO
-            pname: 'G',//產品名稱
-            ptype: 'H',//款式
-            pcount: 'I',//數量
-            pprice: 'J',//單價
-            pallprice: 'K',//總價
-            oship: 'L',//貨運
-            oshipprice: 'M',//運費
-            oprice: 'N',//訂單金額
-            ofee: '',//手續費
-            odiscount: '',//折扣
-            oreceipt: 's'//發票
+            oid: 'C', //訂單編號
+            oname: 'D', //姓名
+            otel: '', //電話
+            oaccount: '', //帳號
+            piso: 'E', //ISO
+            pname: 'F', //產品名稱
+            ptype: 'G', //款式
+            pcount: 'H', //數量
+            pprice: '', //單價
+            pallprice: 'J', //總價
+            oship: 'K', //貨運
+            oshipprice: '', //運費
+            oprice: 'J', //訂單金額
+            ofee: '', //手續費
+            odiscount: '', //折扣
+            oreceipt: '' //發票
         }
     }
 }
@@ -170,9 +170,7 @@ var API_KEY = 'AIzaSyBj8xjZ75lF9oEirYXbEQA-pyJcZKgkHgE';
 var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
-function COLindex(txt) {
-    return txt.charCodeAt(0) - 65
-}
+
 
 function GsubmitStockData(iso, count, pindex) { //扣數量用 差回傳資料 還有相加數量
     gapi.client.sheets.spreadsheets.values.get({
@@ -415,9 +413,17 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
 }
 //print order
 var fctnlist = {
+    COLindex: function (txt) { //欄轉成數字
+        return txt.charCodeAt(0) - 65
+    },
+
     findtoday: function (ary) { //找當天日期的列數
+        var aryA = []
+        for (var i = 0; i < ary.length; i++) { //提取日期
+            aryA.push(new Date(ary[i][0]).toLocaleDateString()); //new date()將文字轉為日期物件 toLocaleDateString再把他轉為文字 這樣日期格式會跟下面比對的統一
+        }
         var todayDate = new Date();
-        return ary.indexOf(todayDate.toLocaleDateString())
+        return aryA.indexOf(todayDate.toLocaleDateString())
     }
 }
 
@@ -429,13 +435,8 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
         spreadsheetId: getid,
         range: getname + "A:Z" //讀取整個試算表，A:Z 必須包含發票 金額 資料
     }).then(function (response) {
-
-        var aryA = [] //存放日期
         var aryO = [] //存放今日訂單
-        for (var i = 0; i < response.result.values.length; i++) { //提取日期
-            aryA.push(new Date(response.result.values[i][0]).toLocaleDateString()); //new date()將文字轉為日期物件 toLocaleDateString再把他轉為文字 這樣日期格式會跟下面比對的統一
-        }
-        var getR = fctnlist.findtoday(aryA); //尋找當天日期列數
+        var getR = fctnlist.findtoday(response.result.values); //尋找當天日期列數
         if (getR == -1) { //如果找不到返回
             $("button").removeAttr('disabled') //激活送出紐
             return
@@ -495,5 +496,50 @@ function printporductslist(col) { //
     }, function (response) {
         console.log('Error: ' + response.result.error.message);
     });
+
+}
+
+function hctmark(web) { // 標記新竹商品，松果 生活沒辦法
+    var getid = eval("sheetrange." + web + "ID.gid") //sheetID
+    var getname = eval("sheetrange." + web + "ID.gname") //sheetName
+    var getshipcol = eval("sheetrange." + web + "ID.col.oship") //取得欄位的字母
+    var getshipcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oship")) //取得欄位的index
+    var getisoindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.piso"))
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: getid,
+        range: getname + "A:" + getshipcol //日期到貨運
+    }).then(function (response) {
+            var getR = fctnlist.findtoday(response.result.values); //尋找當天日期列數
+            var aryS = []
+            if (getR == -1) { //如果找不到返回
+                $("button").removeAttr('disabled') //激活送出紐
+                return
+            }
+
+            var ostart = -1
+            for (var i = getR; i < response.result.values.length; i++) { //從getR列開始提取今日訂單 
+                if (ostart == 1 && response.result.values[i][getshipcolindex]) { //如果本列有值且ostart=1 為下一筆訂單，則傳回-1 結束訂單
+                    ostart = -1
+                }
+                if (response.result.values[i][getshipcolindex] == "竹" || response.result.values[i][getshipcolindex] == "新竹") { //如果是新竹則執行
+                    ostart = 1 //訂單開始
+                }
+                if (ostart == 1) { //如果訂單開始則標記資料
+                    productL.hctproducts.push(response.result.values[i][getisoindex])
+
+                    for (var ii = 0; ii<productL.productlist.length; ii++) {
+                        if(response.result.values[i][getisoindex] == productL.productlist[ii][1]){ //有找到資料則標記框線
+                            $('#productsdiv div:eq('+((ii*8)+3)+')').css('border-right','1px dashed');//*8 是算出來的
+                        }
+                        
+                    }
+                }
+
+            }
+
+        },
+        function (response) {
+            console.log('Error: ' + response.result.error.message);
+        });
 
 }

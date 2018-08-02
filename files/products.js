@@ -2,13 +2,17 @@ var productL = new Vue({
     el: '#productsdiv',
     data: {
         productlist: "",
-        col:""
+        col:"",
+        hctproducts:[]
     },
     methods: {
         doit: function(col){
             this.col = col
             $("button").attr('disabled', 'disabled')
             printporductslist(col);
+        },
+        mark:function(web){
+            hctmark(web);
         }
     }
 })
