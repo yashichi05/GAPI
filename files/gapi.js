@@ -451,6 +451,8 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
             if (aryO[i][oprice]) { //總金額有值，輸入訂單資料
                 if (web == 'songuo' || web == 'buy123') {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], 0, aryO[i][oprice]) //如果是松果或生活運費為0
+                } else if (web == 'shopee') { //如果蝦皮 訂單金額 = 入帳+運費
+                    printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], Number(aryO[i][oprice]) + Number(aryO[i][shipprice]))
                 } else {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], aryO[i][oprice])
                 }
@@ -527,11 +529,11 @@ function hctmark(web) { // 標記新竹商品，松果 生活沒辦法
                 if (ostart == 1) { //如果訂單開始則標記資料
                     productL.hctproducts.push(response.result.values[i][getisoindex])
 
-                    for (var ii = 0; ii<productL.productlist.length; ii++) {
-                        if(response.result.values[i][getisoindex] == productL.productlist[ii][1]){ //有找到資料則標記框線
-                            $('#productsdiv div:eq('+((ii*8)+3)+')').css('border-right','1px dashed');//*8 是算出來的
+                    for (var ii = 0; ii < productL.productlist.length; ii++) {
+                        if (response.result.values[i][getisoindex] == productL.productlist[ii][1]) { //有找到資料則標記框線
+                            $('#productsdiv div:eq(' + ((ii * 8) + 3) + ')').css('border-right', '1px dashed'); //*8 是算出來的
                         }
-                        
+
                     }
                 }
 
