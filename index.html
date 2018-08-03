@@ -6,33 +6,36 @@
     <script src="jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <meta charset="UTF-8">
-    <title></title>
+    <title>拍賣用</title>
+    <script>
+        $(document).ready(function() {
+            getsomething('input');
+        }) //
+
+        function getsomething(word) {
+            $('#getsomething').animate({
+                opacity: '0'
+            }, 100, function() {
+                var htmlobj = eval('$.ajax({url: "/' + word + '",async: false});')
+                $("#getsomething").html(htmlobj.responseText);
+            });
+            $('#getsomething').animate({
+                opacity: '1'
+            }, 100);
+        }
+
+    </script>
+    <style>
+        @media print {
+            #linkajax {
+                display: none;
+            }
+        }
+
+    </style>
 </head>
 
-<script>
-    $(document).ready(function() {getsomething('input');}) //
 
-    function getsomething(word) {
-        $('#getsomething').animate({
-            opacity: '0'
-        }, 100, function() {
-            var htmlobj = eval('$.ajax({url: "/' + word + '",async: false});')
-            $("#getsomething").html(htmlobj.responseText);
-        });
-        $('#getsomething').animate({
-            opacity: '1'
-        }, 100);
-    }
-
-</script>
-<style>
-    @media print {
-        #linkajax {
-            display: none;
-        }
-    }
-
-</style>
 
 <body>
     <div id="linkajax">
