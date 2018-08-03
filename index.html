@@ -10,6 +10,8 @@
 </head>
 
 <script>
+    $(document).ready(function() {getsomething('input');}) //
+
     function getsomething(word) {
         $('#getsomething').animate({
             opacity: '0'
@@ -17,12 +19,13 @@
             var htmlobj = eval('$.ajax({url: "/' + word + '",async: false});')
             $("#getsomething").html(htmlobj.responseText);
         });
-        $('#getsomething').animate({opacity:'1'},100);
+        $('#getsomething').animate({
+            opacity: '1'
+        }, 100);
     }
 
 </script>
 <style>
-
     @media print {
         #linkajax {
             display: none;
@@ -38,7 +41,7 @@
         <a onclick="getsomething('ship')" href="#">貨運統計</a>
         <a onclick="getsomething('printOrder')" href="#">列印訂單</a>
         <a onclick="getsomething('products')" href="#">取貨表</a></div>
-    <div id="getsomething">nothing</div>
+    <div id="getsomething">Loading...</div>
 
 
 
