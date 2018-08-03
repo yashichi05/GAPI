@@ -1,22 +1,11 @@
-<!DOCTYPE html>
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
 
+</style>
 
-<html>
-
-<head>
-    <script src="jquery.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <title>Google Sheets API Quickstart</title>
-    <meta charset="utf-8" />
-<!--    去除input 的箭頭-->
-    <style>
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-        }
-
-    </style>
-</head>
 
 
 <div id="orderform">
@@ -77,11 +66,8 @@
 
 
 <footer>
-    <script src="gapi.js"></script>
+
     <script src="jsfunction.js"></script>
-    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+
 
 </footer>
-</body>
-
-</html>
