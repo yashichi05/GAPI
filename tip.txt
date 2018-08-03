@@ -23,3 +23,4 @@ http://sharedderrick.blogspot.com/2009/05/sql-server-2008-express-enable-remote.
 
 送出時要鎖定送出紐 (沒有必要)
 googleapi function　物件化X (gapi塞在物件內會錯誤) 
+-webkit-print-color-adjust: exact; 強制列印背景

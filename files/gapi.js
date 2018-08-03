@@ -531,7 +531,7 @@ function hctmark(web) { // 標記新竹商品，松果 生活沒辦法
 
                     for (var ii = 0; ii < productL.productlist.length; ii++) {
                         if (response.result.values[i][getisoindex] == productL.productlist[ii][1]) { //有找到資料則標記框線
-                            $('#productsdiv div:eq(' + ((ii * 8) + 3) + ')').css('border-right', '1px dashed'); //*8 是算出來的
+                            $('#productsdiv div:eq(' + ((ii * 8) + 3) + ')').css({'background': 'url(mark.png) no-repeat','background-position': '26px','background-size': '16px 16px'}); //*8 是算出來的
                         }
 
                     }
