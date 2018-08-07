@@ -11,8 +11,15 @@
 
 </style>
 
-<div id="printOrder">
-    <button @click="doit('yahoo')">雅虎</button><button @click="doit('shopee')">蝦皮</button><button @click="doit('pchomed')">PC大一</button><button @click="doit('pchomet')">PC梓原</button><button @click="doit('Ruten')">露天</button><button @click="doit('songuo')">松果</button><button @click="doit('buy123')">生活</button>
+<div id="printOrder" class="m-auto" style="width:1200px;">
+    <div class="mb-2 d-flex justify-content-center">
+        <button class="btn btn-outline-secondary" @click="doit('yahoo')">雅虎</button>
+        <button class="btn btn-outline-secondary" @click="doit('shopee')">蝦皮</button>
+        <button class="btn btn-outline-secondary" @click="doit('pchomed')">PC大一</button>
+        <button class="btn btn-outline-secondary" @click="doit('pchomet')">PC梓原</button>
+        <button class="btn btn-outline-secondary" @click="doit('Ruten')">露天</button>
+        <button class="btn btn-outline-secondary" @click="doit('songuo')">松果</button>
+        <button class="btn btn-outline-secondary" @click="doit('buy123')">生活</button></div>
     <div v-for="(ov,oindex) in allorder" class="" style="border:3px solid #000;font-size: 24px; width:1200px;page-break-inside:avoid;margin-bottom:20px;padding-bottom:10px;">
         <div class="d-flex" style="border-bottom: 1px solid #000;padding:1px;">
             <div class="border-right p-1 border-secondary" style="width:240px;">

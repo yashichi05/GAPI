@@ -5,7 +5,7 @@ Vue.component('receipt-input', {
             num: this.rn
         } //v-model 會附值給rn 會出現警告 ，所以新增一個NUM 初值為rn的值，當她被附值後會脫離rn
     },
-    template: '<tr><td>{{oreder}}</td><td>{{name}}</td><td>{{price}}</td><td><input :id=\"\'receiptInput-\'+orderindex\" @change="putvalue" v-model=\"num\" type=\"search\"><button @click=\"autoFill\">下拉</button></td></tr>',
+    template: '<tr><td class=\"align-middle\">{{oreder}}</td><td class="align-middle">{{name}}</td><td class="align-middle">{{price}}</td><td><input class=\"form-control\" :id=\"\'receiptInput-\'+orderindex\" @change="putvalue" v-model=\"num\" type=\"search\"></td><td><button class=\"btn btn-sm btn-outline-secondary\" @click=\"autoFill\">下拉</button></td></tr>',
     methods: {
         autoFill: function () { //自動向下填滿
             var cal = this.num.slice(-8) //取最後8碼
@@ -28,6 +28,7 @@ Vue.component('receipt-input', {
 var receiptdiv = new Vue({
     el: '#receiptdiv',
     data: {
+        activebtn:false,
         nowbutton: "", //目前平台名稱
         receiptCol: "",
         RowIndex: "", //今日所有定定單開頭
@@ -36,6 +37,7 @@ var receiptdiv = new Vue({
     },
     methods: {
         whichbutton: function (v, oi, on, rn, op, rnc) { //按鈕執行 v為平台名稱 tp預留值 OI為訂單編號所在欄數 ON訂單客人欄數 rn 發票欄位 op訂單金額
+            this.activebtn = true ;//顯示按鈕
             receiptdiv.orders = []; //淨空試算表
             var gid = eval('sheetrange.' + v + 'ID.gid')
             var gname = eval('sheetrange.' + v + 'ID.gname')

@@ -7,8 +7,8 @@
 </style>
 
 
-
-<div id="orderform">
+<div class="m-auto" style="width:520px;">
+<div id="orderform" >
     <select id="webselect" v-model="web" v-on:change="formchange()" name="Gsheet"> 
 　<option value="yahoo">雅虎</option>
 　<option value="pchomet">PC梓</option>
@@ -52,13 +52,13 @@
     <!--            出現刪除訂單紐及下一筆案紐 可以刪除剛剛新增的訂單，下一筆按鈕可以清除輸入框及隱藏刪除訂單按鈕、下一筆按鈕-->
 
 </div>
-<div id="buttonEvent">
-    <button id="ordersubmit" @click="submitOrder" disabled="disabled">送出</button>
-    <button id="orderdel" @click="delOreder" disabled="disabled">刪除</button>
-    <button id="orderclear" @click="nextOrder">下一筆</button>
+<div id="buttonEvent" class="mt-2">
+    <button class="btn btn-sm" id="ordersubmit" @click="submitOrder" disabled="disabled">送出</button>
+    <button class="btn btn-sm" id="orderdel" @click="delOreder" disabled="disabled">刪除</button>
+    <button class="btn btn-sm" id="orderclear" @click="nextOrder">下一筆</button>
 </div>
 
-
+</div>
 
 
 

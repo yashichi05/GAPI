@@ -20,6 +20,9 @@ app.get('/printOrder', function (req, res) {
 app.get('/products', function (req, res) {
     res.sendFile(__dirname + "/" + "products.html");
 })
+app.get('/2', function (req, res) {
+    res.sendFile(__dirname + "/" + "index_TEST.html");
+})
 
 
 
