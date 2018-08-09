@@ -9,8 +9,8 @@ POS 自動化
 https://www.qa-knowhow.com/?p=2559
 
 
-露天怪怪
-取貨數量 能自動標記宅配的商品(有困難)
+
+
 有讀取條更好
 研究then promise
 研究ajax 及製作統整頁面
@@ -27,5 +27,3 @@ googleapi function　物件化X (gapi塞在物件內會錯誤)
 -webkit-print-color-adjust: exact; 強制列印背景
 
 
-發票寫法要改過
-讓他只寫一次
