@@ -27,27 +27,5 @@ googleapi function　物件化X (gapi塞在物件內會錯誤)
 -webkit-print-color-adjust: exact; 強制列印背景
 
 
-        fctn: function (sgs,nowi,endi) {
-            for (var i = now; i < end; i++) {
-                var va = [[this.orders[i].receiptNumber]];
-                if (sgs == 'Y') {
-                    var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+String.fromCharCode(this.receiptCol.charCodeAt(0) - 1)+(this.RowIndex[i]+1), va)' //是松果貨運的話，寫入發票的前一欄
-                } else {
-                    var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+this.receiptCol+(this.RowIndex[i]+1), va)'
-                }
-                //console.log(prg)
-                eval(prg)
-            }
-        },
-        outputNumber: function (sgs) { //輸出輸入的發票號碼
-            var forcount = Math.floor(this.orders.length/30)
-            if (this.orders.length < 30) {
-                this.fctn(sgs,0,this.orders.length)
-            } else {
-                for(var i = 0;i<forcount){
-                    setTimeout(function(){this.fctn(sgs,i*30,(i+1)*30)},1000*(i+1))
-                    
-                }//執行30倍數的
-                setTimeout(function(){this.fctn(sgs,forcount*30,this.orders.length)},1000*forcount) //執行剩下的
-            }
-        }
+發票寫法要改過
+讓他只寫一次

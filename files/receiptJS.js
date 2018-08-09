@@ -28,16 +28,18 @@ Vue.component('receipt-input', {
 var receiptdiv = new Vue({
     el: '#receiptdiv',
     data: {
-        activebtn:false,
+        activebtn: false,
         nowbutton: "", //目前平台名稱
         receiptCol: "",
         RowIndex: "", //今日所有定定單開頭
         orders: [],
-        sgbtn: false
+        sgbtn: false,
+        putvalary: [],
+        todayrow:""
     },
     methods: {
         whichbutton: function (v, oi, on, rn, op, rnc) { //按鈕執行 v為平台名稱 tp預留值 OI為訂單編號所在欄數 ON訂單客人欄數 rn 發票欄位 op訂單金額
-            this.activebtn = true ;//顯示按鈕
+            this.activebtn = true; //顯示按鈕
             receiptdiv.orders = []; //淨空試算表
             var gid = eval('sheetrange.' + v + 'ID.gid')
             var gname = eval('sheetrange.' + v + 'ID.gname')
@@ -60,16 +62,23 @@ var receiptdiv = new Vue({
             })
         },
         outputNumber: function (sgs) { //輸出輸入的發票號碼
-            for (var i = 0; i < this.orders.length; i++) {
-                var va = [[this.orders[i].receiptNumber]];
-                if (sgs=='Y') {
-                    var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+String.fromCharCode(this.receiptCol.charCodeAt(0) - 1)+(this.RowIndex[i]+1), va)' //是松果貨運的話，寫入發票的前一欄
+            this.putvalary = [] //初始化
+            var ri = 0 //rowindex 的初始直
+            for (var i = 0; i < this.RowIndex[this.RowIndex.length - 1] + 1; i++) {
+                if (i == this.RowIndex[ri]) {
+                    this.putvalary.push([this.orders[ri].receiptNumber])
+                    ri = ri + 1; //有找到值，則下一個rowindex
                 } else {
-                    var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+this.receiptCol+(this.RowIndex[i]+1), va)'
+                    this.putvalary.push([])
                 }
-                //console.log(prg)
-                eval(prg)
             }
+            if (sgs == 'Y') {
+                var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+String.fromCharCode(this.receiptCol.charCodeAt(0) - 1)+this.todayrow, this.putvalary)' //是松果貨運的話，寫入發票的前一欄
+            } else {
+                var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+this.receiptCol+this.todayrow, this.putvalary)'
+            }
+            //console.log(prg)
+            eval(prg)
         }
     }
 
