@@ -1,0 +1,22 @@
+<div id="cancelDIV">
+    <div>
+        <button id="yahoo_btn" disabled="disabled" @click="togglebtn('yahoo')">雅虎</button>
+        <button id="pchomet_btn"  @click="togglebtn('pchomet')">PC梓原</button>
+        <button id="pchomed_btn"  @click="togglebtn('pchomed')">PC大一</button>
+        <button id="shopee_btn"  @click="togglebtn('shopee')">蝦皮</button>
+        <button id="Ruten_btn"  @click="togglebtn('Ruten')">露天</button>
+        <button id="songuo_btn"  @click="togglebtn('songuo')">松果</button>
+    </div>
+    <div>
+        <input v-model="rpNum" placeholder="發票金額">
+        <button @click="vueCancel">送出</button>
+    </div>
+
+</div>
+
+<footer>
+
+    <script src="cancelOrder.js"></script>
+
+
+</footer>

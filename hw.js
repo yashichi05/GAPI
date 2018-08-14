@@ -23,6 +23,9 @@ app.get('/products', function (req, res) {
 app.get('/2', function (req, res) {
     res.sendFile(__dirname + "/" + "index_TEST.html");
 })
+app.get('/cancel', function (req, res) {
+    res.sendFile(__dirname + "/" + "cancelOrder.html");
+})
 
 
 

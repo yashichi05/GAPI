@@ -326,7 +326,7 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
             aryA.push(response.result.values[i][0]);
         }
         var getV = aryA.indexOf(todayDate.toLocaleDateString()); //尋找當天日期列數
-        receiptdiv.todayrow = getV+1
+        receiptdiv.todayrow = getV + 1
         if (getV == -1) { //如果找不到返回
             $('#cantFindp').remove()
             $('#receiptdiv').append('<p id=\"cantFindp\">找不到資料</p>')
@@ -335,7 +335,7 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
         $('#cantFindp').remove() //如果有找到則刪除html"找不到"訊息
         for (var i = getV; i < response.result.values.length; i++) {
             if (response.result.values[i][op]) { //有值則執行 新增物件
-                aryPindex.push(i-getV)
+                aryPindex.push(i - getV)
                 receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on], response.result.values[i][op], response.result.values[i][rn]) //增加V-FOR物件
             }
         }
@@ -532,13 +532,61 @@ function hctmark(web) { // 標記新竹商品，松果 生活沒辦法
 
                     for (var ii = 0; ii < productL.productlist.length; ii++) {
                         if (response.result.values[i][getisoindex] == productL.productlist[ii][1]) { //有找到資料則標記框線
-                            $('#productsdiv div:eq(' + ((ii * 8) + 6) + ')').css({'background': 'url(mark.png) no-repeat','background-position': '26px','background-size': '16px 16px'}); //*8 是算出來的
+                            $('#productsdiv div:eq(' + ((ii * 8) + 6) + ')').css({
+                                'background': 'url(mark.png) no-repeat',
+                                'background-position': '26px',
+                                'background-size': '16px 16px'
+                            }); //*8 是算出來的
                         }
 
                     }
                 }
 
             }
+
+        },
+        function (response) {
+            console.log('Error: ' + response.result.error.message);
+        });
+
+}
+
+function cancelapi(web, rpNum) { // 序退 yahoo 要另外寫
+    var getid = eval("sheetrange." + web + "ID.gid") //sheetID
+    var getname = eval("sheetrange." + web + "ID.gname") //sheetName
+    var getrpcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 發票
+    var getcountcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 數量
+    var gettotalcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 總價
+    var getspcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 運費
+    var getopcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 發票金額
+    var getidcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oid")) //取得欄位的index 訂單編號
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: getid,
+        range: getname + "A:Z"
+    }).then(function (response) {
+            var rpAry = []
+            for (var i = 0; i < response.result.values.length; i++) { //提取發票
+                rpAry.push(response.result.values[i][getrpcolindex])
+            }
+
+            var rpRow = rpAry.indexOf(rpNum) //訂單起始列
+            if (rpRow == -1) { //找不到則返回
+                return
+            }
+            var endRow //訂單最後一列
+            for (var i = rpRow; i < response.result.values.length; i++) {
+                endRow = i
+                if (response.result.values[i][getidcolindex] != response.result.values[i + 1][getidcolindex]) {
+                    break
+                }
+            }
+            var putval = [] //輸出資料
+            for (var i = rpRow; i < endRow + 1; i++) {
+                putval.push(response.result.values[i])
+            }
+        
+            //更改資料
+            //寫入資料
 
         },
         function (response) {
