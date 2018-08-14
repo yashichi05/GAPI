@@ -319,6 +319,7 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
         range: getname + "A:U" //讀取整個試算表，A:Z 必須包含發票 金額 資料
     }).then(function (response) {
 
+        $("button").removeAttr('disabled') //激活送出紐
         var todayDate = new Date();
         var aryA = []
         var aryPindex = []
@@ -334,7 +335,7 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
         };
         $('#cantFindp').remove() //如果有找到則刪除html"找不到"訊息
         for (var i = getV; i < response.result.values.length; i++) {
-            if (response.result.values[i][op]) { //有值則執行 新增物件
+            if (response.result.values[i][op] && response.result.values[i][op] > 0) { //有值且大於0(過濾序退)則執行 新增物件
                 aryPindex.push(i - getV)
                 receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on], response.result.values[i][op], response.result.values[i][rn]) //增加V-FOR物件
             }
@@ -373,9 +374,11 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
             return
         };
         var shipcolindex = response.result.values[getV].length - 1 //貨運的欄位INDEX bug第一張訂單貨運空的 會導致統計失敗
+        var pcountCol = fctnlist.COLindex(eval("sheetrange."+web+"ID.col.pcount"))
+
         for (var i = getV; i < response.result.values.length; i++) {
 
-            if (response.result.values[i][shipcolindex]) { //有值則執行 將貨運推至陣列
+            if (response.result.values[i][shipcolindex]&&response.result.values[i][pcountCol]>0) { //有值則執行 將貨運推至陣列
 
                 aryS.push(response.result.values[i][shipcolindex])
             }
@@ -449,7 +452,7 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
         }
         var pushpdtindex = -1 //訂單的Index
         for (var i = 0; i < aryO.length; i++) {
-            if (aryO[i][oprice]) { //總金額有值，輸入訂單資料
+            if (aryO[i][oprice] && aryO[i][oprice] > 0) { //總金額有值，輸入訂單資料
                 if (web == 'songuo' || web == 'buy123') {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], 0, aryO[i][oprice]) //如果是松果或生活運費為0
                 } else if (web == 'shopee') { //如果蝦皮 訂單金額 = 入帳+運費
@@ -459,7 +462,9 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
                 }
                 pushpdtindex = pushpdtindex + 1
             }
-            printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice]) //推訂單商品資料
+            if (aryO[i][pcount] > 0) {
+                printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice])
+            } //推訂單商品資料
         }
         $("button").removeAttr('disabled') //激活送出紐
     }, function (response) {
@@ -584,7 +589,7 @@ function cancelapi(web, rpNum) { // 序退 yahoo 要另外寫
             for (var i = rpRow; i < endRow + 1; i++) {
                 putval.push(response.result.values[i])
             }
-        
+
             //更改資料
             //寫入資料
 

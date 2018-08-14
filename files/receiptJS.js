@@ -35,11 +35,12 @@ var receiptdiv = new Vue({
         orders: [],
         sgbtn: false,
         putvalary: [],
-        todayrow:""
+        todayrow: ""
     },
     methods: {
         whichbutton: function (v, oi, on, rn, op, rnc) { //按鈕執行 v為平台名稱 tp預留值 OI為訂單編號所在欄數 ON訂單客人欄數 rn 發票欄位 op訂單金額
             this.activebtn = true; //顯示按鈕
+            $("button").attr('disabled', 'disabled') //鎖定刪除按鈕
             receiptdiv.orders = []; //淨空試算表
             var gid = eval('sheetrange.' + v + 'ID.gid')
             var gname = eval('sheetrange.' + v + 'ID.gname')
@@ -62,6 +63,7 @@ var receiptdiv = new Vue({
             })
         },
         outputNumber: function (sgs) { //輸出輸入的發票號碼
+
             this.putvalary = [] //初始化
             var ri = 0 //rowindex 的初始直
             for (var i = 0; i < this.RowIndex[this.RowIndex.length - 1] + 1; i++) {
