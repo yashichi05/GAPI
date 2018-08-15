@@ -559,14 +559,14 @@ function hctmark(web) { // 標記新竹商品，松果 生活沒辦法
 
 }
 
-function cancelapi(web, rpNum) { // 序退 yahoo 要另外寫
+function cancelapi(web, rpNum, why) { // 序退 yahoo 要另外寫
     var getid = eval("sheetrange." + web + "ID.gid") //sheetID
     var getname = eval("sheetrange." + web + "ID.gname") //sheetName
     var getrpcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 發票
-    var getcountcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 數量
-    var gettotalcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 總價
-    var getspcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 運費
-    var getopcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 發票金額
+    var getcountcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.pcount")) //取得欄位的index 數量
+    var gettotalcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.pallprice")) //取得欄位的index 總價
+    var getspcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oshipprice")) //取得欄位的index 運費
+    var getopcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oprice")) //取得欄位的index 發票金額
     var getidcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oid")) //取得欄位的index 訂單編號
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: getid,
@@ -581,11 +581,28 @@ function cancelapi(web, rpNum) { // 序退 yahoo 要另外寫
             if (rpRow == -1) { //找不到則返回
                 return
             }
+            //寫入原本發票資料
+            var wrorpRange = getname + eval("sheetrange." + web + "ID.col.oreceipt") + (rpRow+1) //原發票位置
+            var wrorpVal = [[
+                    '序退' + response.result.values[rpRow][getrpcolindex] + " "+(new Date().toLocaleDateString()).substring(5) + " " + why
+                ]]//原發票資料寫入
+            writesheetrange(getid, wrorpRange,wrorpVal)
             var endRow //訂單最後一列
-            for (var i = rpRow; i < response.result.values.length; i++) {
-                endRow = i
-                if (response.result.values[i][getidcolindex] != response.result.values[i + 1][getidcolindex]) {
-                    break
+            if (web == "yahoo") { //最後一筆發票會失敗
+                var getaccolindex = fctnlist.COLindex(sheetrange.yahooID.col.oaccount) //取得帳號欄位的index 
+                for (var i = rpRow; i < response.result.values.length; i++) { //yahoo 專用
+                    endRow = i
+                    if (response.result.values[i][getidcolindex] != response.result.values[i + 1][getidcolindex] || response.result.values[i + 1][getrpcolindex]) { //下一列訂單帳號不一樣 或是 下一列發票有值
+                        break
+                    }
+                }
+
+            } else {
+                for (var i = rpRow; i < response.result.values.length; i++) { //yahoo會沒用
+                    endRow = i
+                    if (response.result.values[i][getidcolindex] != response.result.values[i + 1][getidcolindex]) {
+                        break
+                    }
                 }
             }
             var putval = [] //輸出資料
@@ -594,7 +611,16 @@ function cancelapi(web, rpNum) { // 序退 yahoo 要另外寫
             }
 
             //更改資料
+            putval[0][getspcolindex] = Number(putval[0][getspcolindex]) * (-1)
+            putval[0][getopcolindex] = Number(putval[0][getopcolindex]) * (-1)
+            putval[0][getrpcolindex] = '序退' + putval[0][getrpcolindex] + " " + putval[0][0].substring(5) + why
+            for (var i = 0; i < putval.length; i++) {
+                putval[i][0] = new Date().toLocaleDateString()
+                putval[i][getcountcolindex] = Number(putval[i][getcountcolindex]) * (-1)
+                putval[i][gettotalcolindex] = Number(putval[i][gettotalcolindex]) * (-1)
+            }
             //寫入資料
+            GsubmitOrderData(getid, getname, putval)
 
         },
         function (response) {
