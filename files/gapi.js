@@ -3,10 +3,10 @@ var sheetrange = { //寫入的範圍
         gid: '19ZXwhENPrLmLURoKO4xXoCDahpyMG5wuU_8xsU74kyI',
         gname: '工作表1!',
         col: {
-            piso: 'F', //ISO
-            pname: 'G', //產品名稱
-            ptype: 'H', //款式
-            pcount: 'I' //數量
+            piso: 'B', //ISO
+            pname: 'C', //產品名稱
+            ptype: 'D', //款式
+            pcount: 'G' //數量
         }
     },
     yahooID: {
@@ -172,7 +172,7 @@ var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
 
 
-function GsubmitStockData(iso, count, pindex) { //扣數量用 差回傳資料 還有相加數量
+function GsubmitStockData(iso, count, pindex) { //
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: sheetrange.resStock.gid,
         range: sheetrange.resStock.gname + "B:R" //原本只有取道O蘭，但因為鎖定的取貨蘭 包括本身即之後的欄位為空，會導致陣列較短，無法取值計算 而沒法附值
@@ -563,6 +563,7 @@ function cancelapi(web, rpNum, why) { // 序退 yahoo 要另外寫
     var getid = eval("sheetrange." + web + "ID.gid") //sheetID
     var getname = eval("sheetrange." + web + "ID.gname") //sheetName
     var getrpcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oreceipt")) //取得欄位的index 發票
+    var getisocolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.piso")) //取得欄位的index ISO
     var getcountcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.pcount")) //取得欄位的index 數量
     var gettotalcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.pallprice")) //取得欄位的index 總價
     var getspcolindex = fctnlist.COLindex(eval("sheetrange." + web + "ID.col.oshipprice")) //取得欄位的index 運費
@@ -573,20 +574,24 @@ function cancelapi(web, rpNum, why) { // 序退 yahoo 要另外寫
         range: getname + "A:Z"
     }).then(function (response) {
             var rpAry = []
+
+            $("#msg").html('');
             for (var i = 0; i < response.result.values.length; i++) { //提取發票
                 rpAry.push(response.result.values[i][getrpcolindex])
             }
 
             var rpRow = rpAry.indexOf(rpNum) //訂單起始列
             if (rpRow == -1) { //找不到則返回
+                $("#msg").html('找不到發票');
+                $("#cancelbtn").removeAttr('disabled') //激活送出紐
                 return
             }
             //寫入原本發票資料
-            var wrorpRange = getname + eval("sheetrange." + web + "ID.col.oreceipt") + (rpRow+1) //原發票位置
+            var wrorpRange = getname + eval("sheetrange." + web + "ID.col.oreceipt") + (rpRow + 1) //原發票位置
             var wrorpVal = [[
-                    '序退' + response.result.values[rpRow][getrpcolindex] + " "+(new Date().toLocaleDateString()).substring(5) + " " + why
-                ]]//原發票資料寫入
-            writesheetrange(getid, wrorpRange,wrorpVal)
+                    '序退' + response.result.values[rpRow][getrpcolindex] + " " + (new Date().toLocaleDateString()).substring(5) + " " + why
+                ]] //原發票資料寫入
+            writesheetrange(getid, wrorpRange, wrorpVal)
             var endRow //訂單最後一列
             if (web == "yahoo") { //最後一筆發票會失敗
                 var getaccolindex = fctnlist.COLindex(sheetrange.yahooID.col.oaccount) //取得帳號欄位的index 
@@ -614,17 +619,67 @@ function cancelapi(web, rpNum, why) { // 序退 yahoo 要另外寫
             putval[0][getspcolindex] = Number(putval[0][getspcolindex]) * (-1)
             putval[0][getopcolindex] = Number(putval[0][getopcolindex]) * (-1)
             putval[0][getrpcolindex] = '序退' + putval[0][getrpcolindex] + " " + putval[0][0].substring(5) + why
+
+            var iso
+            var count
             for (var i = 0; i < putval.length; i++) {
+                
+                iso = putval[i][getisocolindex]
+                count = putval[i][getcountcolindex]
+                //console.log(iso,count)
+                cancelprd(iso,count,0)
+                
                 putval[i][0] = new Date().toLocaleDateString()
                 putval[i][getcountcolindex] = Number(putval[i][getcountcolindex]) * (-1)
                 putval[i][gettotalcolindex] = Number(putval[i][gettotalcolindex]) * (-1)
+
             }
             //寫入資料
             GsubmitOrderData(getid, getname, putval)
 
+
+            $("#msg").html('序退完成');
+            $("#cancelbtn").removeAttr('disabled') //激活送出紐
         },
         function (response) {
             console.log('Error: ' + response.result.error.message);
         });
+
+}
+
+function cancelprd(iso, count, pindex) { //序退加回商品
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: sheetrange.resStock.gid,
+        range: sheetrange.resStock.gname + "B:H" //原本只有取道O蘭，但因為鎖定的取貨蘭 包括本身即之後的欄位為空，會導致陣列較短，無法取值計算 而沒法附值
+    }).then(function (response) {
+        var stockISOAry = [];
+        var setArysite
+        //console.log(response.result.values)
+        for (var i = 0; i < response.result.values.length; i++) { //提取ISO
+            stockISOAry.push(response.result.values[i][0]);
+        }
+        var findRow = stockISOAry.indexOf(iso) + 1; //找到的ISO列數
+        if (pindex) { //最後一個商品時//解放按鈕 -2是因為index從0開始 商品列又固定多1  因為後面找不到值會return 所以在這
+
+        }
+        if (findRow - 1 == -1 || iso == "") { //如果找不到ISO 會返回-1 iso為空白字元 會自動找到80列 所以強制RETURN
+            $("#msg").append('<br>找不到商品' + iso);
+            return
+        }
+        if (response.result.values[findRow - 1][fctnlist.COLindex(sheetrange.resStock.col.pcount) - 1] == 'over') { //-1因為從B欄開始
+            var nowcount = 0
+        } else {
+            var nowcount = response.result.values[findRow - 1][fctnlist.COLindex(sheetrange.resStock.col.pcount) - 1]
+            nowcount = Number(nowcount)
+        }
+
+        
+        var wcol = sheetrange.resStock.gname + sheetrange.resStock.col.pcount + findRow.toString() //設定寫入欄位
+        count = [[Number(count) + nowcount]]
+        writesheetrange(sheetrange.resStock.gid, wcol, count) //開始寫入數量
+
+    }, function (response) {
+        console.log('Error: ' + response.result.error.message);
+    });
 
 }

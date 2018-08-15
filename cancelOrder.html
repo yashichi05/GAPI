@@ -1,17 +1,18 @@
-<div id="cancelDIV">
-    <div>
-        <button id="yahoo_btn" disabled="disabled" @click="togglebtn('yahoo')">雅虎</button>
-        <button id="pchomet_btn"  @click="togglebtn('pchomet')">PC梓原</button>
-        <button id="pchomed_btn"  @click="togglebtn('pchomed')">PC大一</button>
-        <button id="shopee_btn"  @click="togglebtn('shopee')">蝦皮</button>
-        <button id="Ruten_btn"  @click="togglebtn('Ruten')">露天</button>
-        <button id="songuo_btn"  @click="togglebtn('songuo')">松果</button>
+<div id="cancelDIV"  class="m-auto text-center"  style="width:450px;">
+    <div class="mb-5 d-flex justify-content-center">
+        <button  class="btn btn-outline-secondary" id="yahoo_btn" disabled="disabled" @click="togglebtn('yahoo')">雅虎</button>
+        <button  class="btn btn-outline-secondary" id="pchomet_btn"  @click="togglebtn('pchomet')">PC梓原</button>
+        <button  class="btn btn-outline-secondary" id="pchomed_btn"  @click="togglebtn('pchomed')">PC大一</button>
+        <button  class="btn btn-outline-secondary" id="shopee_btn"  @click="togglebtn('shopee')">蝦皮</button>
+        <button  class="btn btn-outline-secondary" id="Ruten_btn"  @click="togglebtn('Ruten')">露天</button>
+        <button  class="btn btn-outline-secondary" id="songuo_btn"  @click="togglebtn('songuo')">松果</button>
     </div>
-    <div>
-        <input v-model="rpNum" placeholder="發票序號">
-        <input v-model="why" placeholder="事由">
-        <button @click="vueCancel">送出</button>
+    <div class="d-flex justify-content-center">
+        <input class="form-control w-50 mr-1" v-model="rpNum" placeholder="發票號碼">
+        <input class="form-control w-50 mr-1" v-model="why" placeholder="事由">
+        <button id="cancelbtn" class="btn btn-sm" @click="vueCancel">序退</button>
     </div>
+    <p id="msg" class="mt-5"></p>
 
 </div>
 

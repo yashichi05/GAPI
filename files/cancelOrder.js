@@ -8,6 +8,7 @@ var cancel = new Vue({
     methods:{
         vueCancel:function(){
             cancelapi(this.web,this.rpNum,this.why)
+            $("#cancelbtn").attr('disabled', 'disabled') //鎖定刪除按鈕
         },
         togglebtn:function(web){
             $("button").removeAttr('disabled') //激活送出紐
