@@ -595,20 +595,29 @@ function cancelapi(web, rpNum, why) { // 序退 yahoo 要另外寫
             var endRow //訂單最後一列
             if (web == "yahoo") { //最後一筆發票會失敗
                 var getaccolindex = fctnlist.COLindex(sheetrange.yahooID.col.oaccount) //取得帳號欄位的index 
-                for (var i = rpRow; i < response.result.values.length; i++) { //yahoo 專用
-                    endRow = i
-                    if (response.result.values[i][getidcolindex] != response.result.values[i + 1][getidcolindex] || response.result.values[i + 1][getrpcolindex]) { //下一列訂單帳號不一樣 或是 下一列發票有值
-                        break
+                try {
+                    for (var i = rpRow; i < response.result.values.length; i++) { //yahoo 專用
+                        endRow = i
+                        if (response.result.values[i][getaccolindex] != response.result.values[i + 1][getaccolindex] || response.result.values[i + 1][getrpcolindex]) { //下一列訂單帳號不一樣 或是 下一列發票有值
+                            break
+                        }
                     }
+                } catch {
+
                 }
 
             } else {
-                for (var i = rpRow; i < response.result.values.length; i++) { //yahoo會沒用
-                    endRow = i
-                    if (response.result.values[i][getidcolindex] != response.result.values[i + 1][getidcolindex]) {
-                        break
+                try {
+                    for (var i = rpRow; i < response.result.values.length; i++) { //yahoo會沒用
+                        endRow = i
+                        if (response.result.values[i][getidcolindex] != response.result.values[i + 1][getidcolindex]) {
+                            break
+                        }
                     }
+                } catch {
+
                 }
+
             }
             var putval = [] //輸出資料
             for (var i = rpRow; i < endRow + 1; i++) {
@@ -623,12 +632,11 @@ function cancelapi(web, rpNum, why) { // 序退 yahoo 要另外寫
             var iso
             var count
             for (var i = 0; i < putval.length; i++) {
-                
+
                 iso = putval[i][getisocolindex]
                 count = putval[i][getcountcolindex]
-                //console.log(iso,count)
-                cancelprd(iso,count,0)
-                
+                cancelprd(iso, count, 0)
+
                 putval[i][0] = new Date().toLocaleDateString()
                 putval[i][getcountcolindex] = Number(putval[i][getcountcolindex]) * (-1)
                 putval[i][gettotalcolindex] = Number(putval[i][gettotalcolindex]) * (-1)
@@ -673,7 +681,7 @@ function cancelprd(iso, count, pindex) { //序退加回商品
             nowcount = Number(nowcount)
         }
 
-        
+
         var wcol = sheetrange.resStock.gname + sheetrange.resStock.col.pcount + findRow.toString() //設定寫入欄位
         count = [[Number(count) + nowcount]]
         writesheetrange(sheetrange.resStock.gid, wcol, count) //開始寫入數量
