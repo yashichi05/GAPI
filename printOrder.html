@@ -1,6 +1,6 @@
 <style>
     @media print {
-        button {
+        button,.odrchkbox {
             display: none !important;
         }
         .oprice {
@@ -13,14 +13,19 @@
 
 <div id="printOrder" class="m-auto" style="width:1200px;">
     <div class="mb-2 d-flex justify-content-center">
-        <button class="btn btn-outline-secondary" @click="doit('yahoo')">雅虎</button>
+        <button class="btn btn-outline-secondary" @click="applychk">勾選隱藏</button>
+        <button class="btn btn-outline-secondary" @click="allshow">全部顯示</button>
+        <button class="btn btn-outline-secondary ml-5" @click="doit('yahoo')">雅虎</button>
         <button class="btn btn-outline-secondary" @click="doit('shopee')">蝦皮</button>
         <button class="btn btn-outline-secondary" @click="doit('pchomed')">PC大一</button>
         <button class="btn btn-outline-secondary" @click="doit('pchomet')">PC梓原</button>
         <button class="btn btn-outline-secondary" @click="doit('Ruten')">露天</button>
         <button class="btn btn-outline-secondary" @click="doit('songuo')">松果</button>
-        <button class="btn btn-outline-secondary" @click="doit('buy123')">生活</button></div>
-    <div v-for="(ov,oindex) in allorder" class="" style="border:3px solid #000;font-size: 24px; width:1200px;page-break-inside:avoid;margin-bottom:20px;padding-bottom:10px;">
+        <button class="btn btn-outline-secondary" @click="doit('buy123')">生活</button>
+    </div>
+    <div v-if="ov.applychkdisplay" v-for="(ov,oindex) in allorder" class="" style="border:3px solid #000;font-size: 24px; width:1200px;page-break-inside:avoid;margin-bottom:20px;padding-bottom:10px;">
+
+        <input v-model="ov.chkdisplay" style="position: absolute;" type="checkbox" class="odrchkbox" value="chked" />
         <div class="d-flex" style="border-bottom: 1px solid #000;padding:1px;">
             <div class="border-right p-1 border-secondary" style="width:240px;">
                 <b>{{ov.orderID}}</b>
@@ -44,13 +49,11 @@
             <div class="border-right p-1 text-center" style="width:40px">{{pv.pcount}}</div>
             <div class="text-center p-1" style="width:65px">{{pv.pprice}}</div>
         </div>
+
     </div>
 </div>
 
 
 <footer>
-
     <script src="printOrder.js"></script>
-
-
 </footer>

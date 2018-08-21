@@ -388,7 +388,7 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
 
                 aryS.push(response.result.values[i][shipcolindex])
             }
-            if (web == 'songuo' && response.result.values[i][fctnlist.COLindex(sheetrange.songuoID.col.oprice)] > 0) {//松果判斷序退
+            if (web == 'songuo' && response.result.values[i][fctnlist.COLindex(sheetrange.songuoID.col.oprice)] > 0) { //松果判斷序退
                 aryS.push(response.result.values[i][shipcolindex])
             }
         }

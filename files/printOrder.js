@@ -4,6 +4,16 @@ var printorderobj = new Vue({
         allorder: []
     },
     methods: {
+        allshow: function () {
+            for (var i = 0; i < this.allorder.length; i++) {
+                this.allorder[i].applychkdisplay = true
+            }
+        },
+        applychk: function () {
+            for (var i = 0; i < this.allorder.length; i++) {
+                this.allorder[i].applychkdisplay = !this.allorder[i].chkdisplay
+            }
+        },
         pushPobj: function (index, iso, pname, ptype, pcount, pprice) {
             this.allorder[index].products.push({
                 iso: iso,
@@ -20,11 +30,13 @@ var printorderobj = new Vue({
                 ship: ship,
                 shipprice: shipprice,
                 oprice: oprice,
+                chkdisplay: true,
+                applychkdisplay: true,
                 products: []
             })
         },
         doit: function (web) { //(web, okey, name, iso, pname, ptype, pcount, pprice, ship, shipprice, oprice)
-            this.allorder=[]
+            this.allorder = []
             $("button").attr('disabled', 'disabled') //鎖定按鈕
             if (web == "yahoo") {
                 printOrders('yahoo', 1, 2, 4, 5, 6, 7, 8, 10, 11, 17);
