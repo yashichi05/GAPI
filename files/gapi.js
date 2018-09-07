@@ -474,6 +474,9 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
             if (aryO[i][pcount] > 0) {
                 printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice])
             } //推訂單商品資料
+            if (aryO[i][8] > 0 && web == 'songuo') { //松果
+                printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice])
+            }
         }
         $("button").removeAttr('disabled') //激活送出紐
     }, function (response) {
