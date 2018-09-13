@@ -5,6 +5,7 @@ var takeprd = new Vue({
         count: '',
         isoAry: '',
         countAry: ''
+        ,Col:'L'
     },
     methods: {
         submit: function () {
@@ -12,7 +13,7 @@ var takeprd = new Vue({
             this.countAry = this.count.split("\n")
             $("#errordiv").text("")
             if (this.isoAry.length == this.countAry.length) {
-                cancelprd("L") //要改拿的欄位
+                cancelprd(this.Col) //要改拿的欄位
             } else {
                 $("#errordiv").append("長度不正確")
             }
