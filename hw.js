@@ -26,7 +26,9 @@ app.get('/2', function (req, res) {
 app.get('/cancel', function (req, res) {
     res.sendFile(__dirname + "/" + "cancelOrder.html");
 })
-
+app.get('/takeprd', function (req, res) {
+    res.sendFile(__dirname + "/" + "takeprd.html");
+})
 
 
 app.get('/gettxt', function (req, res) {

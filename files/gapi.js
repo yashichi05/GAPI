@@ -700,3 +700,46 @@ function cancelprd(iso, count, pindex) { //序退加回商品
     });
 
 }
+
+//扣數量
+function cancelprd(takecol) {
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: sheetrange.resStock.gid,
+        range: sheetrange.resStock.gname + "A:R"
+    }).then(function (response) {
+        var gapiisoAry = []
+        var takeColAry = []
+        for (var i = 0; i < response.result.values.length; i++) {
+            gapiisoAry.push(response.result.values[i][1]) //提取ISO碼
+
+        }
+        for (var i = 0; i < response.result.values.length; i++) {
+            takeColAry.push(response.result.values[i][fctnlist.COLindex(takecol)]) //提取已取貨數量
+
+        }
+
+        for (var i = 0; i < takeprd.isoAry.length; i++) { //尋找各ISO位置
+
+            var isorow = gapiisoAry.indexOf(takeprd.isoAry[i]) //寫入的ISO 列數 //若錯誤要跳出資料******
+            if (isorow == -1) {
+                $("#errordiv").append("<br>" + takeprd.isoAry[i] + '  錯誤')
+            } else {
+                takeColAry[isorow] = Number(takeColAry[isorow]) + Number(takeprd.countAry[i]) //變更已取貨數量
+            }
+        }
+
+
+        //寫入資料準備
+        var wrColAry = []
+        for (var i = 0; i < takeColAry.length; i++) {
+            wrColAry.push([takeColAry[i]])
+        }
+        writesheetrange(sheetrange.resStock.gid, sheetrange.resStock.gname + takecol + "1", wrColAry) //寫入資料
+        $("#errordiv").append("<br>完成")
+
+
+    }, function (response) {
+        console.log('Error: ' + response.result.error.message);
+    });
+
+}

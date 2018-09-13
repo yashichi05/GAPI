@@ -1,0 +1,17 @@
+<div id="inputbox" class="m-auto" style="width:230px;">
+    <button class="btn btn-outline-secondary mb-3" @click="submit">送出資料</button>
+    <div>
+        <textarea class="form-control-sm" rows="10" v-model="iso"></textarea>
+        <textarea class="form-control-sm" rows="10" cols="3" v-model="count"></textarea>
+    </div>
+    <div id="errordiv"></div>
+</div>
+<footer>
+    <script src="takeprd.js"></script>
+    <style>
+        textarea {
+            resize: none;
+        }
+
+    </style>
+</footer>
