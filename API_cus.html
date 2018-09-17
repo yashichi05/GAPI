@@ -36,7 +36,8 @@
 　<option value="新竹">新竹</option>
 　<option value="神行">神行</option>
 　<option value="大榮">大榮</option>
-　<option value="萊爾富">萊爾富</option></select>
+　<option value="萊爾富">萊爾富</option>
+　<option value="OK Mart">OK</option></select>
         <input class="form-control-sm" type="number" v-if="!SGCdisplay" style="width:35px;" v-model="orderShipPrice" placeholder="運費"><br v-if="!SGCdisplay">
         <span>訂單金額:{{orderPrice}}</span><span style="padding-left:10px;" v-if="orderFeeCredit_display"><input type="checkbox" value="Y" v-model="orderFeeCredit">信用卡付款</span>
         <span v-if="SGCdisplay"><br><input type="number" class="form-control-sm" style="width:55px;" v-model="SGPrice" placeholder="價格">元<input class="form-control-sm" type="number" style="margin-left:10px;width:35px;" v-model="SGcount" placeholder="幾">入×<input class="form-control-sm" type="number" style="width:28px;" v-model="SGcountC"></span>
