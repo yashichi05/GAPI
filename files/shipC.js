@@ -5,7 +5,8 @@ var shipMenu = new Vue({
         shopee: {
             seven: 0,
             family: 0,
-            life: 0
+            life: 0,
+            OK: 0
         },
         yahoo: {
             seven: 0,
@@ -46,6 +47,9 @@ var shipMenu = new Vue({
         },
         lifecount: function () {
             return this.shopee.life
+        },
+        OKcount: function () {
+            return this.shopee.OK
         }
     },
     methods: {
@@ -57,7 +61,7 @@ var shipMenu = new Vue({
             shipget('pchomed', 'K')
             shipget('pchomet', 'K')
             shipget('buy123', 'K')
-            shipget('songuo', 'N','final')
+            shipget('songuo', 'N', 'final')
         },
 
         shipName: function (sv) {
@@ -67,6 +71,8 @@ var shipMenu = new Vue({
                 return '全'
             } else if (sv == 'life') {
                 return '萊'
+            } else if (sv == 'OK') {
+                return 'O'
             }
         }
     }
