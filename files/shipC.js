@@ -25,6 +25,7 @@ var shipMenu = new Vue({
             family: 0
         },
         songuo: {
+            seven: 0,
             family: 0
         },
         buy123: {
