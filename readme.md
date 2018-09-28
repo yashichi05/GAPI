@@ -1,8 +1,8 @@
 <h1>需求</h1>
-*node.js
+* node.js
 
 <h1>注意</h1>
-*電腦第一次執行，需於網址列打開google的彈出視窗，登入授權使用。
+* 電腦第一次執行，需於網址列打開google的彈出視窗，登入授權使用。
 
 <h1>備忘</h1>
 https://www.w3schools.com/jsref/dom_obj_event.asp
