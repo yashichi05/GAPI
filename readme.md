@@ -1,10 +1,10 @@
-##需求
+#需求
 * node.js
 
-##注意
+#注意
 * 電腦第一次執行，需於網址列打開google的彈出視窗，登入授權使用。
 
-##備忘
+#備忘
 https://www.w3schools.com/jsref/dom_obj_event.asp
 dom event
 
