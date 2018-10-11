@@ -41,7 +41,7 @@ var shipMenu = new Vue({
             }
         },
         sevencount: function () {
-            return this.shopee.seven + this.yahoo.seven + this.pchomeAll.seven + this.Ruten.seven + this.buy123.seven
+            return this.shopee.seven + this.yahoo.seven + this.pchomeAll.seven + this.Ruten.seven + this.buy123.seven +this.songuo.seven
         },
         familycount: function () {
             return this.shopee.family + this.yahoo.family + this.pchomeAll.family + this.Ruten.family + this.buy123.family + this.songuo.family
