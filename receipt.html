@@ -1,6 +1,6 @@
 <style>
     input[type=date]::-webkit-inner-spin-button { visibility: hidden; }
-
+    input[type=date]::-webkit-clear-button {display: none;}
 </style>
 
 <div id="receiptdiv" class="m-auto" style="width:620px;">
@@ -12,7 +12,7 @@
         <button class="btn btn-outline-secondary" @click="whichbutton('pchomet','2','3','18','14','R')">PC梓原</button>
         <button class="btn btn-outline-secondary" @click="whichbutton('Ruten','2','4','21','15','U')">露天</button>
         <button class="btn btn-outline-secondary" @click="whichbutton('songuo','2','3','15','13','O')">松果</button>
-        <input v-model="rdate" type="date">
+        <input class="form-control-sm" v-model="rdate" type="date">
     </div>
     <div class="mb-3" v-if="activebtn">
         <button class="btn btn-sm" @click="outputNumber">送出發票</button>
