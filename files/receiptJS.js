@@ -35,7 +35,8 @@ var receiptdiv = new Vue({
         orders: [],
         sgbtn: false,
         putvalary: [],
-        todayrow: ""
+        todayrow: "",
+        rdate: new Date().getFullYear().toString()+"-"+(new Date().getMonth()+1).toString()+"-"+new Date().getDate().toString()
     },
     methods: {
         whichbutton: function (v, oi, on, rn, op, rnc) { //按鈕執行 v為平台名稱 tp預留值 OI為訂單編號所在欄數 ON訂單客人欄數 rn 發票欄位 op訂單金額

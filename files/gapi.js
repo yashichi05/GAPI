@@ -320,7 +320,7 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
     }).then(function (response) {
 
         $("button").removeAttr('disabled') //激活送出紐
-        var todayDate = new Date();
+        var todayDate = new Date(receiptdiv.rdate);
         var aryA = []
         var aryPindex = []
         for (var i = 0; i < response.result.values.length; i++) { //提取日期
