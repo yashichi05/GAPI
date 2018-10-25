@@ -465,12 +465,19 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
         range: getname + "A:Z" //讀取整個試算表，A:Z 必須包含發票 金額 資料
     }).then(function (response) {
         var aryO = [] //存放今日訂單
-        var getR = fctnlist.findtoday(response.result.values); //尋找當天日期列數
+         //尋找日期列數
+        var aryA = []
+        for (var i = 0; i < response.result.values.length; i++) { //提取日期
+            aryA.push(new Date(response.result.values[i][0]).toLocaleDateString()); //new date()將文字轉為日期物件 toLocaleDateString再把他轉為文字 這樣日期格式會跟下面比對的統一
+        }
+        var todayDate = new Date(printorderobj.rdate);
+        var getR =  aryA.indexOf(todayDate.toLocaleDateString())
+        var getLastR = aryA.lastIndexOf(todayDate.toLocaleDateString()) //該日期的最後一列
         if (getR == -1) { //如果找不到返回
             $("button").removeAttr('disabled') //激活送出紐
             return
         };
-        for (var i = getR; i < response.result.values.length; i++) { //從getR列開始提取今日訂單 
+        for (var i = getR; i < getLastR+1; i++) { //從getR列開始提取今日訂單  到日期的最後一列 +1是包括最後一列
             if (response.result.values[i][okey]) { //如果key欄有值PUSH
                 aryO.push(response.result.values[i]);
             }

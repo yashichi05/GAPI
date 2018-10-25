@@ -1,6 +1,7 @@
 var printorderobj = new Vue({
     el: '#printOrder',
     data: {
+        rdate: new Date().getFullYear().toString()+"-"+(new Date().getMonth()+1).toString()+"-"+new Date().getDate().toString(),
         allorder: []
     },
     methods: {
