@@ -45,8 +45,8 @@ var receiptdiv = new Vue({
                 this.srdate = setdata},
             get:
             function(){
-                if (new Date().getDate()<10){//如果當天為個位數日期 補0
-                    this.srdate = new Date().getFullYear().toString()+"-"+(new Date().getMonth()+1).toString()+"-0"+new Date().getDate().toString()
+                if (this.srdate.slice(this.srdate.length-2,this.srdate.length-1)== "-"){//如果當天為個位數日期 補0
+                    this.srdate = this.srdate.slice(0,-1)+"0"+this.srdate.slice(-1)
                 } 
                 return this.srdate},
         
