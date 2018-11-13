@@ -333,8 +333,11 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
             $('#receiptdiv').append('<p id=\"cantFindp\">找不到資料</p>')
             return
         };
+        //最後一個搜尋結果
+        var lastdaterow = aryA.lastIndexOf(todayDate.toLocaleDateString());
         $('#cantFindp').remove() //如果有找到則刪除html"找不到"訊息
-        for (var i = getV; i < response.result.values.length; i++) {
+        //
+        for (var i = getV; i < lastdaterow+1; i++) {
             if (response.result.values[i][op] && response.result.values[i][op] > 0) { //有值且大於0(過濾序退)則執行 新增物件
                 aryPindex.push(i - getV)
                 receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on], response.result.values[i][op], response.result.values[i][rn]) //增加V-FOR物件

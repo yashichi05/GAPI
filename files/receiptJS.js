@@ -36,7 +36,22 @@ var receiptdiv = new Vue({
         sgbtn: false,
         putvalary: [],
         todayrow: "",
-        rdate: new Date().getFullYear().toString()+"-"+(new Date().getMonth()+1).toString()+"-"+new Date().getDate().toString()
+        srdate: new Date().getFullYear().toString()+"-"+(new Date().getMonth()+1).toString()+"-"+new Date().getDate().toString()
+    },
+    computed:{
+        rdate:{
+            set:
+            function(setdata){
+                this.srdate = setdata},
+            get:
+            function(){
+                if (new Date().getDate()<10){//如果當天為個位數日期 補0
+                    this.srdate = new Date().getFullYear().toString()+"-"+(new Date().getMonth()+1).toString()+"-0"+new Date().getDate().toString()
+                } 
+                return this.srdate},
+        
+        }
+        
     },
     methods: {
         whichbutton: function (v, oi, on, rn, op, rnc) { //按鈕執行 v為平台名稱 tp預留值 OI為訂單編號所在欄數 ON訂單客人欄數 rn 發票欄位 op訂單金額
