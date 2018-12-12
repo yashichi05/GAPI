@@ -490,8 +490,11 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
             if (aryO[i][oprice] && aryO[i][oprice] > 0) { //總金額有值，輸入訂單資料
                 if (web == 'songuo' || web == 'buy123') {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], 0, aryO[i][oprice]) //如果是松果或生活運費為0
-                } else if (web == 'shopee') { //如果蝦皮 訂單金額 = 入帳+運費
-                    printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], Number(aryO[i][oprice]) + Number(aryO[i][shipprice]))
+                } else if (web == 'shopee') { //如果蝦皮 訂單金額 = 入帳+運費-折扣碼
+                    if (!Number(aryO[i][19])){
+                        aryO[i][19] = 0
+                    }
+                    printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], Number(aryO[i][oprice]) + Number(aryO[i][shipprice])- Number(aryO[i][19]))
                 } else {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], aryO[i][oprice])
                 }
