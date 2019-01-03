@@ -32,8 +32,8 @@ var sheetrange = { //寫入的範圍
         }
     },
     shopeeID: {
-        gid: '1-m4Y_02IF82_o7dI3N8z9mA4GcuqspyaaPtHxmze1Uk',
-        gname: '工作表1!',
+        gid: '1nplThOG2vqcdia3Uht1Niv9oW7sfhU2YpbbBPDwmlcc',
+        gname: '訂單明細!',
         col: {
             oid: 'B', //訂單編號
             oname: 'C', //姓名
@@ -50,7 +50,7 @@ var sheetrange = { //寫入的範圍
             oprice: 'N', //訂單金額
             ofee: '', //手續費
             odiscount: '', //折扣
-            oreceipt: 'S' //發票
+            oreceipt: 'O' //發票
         }
     },
     pchomedID: {
@@ -76,8 +76,8 @@ var sheetrange = { //寫入的範圍
         }
     },
     pchometID: {
-        gid: '1Vm0WQTShQSCRswroN2N4MNq-ofJPAOvv_yPMqVTNqnc',
-        gname: '梓原!',
+        gid: '1NzSk2lwQ456eflqdnKwWWRy6ZIZsbf5Bj0BGcxcjqSI',
+        gname: '工作表1!',
         col: {
             oid: 'B', //訂單編號
             oname: 'C', //姓名
@@ -91,15 +91,15 @@ var sheetrange = { //寫入的範圍
             pallprice: 'J', //總價
             oship: 'K', //貨運
             oshipprice: 'L', //運費
-            oprice: 'N', //訂單金額
+            oprice: 'M', //訂單金額
             ofee: '', //手續費
             odiscount: '', //折扣
-            oreceipt: 'R' //發票
+            oreceipt: 'M' //發票
         }
     },
     RutenID: {
-        gid: '1nimYD9iPgdHE7RXWqflBocOkj29mRVkCaatcWbq4Rvw',
-        gname: '露天拍賣!',
+        gid: '1vt6bzGSpS8StKdWbIk7gi_dtJ7w1OBIOODiA0eVFARw',
+        gname: '工作表1!',
         col: {
             oid: 'B', //訂單編號
             oname: 'D', //姓名
@@ -113,14 +113,14 @@ var sheetrange = { //寫入的範圍
             pallprice: 'K', //總價
             oship: 'L', //貨運
             oshipprice: 'M', //運費
-            oprice: 'O', //訂單金額
+            oprice: 'N', //訂單金額
             ofee: '', //手續費
             odiscount: '', //折扣
-            oreceipt: 'U' //發票
+            oreceipt: 'O' //發票
         }
     },
     songuoID: {
-        gid: '1MRTaGo2H0xyhhyeA-Y0EDlVUzJ8J_djI6qCawZRt1Qw',
+        gid: '12HcyDkrHWGG2w1hJIjM1tk7BQqi2-HumCQehwuah0ro',
         gname: '工作表1!',
         col: {
             oid: 'B', //訂單編號
@@ -142,7 +142,7 @@ var sheetrange = { //寫入的範圍
         }
     },
     buy123ID: {
-        gid: '1jztvn3KG-e6ffWfEfUYF7pBS_vdYFGofM2dH8C4Krrs',
+        gid: '1snj6VvwDoMel448xnLlPCWwECTxkEs4sl5OfEWlezJs',
         gname: '工作表!',
         col: {
             oid: 'C', //訂單編號
@@ -490,17 +490,13 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
             if (aryO[i][oprice] && aryO[i][oprice] > 0) { //總金額有值，輸入訂單資料
                 if (web == 'songuo' || web == 'buy123') {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], 0, aryO[i][oprice]) //如果是松果或生活運費為0
-                } else if (web == 'shopee') { //如果蝦皮 訂單金額 = 入帳+運費-折扣碼
-                    if (!Number(aryO[i][19])){
-                        aryO[i][19] = 0
-                    }
-                    printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], Number(aryO[i][oprice]) + Number(aryO[i][shipprice])- Number(aryO[i][19]))
-                } else {
+                }  else {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], aryO[i][oprice])
                 }
                 pushpdtindex = pushpdtindex + 1
             }
             if (aryO[i][pcount] > 0) {
+                console.log(pushpdtindex)
                 printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice])
             } //推訂單商品資料
             if (aryO[i][8] > 0 && web == 'songuo') { //松果
