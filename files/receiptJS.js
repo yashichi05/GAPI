@@ -91,7 +91,7 @@ var receiptdiv = new Vue({
                 }
             }
             if (sgs == 'Y') {
-                var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+String.fromCharCode(this.receiptCol.charCodeAt(0) - 1)+this.todayrow, this.putvalary)' //是松果貨運的話，寫入發票的前一欄
+                var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+String.fromCharCode(this.receiptCol.charCodeAt(0) + 2)+this.todayrow, this.putvalary)' //是松果貨運的話，寫入發票的前一欄
             } else {
                 var prg = 'writesheetrange(sheetrange.' + this.nowbutton + 'ID.gid, sheetrange.' + this.nowbutton + 'ID.gname+this.receiptCol+this.todayrow, this.putvalary)'
             }

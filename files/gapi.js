@@ -130,20 +130,20 @@ var sheetrange = { //寫入的範圍
             piso: 'E', //ISO
             pname: 'F', //產品名稱
             ptype: 'G', //款式
-            pcount: '', //數量
-            pprice: '', //單價
+            pcount: 'H', //數量
+            pprice: 'J', //單價
             pallprice: 'J', //總價
-            oship: 'N', //貨運
+            oship: 'O', //貨運
             oshipprice: '', //運費
             oprice: 'M', //訂單金額
             ofee: 'K', //手續費
             odiscount: 'L', //折扣
-            oreceipt: 'O' //發票
+            oreceipt: 'N' //發票
         }
     },
     buy123ID: {
         gid: '1snj6VvwDoMel448xnLlPCWwECTxkEs4sl5OfEWlezJs',
-        gname: '工作表!',
+        gname: '工作表1!',
         col: {
             oid: 'C', //訂單編號
             oname: 'D', //姓名
@@ -318,7 +318,6 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
         spreadsheetId: getid,
         range: getname + "A:U" //讀取整個試算表，A:Z 必須包含發票 金額 資料
     }).then(function (response) {
-
         $("button").removeAttr('disabled') //激活送出紐
         var todayDate = new Date(receiptdiv.rdate);
         var aryA = []
@@ -326,6 +325,7 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
         for (var i = 0; i < response.result.values.length; i++) { //提取日期
             aryA.push(response.result.values[i][0]);
         }
+        
         var getV = aryA.indexOf(todayDate.toLocaleDateString()); //尋找當天日期列數
         receiptdiv.todayrow = getV + 1
         if (getV == -1) { //如果找不到返回
@@ -527,15 +527,15 @@ function printporductslist(col) { //
                 aryL[i][14] = ""
             }
         }
-        aryL = aryL.sort(function (a, b) { //依位置排列
-            if (!a[16]) {
-                a[16] = "99"
+        //aryL = aryL.sort(function (a, b) { //依位置排列
+        //    if (!a[16]) {
+        //        a[16] = "99"
 
-            } else if (!b[16]) {
-                b[16] = "99"
-            }
-            return Number(a[16].split("-")[0]) - Number(b[16].split("-")[0])
-        });
+        //    } else if (!b[16]) {
+        //        b[16] = "99"
+        //    }
+        //    return Number(a[16].split("-")[0]) - Number(b[16].split("-")[0])
+        //});
         productL.productlist = aryL;
         $("button").removeAttr('disabled') //激活送出紐
     }, function (response) {
