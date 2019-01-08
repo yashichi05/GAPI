@@ -12,6 +12,10 @@ var shipMenu = new Vue({
             seven: 0,
             family: 0
         },
+        yahoot: {
+            seven: 0,
+            family: 0
+        },
         pchomed: {
             seven: 0,
             family: 0
@@ -34,6 +38,12 @@ var shipMenu = new Vue({
         }
     },
     computed: {
+        yahooAll: function () {
+            return {
+                seven: this.yahoo.seven + this.yahoot.seven,
+                family: this.yahoo.family + this.yahoot.family
+            }
+        },
         pchomeAll: function () {
             return {
                 seven: this.pchomed.seven + this.pchomet.seven,
@@ -41,10 +51,10 @@ var shipMenu = new Vue({
             }
         },
         sevencount: function () {
-            return this.shopee.seven + this.yahoo.seven + this.pchomeAll.seven + this.Ruten.seven + this.buy123.seven +this.songuo.seven
+            return this.shopee.seven + this.yahooAll.seven + this.pchomeAll.seven + this.Ruten.seven + this.buy123.seven +this.songuo.seven
         },
         familycount: function () {
-            return this.shopee.family + this.yahoo.family + this.pchomeAll.family + this.Ruten.family + this.buy123.family + this.songuo.family
+            return this.shopee.family + this.yahooAll.family + this.pchomeAll.family + this.Ruten.family + this.buy123.family + this.songuo.family
         },
         lifecount: function () {
             return this.shopee.life
@@ -56,13 +66,13 @@ var shipMenu = new Vue({
     methods: {
         getallweb: function () { //執行查找
             $("#shipget").attr('disabled', 'disabled') //鎖定按鈕
-            shipget('yahoo', 'K')
+            shipget('yahoo', 'L')
+            shipget('yahoot', 'L')
             shipget('shopee', 'L')
             shipget('Ruten', 'L')
-            shipget('pchomed', 'K')
             shipget('pchomet', 'K')
             shipget('buy123', 'K')
-            shipget('songuo', 'N', 'final')
+            shipget('songuo', 'O', 'final')
         },
 
         shipName: function (sv) {

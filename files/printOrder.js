@@ -11,9 +11,14 @@ var printorderobj = new Vue({
                 this.srdate = setdata},
             get:
             function(){
-                if (this.srdate.slice(this.srdate.length-2,this.srdate.length-1)== "-"){//如果當天為個位數日期 補0
-                    this.srdate = this.srdate.slice(0,-1)+"0"+this.srdate.slice(-1)
-                } 
+                var spdate = this.srdate.split("-")
+                if (spdate[1].length<2){
+                    spdate[1] = "0"+spdate[1]
+                }
+                if (spdate[2].length<2){
+                    spdate[2] = "0"+spdate[2]
+                }
+                this.srdate = spdate[0]+"-"+spdate[1]+"-"+spdate[2]
                 return this.srdate},
         
         }
@@ -55,11 +60,11 @@ var printorderobj = new Vue({
             this.allorder = []
             $("button").attr('disabled', 'disabled') //鎖定按鈕
             if (web == "yahoo") {
-                printOrders('yahoo', 1, 2, 4, 5, 6, 7, 8, 10, 11, 17);
+                printOrders('yahoo', 1, 2, 5, 6, 7, 8, 9, 11, 12, 14);
             } else if (web == "shopee") {
                 printOrders('shopee', 1, 2, 5, 6, 7, 8, 9, 11, 12, 13);
-            } else if (web == "pchomed") {
-                printOrders('pchomed', 1, 2, 4, 5, 6, 7, 8, 10, 11, 13);
+            } else if (web == "yahoot") {
+                printOrders('yahoot',   1, 2, 5, 6, 7, 8, 9, 11, 12, 14);
             } else if (web == "pchomet") {
                 printOrders('pchomet', 1, 2, 4, 5, 6, 7, 8, 10, 11, 12);
             } else if (web == "Ruten") {

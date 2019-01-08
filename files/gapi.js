@@ -10,25 +10,47 @@ var sheetrange = { //寫入的範圍
         }
     },
     yahooID: {
-        gid: '1ve2C2zi_W8ctD4ObBdkEkheStQGgopHpGHXd_ygdNiI',
-        gname: 'YAHOO拍賣!',
+        gid: '1DX4rBZ55EnP8-Falc1mxYiS487MhualwAohmv_d07HI',
+        gname: '大一!',
         col: {
-            oid: '', //訂單編號
+            oid: 'B', //訂單編號
             oname: 'C', //姓名
             otel: 'D', //電話
-            oaccount: 'B', //帳號
-            piso: 'E', //ISO
-            pname: 'F', //產品名稱
-            ptype: 'G', //款式
-            pcount: 'H', //數量
-            pprice: 'I', //單價
-            pallprice: 'J', //總價
-            oship: 'K', //貨運
-            oshipprice: 'L', //運費
-            oprice: 'R', //訂單金額
+            oaccount: 'E', //帳號
+            piso: 'F', //ISO
+            pname: 'G', //產品名稱
+            ptype: 'H', //款式
+            pcount: 'I', //數量
+            pprice: 'J', //單價
+            pallprice: 'K', //總價
+            oship: 'L', //貨運
+            oshipprice: 'M', //運費
+            oprice: 'O', //訂單金額
             ofee: '', //手續費
-            odiscount: 'M', //折扣
-            oreceipt: 'O' //發票
+            odiscount: 'N', //折扣
+            oreceipt: 'P' //發票
+        }
+    },
+    yahootID: {
+        gid: '1DX4rBZ55EnP8-Falc1mxYiS487MhualwAohmv_d07HI',
+        gname: '梓原!',
+        col: {
+            oid: 'B', //訂單編號
+            oname: 'C', //姓名
+            otel: 'D', //電話
+            oaccount: 'E', //帳號
+            piso: 'F', //ISO
+            pname: 'G', //產品名稱
+            ptype: 'H', //款式
+            pcount: 'I', //數量
+            pprice: 'J', //單價
+            pallprice: 'K', //總價
+            oship: 'L', //貨運
+            oshipprice: 'M', //運費
+            oprice: 'O', //訂單金額
+            ofee: '', //手續費
+            odiscount: 'N', //折扣
+            oreceipt: 'P' //發票
         }
     },
     shopeeID: {
@@ -325,7 +347,7 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
         for (var i = 0; i < response.result.values.length; i++) { //提取日期
             aryA.push(response.result.values[i][0]);
         }
-        
+
         var getV = aryA.indexOf(todayDate.toLocaleDateString()); //尋找當天日期列數
         receiptdiv.todayrow = getV + 1
         if (getV == -1) { //如果找不到返回
@@ -337,7 +359,7 @@ function getTodayOrder(getid, getname, oi, on, op, rn) { //取得今日訂單的
         var lastdaterow = aryA.lastIndexOf(todayDate.toLocaleDateString());
         $('#cantFindp').remove() //如果有找到則刪除html"找不到"訊息
         //
-        for (var i = getV; i < lastdaterow+1; i++) {
+        for (var i = getV; i < lastdaterow + 1; i++) {
             if (response.result.values[i][op] && response.result.values[i][op] > 0) { //有值且大於0(過濾序退)則執行 新增物件
                 aryPindex.push(i - getV)
                 receiptdiv.addOrdersObj(response.result.values[i][oi], response.result.values[i][on], response.result.values[i][op], response.result.values[i][rn]) //增加V-FOR物件
@@ -362,6 +384,7 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
         spreadsheetId: getid,
         range: getname + "A:" + col
     }).then(function (response) {
+
         if (final == 'final') { //解除鎖定按鈕
             $("#shipget").removeAttr('disabled')
         }
@@ -374,7 +397,6 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
         }
 
         var getV = aryA.indexOf(todayDate.toLocaleDateString()); //尋找當天日期列數
-
 
         if (getV == -1) { //如果找不到返回
             return
@@ -391,38 +413,10 @@ function shipget(web, col, final) { //取得貨運那蘭 web 哪個平台 ship �
 
                 aryS.push(response.result.values[i][shipcolindex])
             }
-            if (web == 'songuo' && response.result.values[i][fctnlist.COLindex(sheetrange.songuoID.col.oprice)] > 0) { //松果判斷序退
-                aryS.push(response.result.values[i][shipcolindex])
-            }
+
         }
         var sc = [] //計算宅配數量
-        if (web == 'songuo') { //如果是松果
-            var pattern = new RegExp("[A-Za-z]+"); //驗證英文
 
-            var chkeng
-            for (var i = 0; i < aryS.length; i++) {
-                chkeng = ""
-                if (aryS[i]) {
-                    chkeng = aryS[i].substr(0, 1)
-                }
-                if (pattern.test(chkeng)) { //開頭是英文 為7-11
-                    sc.push(i)
-
-                }
-            }
-            shipMenu.songuo.seven = sc.length
-            
-            var sc = []
-            for (var i = 0; i < aryS.length; i++) {
-                if (aryS[i].substr(0, 2) == "08" || aryS[i].substr(0, 2) == "18") { //開頭是08 或18就算是全家一件
-                    sc.push(i)
-
-                }
-            }
-
-            shipMenu.songuo.family = sc.length
-            return
-        }
         var ship = ['seven', 'family', 'life', 'OK']
         for (var oi = 0; oi < ship.length; oi++) {
             for (var i = 0; i < aryS.length; i++) {
@@ -468,19 +462,19 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
         range: getname + "A:Z" //讀取整個試算表，A:Z 必須包含發票 金額 資料
     }).then(function (response) {
         var aryO = [] //存放今日訂單
-         //尋找日期列數
+        //尋找日期列數
         var aryA = []
         for (var i = 0; i < response.result.values.length; i++) { //提取日期
             aryA.push(new Date(response.result.values[i][0]).toLocaleDateString()); //new date()將文字轉為日期物件 toLocaleDateString再把他轉為文字 這樣日期格式會跟下面比對的統一
         }
         var todayDate = new Date(printorderobj.rdate);
-        var getR =  aryA.indexOf(todayDate.toLocaleDateString())
+        var getR = aryA.indexOf(todayDate.toLocaleDateString())
         var getLastR = aryA.lastIndexOf(todayDate.toLocaleDateString()) //該日期的最後一列
         if (getR == -1) { //如果找不到返回
             $("button").removeAttr('disabled') //激活送出紐
             return
         };
-        for (var i = getR; i < getLastR+1; i++) { //從getR列開始提取今日訂單  到日期的最後一列 +1是包括最後一列
+        for (var i = getR; i < getLastR + 1; i++) { //從getR列開始提取今日訂單  到日期的最後一列 +1是包括最後一列
             if (response.result.values[i][okey]) { //如果key欄有值PUSH
                 aryO.push(response.result.values[i]);
             }
@@ -490,7 +484,7 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
             if (aryO[i][oprice] && aryO[i][oprice] > 0) { //總金額有值，輸入訂單資料
                 if (web == 'songuo' || web == 'buy123') {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], 0, aryO[i][oprice]) //如果是松果或生活運費為0
-                }  else {
+                } else {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], aryO[i][oprice])
                 }
                 pushpdtindex = pushpdtindex + 1
@@ -627,32 +621,18 @@ function cancelapi(web, rpNum, why) { // 序退 yahoo 要另外寫
                 ]] //原發票資料寫入
             writesheetrange(getid, wrorpRange, wrorpVal)
             var endRow //訂單最後一列
-            if (web == "yahoo") { //最後一筆發票會失敗
-                var getaccolindex = fctnlist.COLindex(sheetrange.yahooID.col.oaccount) //取得帳號欄位的index 
-                try {
-                    for (var i = rpRow; i < response.result.values.length; i++) { //yahoo 專用
-                        endRow = i
-                        if (response.result.values[i][getaccolindex] != response.result.values[i + 1][getaccolindex] || response.result.values[i + 1][getrpcolindex]) { //下一列訂單帳號不一樣 或是 下一列發票有值
-                            break
-                        }
+            try {
+                for (var i = rpRow; i < response.result.values.length; i++) { //yahoo會沒用
+                    endRow = i
+                    if (response.result.values[i][getidcolindex] != response.result.values[i + 1][getidcolindex]) {
+                        break
                     }
-                } catch {
-
                 }
-
-            } else {
-                try {
-                    for (var i = rpRow; i < response.result.values.length; i++) { //yahoo會沒用
-                        endRow = i
-                        if (response.result.values[i][getidcolindex] != response.result.values[i + 1][getidcolindex]) {
-                            break
-                        }
-                    }
-                } catch {
-
-                }
+            } catch {
 
             }
+
+
             var putval = [] //輸出資料
             for (var i = rpRow; i < endRow + 1; i++) {
                 putval.push(response.result.values[i])
@@ -727,7 +707,7 @@ function cancelprd(iso, count, pindex) { //序退加回商品
 }
 
 //扣數量
-function cancelprd(takecol) {
+function takeprdapi(takecol) {
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: sheetrange.resStock.gid,
         range: sheetrange.resStock.gname + "A:R"
