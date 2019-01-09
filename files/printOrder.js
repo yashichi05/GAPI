@@ -73,6 +73,8 @@ var printorderobj = new Vue({
                 printOrders('songuo', 1, 2, 4, 5, 6, 7, 9, 14, 16, 12);
             } else if (web == "buy123") {
                 printOrders('buy123', 2, 3, 4, 5, 6, 7, 9, 10, 11, 9);
+            } else if (web == "LINE") {
+                printOrders('LINE', 1, 1, 3, 4, 5, 6, 7, 9, 12, 10);
             }
 
 

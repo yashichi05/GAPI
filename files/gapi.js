@@ -31,6 +31,28 @@ var sheetrange = { //寫入的範圍
             oreceipt: 'P' //發票
         }
     },
+    LINEID: {
+        gid: '1NwTr2_GNxBEQjZDDYiiT_SkUV9e-8i58qhNHA20_RyE',
+        gname: '工作表1!',
+        col: {
+            oid: 'B', //訂單編號
+            oname: 'B', //姓名
+            otel: 'C', //電話
+            oaccount: '', //帳號
+            piso: 'D', //ISO
+            pname: 'E', //產品名稱
+            ptype: 'F', //款式
+            pcount: 'G', //數量
+            pprice: 'H', //單價
+            pallprice: 'I', //總價
+            oship: 'J', //貨運
+            oshipprice: '', //運費
+            oprice: 'K', //訂單金額
+            ofee: '', //手續費
+            odiscount: '', //折扣
+            oreceipt: 'L' //發票
+        }
+    },
     yahootID: {
         gid: '1DX4rBZ55EnP8-Falc1mxYiS487MhualwAohmv_d07HI',
         gname: '梓原!',
@@ -484,13 +506,15 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
             if (aryO[i][oprice] && aryO[i][oprice] > 0) { //總金額有值，輸入訂單資料
                 if (web == 'songuo' || web == 'buy123') {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], 0, aryO[i][oprice]) //如果是松果或生活運費為0
+                } else if(web == 'LINE') {
+                    printorderobj.pushOobj(aryO[i][name], "", aryO[i][ship], 0, aryO[i][oprice])
                 } else {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], aryO[i][oprice])
                 }
                 pushpdtindex = pushpdtindex + 1
             }
             if (aryO[i][pcount] > 0) {
-                console.log(pushpdtindex)
+                //console.log(pushpdtindex)
                 printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice])
             } //推訂單商品資料
             if (aryO[i][8] > 0 && web == 'songuo') { //松果
