@@ -71,6 +71,7 @@ var shipMenu = new Vue({
             shipget('shopee', 'L')
             shipget('Ruten', 'L')
             shipget('pchomet', 'K')
+            shipget('pchomed', 'K')
             shipget('buy123', 'K')
             shipget('songuo', 'O', 'final')
         },

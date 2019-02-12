@@ -98,7 +98,7 @@ var sheetrange = { //寫入的範圍
         }
     },
     pchomedID: {
-        gid: '1Vm0WQTShQSCRswroN2N4MNq-ofJPAOvv_yPMqVTNqnc',
+        gid: '1NzSk2lwQ456eflqdnKwWWRy6ZIZsbf5Bj0BGcxcjqSI',
         gname: '大一!',
         col: {
             oid: 'B', //訂單編號
@@ -113,15 +113,15 @@ var sheetrange = { //寫入的範圍
             pallprice: 'J', //總價
             oship: 'K', //貨運
             oshipprice: 'L', //運費
-            oprice: 'N', //訂單金額
+            oprice: 'M', //訂單金額
             ofee: '', //手續費
             odiscount: '', //折扣
-            oreceipt: 'R' //發票
+            oreceipt: 'M' //發票
         }
     },
     pchometID: {
         gid: '1NzSk2lwQ456eflqdnKwWWRy6ZIZsbf5Bj0BGcxcjqSI',
-        gname: '工作表1!',
+        gname: '梓原!',
         col: {
             oid: 'B', //訂單編號
             oname: 'C', //姓名
