@@ -33,20 +33,20 @@
         <input v-model="ov.chkdisplay" style="position: absolute;" type="checkbox" class="odrchkbox" value="chked" />
         <div class="d-flex" style="border-bottom: 1px solid #000;padding:1px;">
             <div class="border-right p-1 border-secondary" style="width:240px;">
-                <b>{{ov.orderID}}</b>
+                {{ov.orderID}}
             </div>
             <div class="border-right border-secondary text-center p-1" style="width:160px;">
-                <b>{{ov.cusname}}</b>
+                {{ov.cusname}}
             </div>
             <div class="border-right border-secondary" style="width:390px;"></div>
             <div class="p-1 text-center border-right border-secondary" style="width:240px;">
-                <b>{{ov.ship}}<span style="padding-left:20px;">運費:{{ov.shipprice}}</span></b>
+                {{ov.ship}}<span style="padding-left:20px;">運費:{{ov.shipprice}}</span>
             </div>
-            <div class="p-1 text-center oprice" style="width:170px;background-color: #eee">
-                <b>發票:{{ov.oprice}}</b>
+            <div class="p-1 text-center oprice" style="width:170px;background-color: #eee;">
+                發票:{{ov.oprice}}
             </div>
         </div>
-        <div v-for="(pv,pindex) in allorder[oindex].products" class="border-bottom border-secondary d-flex" style="padding:1px;">
+        <div v-for="(pv,pindex) in allorder[oindex].products" class="border-bottom border-secondary d-flex" style="padding:1px;color:#555;">
             <div class="border-right p-1 text-left" style="width:240px">{{pv.iso}}</div>
             <div class="border-right p-1 text-center" style="width:40px">{{pv.pcount}}</div>
             <div class="border-right p-1 text-left" style="width:610px">{{pv.pname}}</div>

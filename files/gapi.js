@@ -513,11 +513,11 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
                 }
                 pushpdtindex = pushpdtindex + 1
             }
-            if (aryO[i][pcount] > 0) {
+            if (aryO[i][pcount] > 0 && pushpdtindex>-1) {
                 //console.log(pushpdtindex)
                 printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice])
             } //推訂單商品資料
-            if (aryO[i][8] > 0 && web == 'songuo') { //松果
+            if (aryO[i][8] > 0 && web == 'songuo' && pushpdtindex>-1) { //松果
                 printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice])
             }
         }
