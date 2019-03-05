@@ -77,6 +77,8 @@ var printorderobj = new Vue({
                 printOrders('buy123', 2, 3, 4, 5, 6, 7, 9, 10, 11, 9);
             } else if (web == "LINE") {
                 printOrders('LINE', 1, 1, 3, 4, 5, 6, 7, 9, 12, 10);
+            }else if (web == "Facebook") {
+                printOrders('Facebook', 0, 1, 3, 4, 5, 6, 7, 9, 10, 11);
             }
 
 

@@ -53,6 +53,28 @@ var sheetrange = { //寫入的範圍
             oreceipt: 'L' //發票
         }
     },
+    FacebookID: {
+        gid: '1f36qa112A6stUaFV94SYs-IIs13n6_mATzm_CPB-_IQ',
+        gname: 'FB!',
+        col: {
+            oid: 'A', //訂單編號
+            oname: 'B', //姓名
+            otel: 'C', //電話
+            oaccount: '', //帳號
+            piso: 'D', //ISO
+            pname: 'E', //產品名稱
+            ptype: 'F', //款式
+            pcount: 'G', //數量
+            pprice: 'H', //單價
+            pallprice: 'I', //總價
+            oship: 'J', //貨運
+            oshipprice: 'K', //運費
+            oprice: 'L', //訂單金額
+            ofee: '', //手續費
+            odiscount: '', //折扣
+            oreceipt: 'M' //發票
+        }
+    },
     yahootID: {
         gid: '1DX4rBZ55EnP8-Falc1mxYiS487MhualwAohmv_d07HI',
         gname: '梓原!',
