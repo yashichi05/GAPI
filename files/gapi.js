@@ -119,6 +119,28 @@ var sheetrange = { //寫入的範圍
             oreceipt: 'O' //發票
         }
     },
+    shopee_bigID: {
+        gid: '1nplThOG2vqcdia3Uht1Niv9oW7sfhU2YpbbBPDwmlcc',
+        gname: '大航家!',
+        col: {
+            oid: 'B', //訂單編號
+            oname: 'C', //姓名
+            otel: 'D', //電話
+            oaccount: 'E', //帳號
+            piso: 'F', //ISO
+            pname: 'G', //產品名稱
+            ptype: 'H', //款式
+            pcount: 'I', //數量
+            pprice: 'J', //單價
+            pallprice: 'K', //總價
+            oship: 'L', //貨運
+            oshipprice: 'M', //運費
+            oprice: 'N', //訂單金額
+            ofee: '', //手續費
+            odiscount: '', //折扣
+            oreceipt: 'O' //發票
+        }
+    },
     pchomedID: {
         gid: '1NzSk2lwQ456eflqdnKwWWRy6ZIZsbf5Bj0BGcxcjqSI',
         gname: '大一!',
@@ -160,7 +182,7 @@ var sheetrange = { //寫入的範圍
             oprice: 'M', //訂單金額
             ofee: '', //手續費
             odiscount: '', //折扣
-            oreceipt: 'M' //發票
+            oreceipt: 'N' //發票
         }
     },
     RutenID: {
