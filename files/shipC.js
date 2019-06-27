@@ -35,6 +35,10 @@ var shipMenu = new Vue({
         buy123: {
             seven: 0,
             family: 0
+        },
+        facebook: {
+            seven: 0,
+            family: 0
         }
     },
     computed: {
@@ -51,10 +55,10 @@ var shipMenu = new Vue({
             }
         },
         sevencount: function () {
-            return this.shopee.seven + this.yahooAll.seven + this.pchomeAll.seven + this.Ruten.seven + this.buy123.seven +this.songuo.seven
+            return this.facebook.seven + this.shopee.seven + this.yahooAll.seven + this.pchomeAll.seven + this.Ruten.seven + this.buy123.seven +this.songuo.seven
         },
         familycount: function () {
-            return this.shopee.family + this.yahooAll.family + this.pchomeAll.family + this.Ruten.family + this.buy123.family + this.songuo.family
+            return this.facebook.family + this.shopee.family + this.yahooAll.family + this.pchomeAll.family + this.Ruten.family + this.buy123.family + this.songuo.family
         },
         lifecount: function () {
             return this.shopee.life
@@ -67,6 +71,7 @@ var shipMenu = new Vue({
         getallweb: function () { //執行查找
             $("#shipget").attr('disabled', 'disabled') //鎖定按鈕
             shipget('yahoo', 'L')
+            shipget('facebook', 'J')
             shipget('yahoot', 'L')
             shipget('shopee', 'L')
             shipget('Ruten', 'L')
