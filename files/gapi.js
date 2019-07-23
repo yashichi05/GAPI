@@ -33,7 +33,7 @@ var sheetrange = { //寫入的範圍
     },
     yahooID: {
         gid: '1DX4rBZ55EnP8-Falc1mxYiS487MhualwAohmv_d07HI',
-        gname: '大一!',
+        gname: '大航家!',
         col: {
             oid: 'B', //訂單編號
             oname: 'C', //姓名
@@ -572,18 +572,18 @@ function printOrders(web, okey, name, iso, pname, ptype, pcount, pprice, ship, s
             if (aryO[i][oprice] && aryO[i][oprice] > 0) { //總金額有值，輸入訂單資料
                 if (web == 'songuo' || web == 'buy123') {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], 0, aryO[i][oprice]) //如果是松果或生活運費為0
-                } else if(web == 'LINE') {
+                } else if (web == 'LINE') {
                     printorderobj.pushOobj(aryO[i][name], "", aryO[i][ship], 0, aryO[i][oprice])
                 } else {
                     printorderobj.pushOobj(aryO[i][okey], aryO[i][name], aryO[i][ship], aryO[i][shipprice], aryO[i][oprice])
                 }
                 pushpdtindex = pushpdtindex + 1
             }
-            if (aryO[i][pcount] > 0 && pushpdtindex>-1) {
+            if (aryO[i][pcount] > 0 && pushpdtindex > -1) {
                 //console.log(pushpdtindex)
                 printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice])
             } //推訂單商品資料
-            if (aryO[i][8] > 0 && web == 'songuo' && pushpdtindex>-1) { //松果
+            if (aryO[i][8] > 0 && web == 'songuo' && pushpdtindex > -1) { //松果
                 printorderobj.pushPobj(pushpdtindex, aryO[i][iso], aryO[i][pname], aryO[i][ptype], aryO[i][pcount], aryO[i][pprice])
             }
         }
@@ -611,16 +611,24 @@ function printporductslist(col) { //
                 aryL[i][14] = ""
             }
         }
+        var nan_val
+        for(var i =0;i<aryL.length;i++){
+            
+            if (aryL[i][16] == nan_val){
+                aryL[i][16] = '?'
+            }
+        }
         //aryL.sort()
-        //aryL = aryL.sort(function (a, b) { //依位置排列
-        //    if (!a[16]) {
-        //        a[16] = "99"
+        aryL = aryL.sort(function (a, b) { //依位置排列
+            //    if (!a[16]) {
+            //        a[16] = "99"
 
-        //    } else if (!b[16]) {
-        //        b[16] = "99"
-        //    }
-        //    return Number(a[16].substr(0,1)) - Number(b[16].substr(0,1))
-        //});
+            //    } else if (!b[16]) {
+            //        b[16] = "99"
+            //    }
+            return a[16] > b[16] ? 1 : -1;
+
+        });
         productL.productlist = aryL;
         $("button").removeAttr('disabled') //激活送出紐
     }, function (response) {
